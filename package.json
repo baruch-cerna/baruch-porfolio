@@ -1,0 +1,23 @@
+{
+  "name": "out-out",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.8.2",
+    "@astrojs/netlify": "^5.4.0",
+    "astro": "^4.11.6",
+    "gsap": "^3.12.5",
+    "p5": "^1.9.4",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.7.6"
+  }
+}

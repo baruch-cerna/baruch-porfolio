@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Baruch Cerna">
+  <main>
+    <header>
+      <div class="header-container">
+        <h1 class="enter">Baruch Cerna</h1>
+      </div>
+      <div class="header-container">
+        <h2 class="enter">
+          I'm <span id="your">a</span> Web Developer based in Mexico.
+        </h2>
+      </div>
+
+      <p>
+        I'm looking for project opportunities and I'm always open to new
+        challenges. My stack includes HTML, CSS, JavaScript, Angular, and
+        Node.js. If you're interested in working with me, feel free to reach
+        out!
+      </p>
+    </header>
+  </main>
+</Layout>
+
+<style>
+  main {
+    padding: 3rem;
+    max-width: 1024px;
+  }
+
+  .header-container {
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 6rem;
+    color: rgb(var(--accent-light));
+  }
+
+  h2 {
+    color: rgb(var(--accent));
+    font-size: 2rem;
+  }
+
+  p {
+    color: rgb(var(--accent-light));
+    font-size: 1.5rem;
+  }
+
+  @media screen and (max-width: 575px) {
+    main {
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 4rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+</style>
