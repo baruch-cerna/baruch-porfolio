@@ -45,6 +45,7 @@ const { title } = Astro.props;
   *::before,
   *::after {
     box-sizing: border-box;
+    /* cursor: none */
   }
   :root {
     --accent: 92, 99, 115;
@@ -60,12 +61,12 @@ const { title } = Astro.props;
   html {
     font-family: "Red Hat Mono", monospace;
     font-optical-sizing: auto;
-    background: rgb(var(--accent-dark));
+    background: rgb(var(--accent-light));
   }
   body {
     position: relative;
     margin: 0;
-    padding: 0;
+    padding: 3rem 0;
     overflow-x: hidden;
     min-height: 100vh;
   }
@@ -77,11 +78,32 @@ const { title } = Astro.props;
     height: 100%;
     z-index: -1;
   }
+
+  h1,
+  h2,
+  h3,
+  p {
+    font-family: "GeneralSans", sans-serif;
+  }
+
   h1,
   h2,
   h3 {
-    font-family: "GeneralSans-Regular", sans-serif;
     margin: 0;
     line-height: 1;
+  }
+
+  h2,
+  h3 {
+    color: rgb(var(--accent));
+  }
+
+  h1,
+  p {
+    color: rgb(var(--accent-dark));
+  }
+
+  p {
+    font-weight: 500;
   }
 </style>

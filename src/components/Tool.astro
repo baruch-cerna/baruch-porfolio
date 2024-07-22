@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  body: string;
+}
+
+const { title, body } = Astro.props;
+---
+
+<li class="tool">
+  <h3>
+    {title}
+  </h3>
+  <p>
+    {body}
+  </p>
+</li>
+<style>
+  .tool {
+    display: block;
+    list-style: none;
+    padding: 1px;
+    width: calc((100% - 2rem) / 3);
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    .tool {
+      width: 100%;
+    }
+  }
+</style>

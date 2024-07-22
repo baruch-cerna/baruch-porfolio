@@ -15,6 +15,7 @@
     "astro": "^4.11.6",
     "gsap": "^3.12.5",
     "p5": "^1.9.4",
+    "sass": "^1.77.8",
     "typescript": "^5.5.3"
   },
   "devDependencies": {
