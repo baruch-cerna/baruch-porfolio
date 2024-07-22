@@ -5,7 +5,7 @@ const sketch = (p: p5) => {
   const noiseMultiplier = 0.01;
 
   const setInitialPoints = (body: HTMLBodyElement) => {
-    const totalPoints = Math.round(window.devicePixelRatio * body.offsetWidth);
+    const totalPoints = window.devicePixelRatio * body.offsetHeight;
     for (let i = 0; i < totalPoints; i++) {
       points.push(p.createVector(p.random(p.width), p.random(p.height)));
     }
