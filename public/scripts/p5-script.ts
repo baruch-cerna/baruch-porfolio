@@ -42,7 +42,6 @@ const sketch = (p: p5) => {
 
   p.windowResized = () => {
     const body = document.getElementsByTagName("body")[0];
-    setInitialPoints(body);
     p.resizeCanvas(body.offsetWidth, body.offsetHeight);
   };
 };
