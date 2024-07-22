@@ -19,10 +19,23 @@ const { title, body } = Astro.props;
   .tool {
     display: block;
     list-style: none;
-    padding: 1px;
+    padding: 2rem 1rem;
     width: calc((100% - 2rem) / 3);
+    transform: scale(0.7);
     transition: all 0.2s ease-in-out;
     text-align: center;
+  }
+
+  .tool:is(:hover, :focus-within) {
+    background-color: rgb(var(--accent));
+  }
+
+  .tool:is(:hover, :focus-within) h3 {
+    color: rgb(var(--accent-light));
+  }
+
+  .tool:is(:hover, :focus-within) p {
+    color: rgb(var(--accent-light));
   }
 
   @media screen and (max-width: 768px) {
