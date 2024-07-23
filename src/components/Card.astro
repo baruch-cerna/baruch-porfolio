@@ -5,15 +5,17 @@ interface Props {
   title: string;
   body: string;
   href: string;
-  image: string;
+  image: any;
 }
 
 const { href, title, body, image } = Astro.props;
 ---
 
 <li class="link-card">
-  <a href={href} target="_blank" rel="noopener noreferrer">
-    <Image src={image} alt={title} inferSize />
+  <a class="card-ref" href={href} target="_blank" rel="noopener noreferrer">
+    <Image src={image} alt={title} inferSize loading={"lazy"} />
+  </a>
+  <div>
     <h3>
       {title}
       <span>&rarr;</span>
@@ -21,63 +23,67 @@ const { href, title, body, image } = Astro.props;
     <p>
       {body}
     </p>
-  </a>
+  </div>
 </li>
 <style>
   .link-card {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
     list-style: none;
-    padding: 1px;
-    width: 70%;
-    aspect-ratio: 16/9;
+    padding: 0;
+    width: 100%;
     transition: all 0.2s ease-in-out;
   }
+
   .link-card > a {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     height: 100%;
+    aspect-ratio: 16/9;
     text-decoration: none;
     line-height: 1.4;
-    position: relative;
-    padding: 2rem;
+  }
+
+  .link-card > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+    padding: 1rem;
   }
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
   }
   h3 {
     margin: 0;
     font-size: 1.5rem;
-    color: rgba(0, 0, 0, 0);
+    color: rgb(var(--accent-light));
   }
   p {
     margin-top: 0.5rem;
     margin-bottom: 0;
-    color: rgba(0, 0, 0, 0);
+    color: rgb(var(--accent-light));
   }
 
-  .link-card:is(:hover, :focus-within) {
+  .link-card:is(:hover, :focus-within) div {
     background-color: rgb(var(--accent));
   }
 
-  .link-card:is(:hover, :focus-within) h3 {
-    color: rgb(var(--accent-light));
-  }
-  .link-card:is(:hover, :focus-within) p {
-    color: rgb(var(--accent-light));
-  }
-
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 575px) {
     .link-card {
-      width: 100%;
+      flex-direction: column;
+      gap: 0;
     }
-  }
+    .link-card > div {
+      background-color: rgb(var(--accent));
+    }
 </style>

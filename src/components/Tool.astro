@@ -23,7 +23,6 @@ const { title, body } = Astro.props;
     width: calc((100% - 2rem) / 3);
     transform: scale(0.7);
     transition: all 0.2s ease-in-out;
-    text-align: center;
   }
 
   .tool:is(:hover, :focus-within) {
@@ -38,7 +37,13 @@ const { title, body } = Astro.props;
     color: rgb(var(--accent-light));
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
+    .tool {
+      width: calc((100% - 1rem) / 2);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
     .tool {
       width: 100%;
     }

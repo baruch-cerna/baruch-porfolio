@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.8.2",
     "@astrojs/netlify": "^5.4.0",
     "astro": "^4.11.6",
+    "astro-compressor": "^0.4.1",
     "gsap": "^3.12.5",
     "p5": "^1.9.4",
     "sass": "^1.77.8",

@@ -27,7 +27,7 @@ import { projects, tools } from "../data/index.data";
   </main>
   <section>
     <h2>Main tools</h2>
-    <ul>
+    <ul id="tools">
       {tools.map((tool) => <Tool title={tool.title} body={tool.body} />)}
     </ul>
   </section>
@@ -58,12 +58,6 @@ import { projects, tools } from "../data/index.data";
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  h1,
-  h2,
-  p {
-    text-align: center;
   }
 
   .header-container {
@@ -100,7 +94,7 @@ import { projects, tools } from "../data/index.data";
       padding: 2rem;
     }
     h1 {
-      font-size: 4rem;
+      font-size: 4.5rem;
     }
     h2 {
       font-size: 1.5rem;

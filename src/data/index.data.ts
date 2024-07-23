@@ -25,11 +25,19 @@ export const tools = [
   },
 ];
 
+import PortfolioImage from '../../public/media/baruch_cerna.jpg';
+
 export const projects = [
   {
     title: "ZÖKU",
     body: "Web platform for real estate auctions in Mexico, built using Angular, p5.js and Node.js.",
     href: "https://www.zoku.com.mx",
     image: "https://zoku.com.mx/assets/media/video-poster.jpg",
+  },
+  {
+    title: "My portfolio",
+    body: "My personal website built using Astro, p5.js and GSAP.",
+    href: "https://baruch-cerna.netlify.app",
+    image: PortfolioImage,
   },
 ];
