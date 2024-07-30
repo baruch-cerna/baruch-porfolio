@@ -34,10 +34,9 @@ const { title } = Astro.props;
     <slot />
     <div id="v-pointer"></div>
     <script>
-      import { runSketch } from "../../public/scripts/p5-script";
       import { startAnimations } from "../../public/scripts/ui-animations";
-      runSketch();
       startAnimations();
+      import("../../public/scripts/p5-script").then(m => m.runSketch())
       const cursor = document.getElementById("v-pointer");
       if (cursor) {
         document.addEventListener("mouseover", (e) => {
