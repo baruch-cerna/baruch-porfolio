@@ -75,7 +75,7 @@ const { href, title, body, image } = Astro.props;
   }
 
   .link-card:is(:hover, :focus-within) div {
-    background-color: rgb(var(--accent));
+    background-color: rgba(var(--accent), 0.7);
   }
 
   @media screen and (max-width: 575px) {
@@ -84,6 +84,6 @@ const { href, title, body, image } = Astro.props;
       gap: 0;
     }
     .link-card > div {
-      background-color: rgb(var(--accent));
+      background-color: rgba(var(--accent), 0.7);
     }
 </style>

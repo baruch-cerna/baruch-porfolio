@@ -23,10 +23,11 @@ const { title, body } = Astro.props;
     width: calc((100% - 2rem) / 3);
     transform: scale(0.7);
     transition: all 0.2s ease-in-out;
+    
   }
 
   .tool:is(:hover, :focus-within) {
-    background-color: rgb(var(--accent));
+    background-color: rgba(var(--accent), 0.7);
   }
 
   .tool:is(:hover, :focus-within) h3 {
