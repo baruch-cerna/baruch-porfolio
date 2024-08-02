@@ -22,7 +22,7 @@ export const startAnimations = () => {
       scrollTrigger: tool,
       delay: (i + 1) * 0.1,
       scale: 1,
-      duration: 1,
+      duration: 0.7,
       ease: "bounce.out",
     });
   });
