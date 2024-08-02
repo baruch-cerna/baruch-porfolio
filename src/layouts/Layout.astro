@@ -38,40 +38,37 @@ const { title } = Astro.props;
       import("../../public/scripts/ui-animations").then((m) =>
         m.startAnimations()
       );
-      window.onload = () => {
-        const cursor = document.getElementById("v-pointer");
-        if (cursor) {
-          document.addEventListener("mouseover", (e) => {
-            const element = e.target;
-            if (element instanceof HTMLImageElement) {
-              const p = document.createElement("p");
-              p.textContent = "Live view";
-              p.style.color = "rgb(var(--accent-dark))";
-              p.style.fontSize = "1rem";
-              p.style.fontWeight = "700";
-              p.style.textAlign = "center";
-              p.style.margin = "0";
-              p.style.padding = "auto";
-              p.style.width = "100%";
-              p.style.aspectRatio = "1/1";
-              p.style.alignContent = "center";
-              cursor.style.padding = "2rem";
-              cursor.appendChild(p);
+      const cursor = document.getElementById("v-pointer");
+      if (cursor) {
+        document.addEventListener("mouseover", (e) => {
+          const element = e.target;
+          if (element instanceof HTMLImageElement) {
+            const p = document.createElement("p");
+            p.textContent = "Live view";
+            p.style.color = "rgb(var(--accent-dark))";
+            p.style.fontSize = "1rem";
+            p.style.fontWeight = "700";
+            p.style.textAlign = "center";
+            p.style.margin = "0";
+            p.style.padding = "auto";
+            p.style.width = "100%";
+            p.style.aspectRatio = "1/1";
+            p.style.alignContent = "center";
+            cursor.style.padding = "2rem";
+            cursor.appendChild(p);
+          }
+        });
+        document.addEventListener("mouseout", (e) => {
+          const element = e.target;
+          if (element instanceof HTMLImageElement) {
+            const isImg = element.parentElement?.classList.contains("card-ref");
+            if (isImg) {
+              cursor.removeChild(cursor.children[0]);
+              cursor.style.padding = "0.75rem";
             }
-          });
-          document.addEventListener("mouseout", (e) => {
-            const element = e.target;
-            if (element instanceof HTMLImageElement) {
-              const isImg =
-                element.parentElement?.classList.contains("card-ref");
-              if (isImg) {
-                cursor.removeChild(cursor.children[0]);
-                cursor.style.padding = "0.75rem";
-              }
-            }
-          });
-        }
-      };
+          }
+        });
+      }
     </script>
   </body>
 </html>
