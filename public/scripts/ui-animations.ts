@@ -10,7 +10,7 @@ export const startAnimations = () => {
     duration: 0.6,
     y: "100%",
     opacity: 0,
-    ease: "back.inOut",
+    ease: "power4.in",
   });
 
   const tlYour = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
@@ -22,7 +22,8 @@ export const startAnimations = () => {
       scrollTrigger: tool,
       delay: (i + 1) * 0.1,
       scale: 1,
-      ease: "elastic.inOut",
+      duration: 1,
+      ease: "bounce.out",
     });
   });
 };

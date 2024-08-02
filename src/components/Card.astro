@@ -6,12 +6,13 @@ interface Props {
   body: string;
   href: string;
   image: any;
+  isOdd: boolean;
 }
 
-const { href, title, body, image } = Astro.props;
+const { href, title, body, image, isOdd } = Astro.props;
 ---
 
-<li class="link-card">
+<li class:list={["link-card", {"reverse": isOdd}]}>
   <a class="card-ref" href={href} target="_blank" rel="noopener noreferrer">
     <Image src={image} alt={title} inferSize loading={"lazy"} />
   </a>
@@ -65,13 +66,16 @@ const { href, title, body, image } = Astro.props;
   }
   h3 {
     margin: 0;
-    font-size: 1.5rem;
     color: rgb(var(--accent-light));
   }
   p {
     margin-top: 0.5rem;
     margin-bottom: 0;
     color: rgb(var(--accent-light));
+  }
+
+  .reverse {
+    flex-direction: row-reverse;
   }
 
   .link-card:is(:hover, :focus-within) div {

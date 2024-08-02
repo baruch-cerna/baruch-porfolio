@@ -8,12 +8,12 @@ export const tools = [
     body: "The programming language that adds interactivity and dynamic behavior to websites. It allows elements to respond to user actions, update content without reloading, and create complex web applications.",
   },
   {
-    title: "Angular",
-    body: "A framework for building dynamic web applications. It extends HTML with custom elements and attributes, enabling complex user interfaces and efficient data management.",
+    title: "UI Frameworks",
+    body: "I use tools such as React, Astro, and Angular. It helps me build reusable custom elements and attributes, enabling complex user interfaces and efficient data management.",
   },
   {
     title: "Node.js",
-    body: "A runtime environment that allows JavaScript to run on servers. It enables building scalable network applications and backend services using JavaScript outside the browser.",
+    body: "Allows JavaScript to run on servers. It enables building scalable network applications and backend services for managing data and interacting with databases.",
   },
   {
     title: "p5.js",
@@ -25,7 +25,7 @@ export const tools = [
   },
 ];
 
-import PortfolioImage from '../../public/media/baruch_cerna.jpg';
+import PortfolioImage from "../../public/media/baruch_cerna.jpg";
 
 export const projects = [
   {
@@ -40,4 +40,11 @@ export const projects = [
     href: "https://baruch-cerna.netlify.app",
     image: PortfolioImage,
   },
+  // {
+  //   title: "nacos y estupidos s.a. de c.v.",
+  //   body: "El punk_y_cursi del futuro, estamos ubicados en Av de las Fuentes 545, Jardines del Pedregal, CP 0900. Pagina que cuenta con mas de 70 seguidores y os reels que fueron tendencia en el momento.",
+  //   href: "https://www.instagram.com/nacos.y.estupidos/",
+  //   image:
+  //     "https://scontent-qro1-1.cdninstagram.com/v/t51.2885-19/450844714_993075719176904_3777718049372913588_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-qro1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=H0cxsFCUbGcQ7kNvgGkQqJn&gid=01d14cfa50434676b0a4c0437bb65667&edm=AFg4Q8wBAAAA&ccb=7-5&oh=00_AYDY-DGamlGJvP-n0LKh271NFQINPKVPBHcxj4DuP9LKtg&oe=66B2B60A&_nc_sid=0b30b7",
+  // },
 ];

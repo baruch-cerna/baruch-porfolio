@@ -16,7 +16,7 @@ const sketch = (p: p5) => {
 
   const points: p5.Vector[] = [];
   const noiseMultiplier = 0.01;
-  const speedMouse = 0.15;
+  const speedMouse = 0.2;
   let cursor: p5.Element | null;
   let x = 0;
   let y = 0;
@@ -50,6 +50,7 @@ const sketch = (p: p5) => {
       y = p.lerp(y, p.mouseY, speedMouse);
       cursor.position(x, y);
     }
+    p.background(9, 9, 13, 5);
     points.forEach((po) => {
       p.point(po.x, po.y);
       const n = p.noise(po.x * noiseMultiplier, po.y * noiseMultiplier);

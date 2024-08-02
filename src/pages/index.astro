@@ -35,12 +35,13 @@ import { projects, tools } from "../data/index.data";
     <h2>Projects</h2>
     <ul>
       {
-        projects.map((project) => (
+        projects.map((project, index) => (
           <Card
             title={project.title}
             body={project.body}
             href={project.href}
             image={project.image}
+            isOdd={index % 2 !== 0}
           />
         ))
       }
@@ -54,7 +55,7 @@ import { projects, tools } from "../data/index.data";
     margin: 0 auto;
     padding: 3rem;
     max-width: 1200px;
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100dvh - 6rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,7 +70,7 @@ import { projects, tools } from "../data/index.data";
   }
 
   h2 {
-    font-size: 3rem;
+    font-size: 4.5rem;
   }
 
   p {
@@ -94,10 +95,10 @@ import { projects, tools } from "../data/index.data";
       padding: 2rem;
     }
     h1 {
-      font-size: 4.5rem;
+      font-size: 5rem;
     }
     h2 {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
     }
     p {
       font-size: 1rem;
