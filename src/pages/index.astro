@@ -1,66 +1,30 @@
 ---
+import Section from "../components/Section.astro";
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Tool from "../components/Tool.astro";
-
-import { projects, tools } from "../data/index.data";
 ---
 
 <Layout title="Baruch Cerna">
-  <main>
-    <header>
-      <div class="header-container">
-        <h1 class="enter">Baruch Cerna</h1>
-      </div>
-      <div class="header-container">
-        <h2 class="enter">
-          I'm <span id="your">a</span> Web Developer based in Mexico
-        </h2>
-      </div>
+  <Section bgColor="red">
+    <div class="header-container">
+      <h1 class="enter">Baruch Cerna</h1>
+    </div>
+    <div class="header-container">
+      <h2 class="enter">
+        I'm <span id="your">a</span> Web Developer based in Mexico
+      </h2>
+    </div>
 
-      <p>
-        I'm looking for project opportunities and I'm always open to new
-        challenges. If you're interested in working with me, feel free to reach
-        out!
-      </p>
-    </header>
-  </main>
-  <section>
-    <h2>Main tools</h2>
-    <ul id="tools">
-      {tools.map((tool) => <Tool title={tool.title} body={tool.body} />)}
-    </ul>
-  </section>
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      {
-        projects.map((project, index) => (
-          <Card
-            title={project.title}
-            body={project.body}
-            href={project.href}
-            image={project.image}
-            isOdd={index % 2 !== 0}
-          />
-        ))
-      }
-    </ul>
-  </section>
+    <p>
+      I'm looking for project opportunities and I'm always open to new
+      challenges. If you're interested in working with me, feel free to reach
+      out!
+    </p>
+  </Section>
+  <Section bgColor="green" />
+  <Section bgColor="blue" />
 </Layout>
 
 <style>
-  main,
-  section {
-    margin: 0 auto;
-    padding: 3rem;
-    max-width: 1200px;
-    min-height: calc(100dvh - 6rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   .header-container {
     overflow: hidden;
   }

@@ -1,4 +1,5 @@
 import p5 from "p5";
+import "./../../node_modules/p5/lib/p5";
 
 const getDeviceType = () => {
   const ua = navigator.userAgent;
@@ -30,6 +31,10 @@ const sketch = (p: p5) => {
   };
 
   p.setup = () => {
+    import("../lib/p5.grain").then((g) => {
+      g.default.p5grain.setup();
+      g.default.p5grain.applyMonochromaticGrain(42);
+    });
     p.frameRate(45);
     const body = document.getElementsByTagName("body")[0];
     p.createCanvas(body.offsetWidth, body.offsetHeight);
