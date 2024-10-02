@@ -12,7 +12,6 @@ export const startAnimations = () => {
         trigger: section,
         start: "top top",
         pin: true,
-        pinSpacing: false,
       },
     });
   });
@@ -28,13 +27,14 @@ export const startAnimations = () => {
   const tlYour = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
   tlYour.to("#your", { duration: 0.7, text: "your", delay: 1.6 });
 
-  // tools.forEach((tool, i) => {
-  //   gsap.to(tool, {
-  //     scrollTrigger: tool,
-  //     delay: (i + 1) * 0.1,
-  //     scale: 1,
-  //     duration: 0.7,
-  //     ease: "bounce.out",
-  //   });
-  // });
+  const tools: gsap.DOMTarget[] = gsap.utils.toArray(".tool");
+  tools.forEach((tool, i) => {
+    gsap.to(tool, {
+      scrollTrigger: tool,
+      delay: (i + 1) * 0.1,
+      scale: 1,
+      duration: 0.7,
+      ease: "bounce.out",
+    });
+  });
 };

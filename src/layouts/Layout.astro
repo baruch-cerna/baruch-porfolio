@@ -24,9 +24,9 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-    <!-- <div id="v-pointer"></div> -->
+    <div id="v-pointer"></div>
     <script>
-      // import("../../public/scripts/p5-script").then((m) => m.runSketch());
+      import("../../public/scripts/p5-script").then((m) => m.runSketch());
       import("../../public/scripts/ui-animations").then((m) =>
         m.startAnimations()
       );

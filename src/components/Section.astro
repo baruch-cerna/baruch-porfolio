@@ -1,15 +1,9 @@
 ---
-import { Image } from "astro:assets";
 
-interface Props {
-  bgColor: string;
-}
-
-const { bgColor } = Astro.props;
 ---
 
 <section class="section">
-  <div class="container" class:list={[bgColor]}>
+  <div class="container">
     <slot />
   </div>
 </section>
@@ -27,7 +21,6 @@ const { bgColor } = Astro.props;
   .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
@@ -36,16 +29,4 @@ const { bgColor } = Astro.props;
     border-radius: 1rem;
     text-align: center;
   }
-/* 
-  .red {
-    background-color: #c44242;
-  }
-
-  .green {
-    background-color: #3c7c3c;
-  }
-
-  .blue {
-    background-color: #505099;
-  } */
 </style>
