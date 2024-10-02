@@ -1,41 +1,29 @@
 ---
 import Card from "../components/Card.astro";
+import Navbar from "../components/Navbar.astro";
 import Section from "../components/Section.astro";
 import Tool from "../components/Tool.astro";
 import { projects, tools } from "../data/index.data";
 import Layout from "../layouts/Layout.astro";
+import LocationIcon from "../../public/media/location.svg?raw"
+import { addAttributesToInnerHTMLString } from "../data/utils";
+const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "3rem", height: "3rem", fill: "rgb(var(--accent-light))"});
 ---
 
 <Layout title="Baruch Cerna">
-  <nav>
-    <div>
-      <img src="/images/logo.png" alt="logo" />
-      
-    </div>
-    <a href="#projects">Projects</a>
-      <a href="#tools">Tools</a>
-  </nav>
+  <Navbar />
   <Section>
-    <div class="header">
-      <div class="header-container">
-        <h1 class="enter">Baruch Cerna</h1>
-        <h2 class="enter">Complexity made simple</h2>
-      </div>
-      <div class="header-container"></div>
-      <p>
-        I'm <span id="your">a</span> Web Developer based in Mexico
-      </p>
+    <div class="header-container">
+      <p class="location"><Fragment set:html={locationIcon} /> Mexico City</p>
+      <h1 class="enter">WEB DEVELOPER</h1>
+      <h2 class="enter">Complexity made simple</h2>
+      <p>The answer is more elegant if it is simple. I have more than 4 years designing solutions and writing 
+        code that has helped solve problems or bring ideas to 
+        reality in startups and multinationals, I rely on 
+        technologies that are at the forefront. </p>
     </div>
   </Section>
-  <Section>
-    <div class="header">
-      <h2>
-      "Logic and creativity, a little of both"
-      </h2>
-    <p>I live in Mexico, I studied computer systems engineering. I have more than 4 years designing solutions and writing code that has helped solve problems or bring ideas to reality in startups and multinationals, I rely on technologies that are at the forefront. I think the answer is more elegant if it is simple.</p>
-  
-    </div>
-    </Section>
+  <!-- 
   <Section>
     <div class="tools">
       <h2>Main tools</h2>
@@ -64,7 +52,7 @@ import Layout from "../layouts/Layout.astro";
       </ul>
     </div>
     
-  </Section>
+  </Section> -->
 </Layout>
 
 <style>
@@ -111,15 +99,6 @@ import Layout from "../layouts/Layout.astro";
     margin-top: 3rem;
   }
 
-  .header, .tools {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
-
   .projects {
     display: flex;
     flex-direction: column;
@@ -129,19 +108,21 @@ import Layout from "../layouts/Layout.astro";
     gap: 1rem;
   }
 
+  .location {
+    display: inline-flex; 
+    align-items: center; 
+    margin: 1rem 0;
+  }
+
   @media screen and (max-width: 575px) {
-    main,
-    section {
-      padding: 2rem;
-    }
     h1 {
-      font-size: 5rem;
+      font-size: 3rem;
     }
     h2 {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     p {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
   }
 </style>

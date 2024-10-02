@@ -5,16 +5,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
 export const startAnimations = () => {
-  const sections: gsap.DOMTarget[] = gsap.utils.toArray(".section");
-  sections.forEach((section, i) => {
-    gsap.to(section, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        pin: true,
-      },
-    });
-  });
+  // const sections: gsap.DOMTarget[] = gsap.utils.toArray(".section");
+  // sections.forEach((section, i) => {
+  //   gsap.to(section, {
+  //     scrollTrigger: {
+  //       trigger: section,
+  //       start: "top top",
+  //       pin: true,
+  //     },
+  //   });
+  // });
 
   const tlEnter = gsap.timeline();
   tlEnter.from(".enter", {

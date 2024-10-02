@@ -51,7 +51,7 @@ const sketch = (p: p5) => {
       y = p.lerp(y, p.mouseY, speedMouse);
       cursor.position(x, y);
     }
-    p.background(9, 9, 13, 5);
+    p.background(1, 13, 0);
     points.forEach((po) => {
       p.point(po.x, po.y);
       const n = p.noise(po.x * noiseMultiplier, po.y * noiseMultiplier);
