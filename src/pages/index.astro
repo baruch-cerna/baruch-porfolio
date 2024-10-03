@@ -4,7 +4,7 @@ import Section from "../components/Section.astro";
 import Layout from "../layouts/Layout.astro";
 import LocationIcon from "../../public/media/location.svg?raw"
 import { addAttributesToInnerHTMLString } from "../data/utils";
-const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "3rem", height: "3rem", fill: "rgb(var(--accent-light))"});
+const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5rem", height: "3rem", fill: "rgb(var(--accent-light))"});
 ---
 
 <Layout title="Baruch Cerna | Web Developer">
@@ -20,6 +20,7 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "3rem"
         technologies that are at the forefront. </p>
     </div>
   </Section>
+  
 </Layout>
 
 <style>
@@ -82,7 +83,26 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "3rem"
   .location {
     display: inline-flex; 
     align-items: center; 
-    margin: 1rem 0;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    h1 {
+      font-size: 7.5rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .header-container {
+      gap: 1rem;
+    }
+    
+    h1 {
+      font-size: 5.5rem;
+    }
+    h2 {
+      font-size: 2rem;
+    }
   }
 
   @media screen and (max-width: 575px) {

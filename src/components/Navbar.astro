@@ -50,13 +50,6 @@ const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
       gap: 1rem;
     }
 
-    .logo {
-      flex-direction: column-reverse;
-      align-items: center;
-      width: 100%;
-      text-align: center;
-    }
-
     .links {
       display: flex;
       flex-direction: row;
@@ -68,6 +61,23 @@ const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
   @media screen and (max-width: 575px) {
     nav {
       padding: 1rem;
+    }
+
+    .logo {
+
+      & > p {
+        font-size: 2rem;
+      }
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      & > a {
+        font-size: 1.5rem;
+      }
     }
   }
   

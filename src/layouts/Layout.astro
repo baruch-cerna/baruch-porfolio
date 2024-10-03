@@ -98,7 +98,7 @@ const { title } = Astro.props;
   }
 
   .logo-svg {
-    width: 100px;
+    width: auto;
     height: 100px;
     fill: rgb(var(--accent-light));
   }
@@ -159,8 +159,7 @@ const { title } = Astro.props;
 
   @media screen and (max-width: 575px) {
     .logo-svg {
-      width: 80px;
-      height: 80px;
+      height: 60px;
     }
   }
 </style>
