@@ -2,9 +2,15 @@
 import Navbar from "../components/Navbar.astro";
 import Section from "../components/Section.astro";
 import Layout from "../layouts/Layout.astro";
-import LocationIcon from "../../public/media/location.svg?raw"
+import LocationIcon from "../../public/media/location.svg?raw";
 import { addAttributesToInnerHTMLString } from "../data/utils";
-const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5rem", height: "3rem", fill: "rgb(var(--accent-light))"});
+import { projects } from "../data/index.data";
+import Card from "../components/Card.astro";
+const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
+  width: "2.5rem",
+  height: "3rem",
+  fill: "rgb(var(--accent-light))",
+});
 ---
 
 <Layout title="Baruch Cerna | Web Developer">
@@ -14,13 +20,43 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5re
       <p class="location"><Fragment set:html={locationIcon} /> Mexico City</p>
       <h1 class="enter">WEB DEVELOPER</h1>
       <h2 class="enter">Complexity made simple</h2>
-      <p>The answer is more elegant if it is simple. I have more than 4 years designing solutions and writing 
-        code that has helped solve problems or bring ideas to 
-        reality in startups and multinationals, I rely on 
-        technologies that are at the forefront. </p>
+      <p>
+        The answer is more elegant if it is simple. I have more than 4 years
+        designing solutions and writing code that has helped solve problems or
+        bring ideas to reality in startups and multinationals, I rely on
+        technologies that are at the forefront.
+      </p>
     </div>
   </Section>
-  
+  <Section>
+    <h2 id="projects">Projects</h2>
+    <p>
+      Adaptability and innovation are key to overcoming challenges and
+      achieving the goal. Throughout my experience, I have developed efficient
+      and tailored solutions, applying new technologies and approaches that
+      ensure high-impact results at every stage of the process.
+    </p>
+    <div class="projects">
+      {
+        projects.map((project) => (
+          <Card
+            title={project.title}
+            body={project.body}
+            href={project.href}
+            image={project.image}
+            technologies={project.technologies}
+          />
+        ))
+      }
+    </div>
+  </Section>
+
+  <footer>
+    <p>
+      Made with ❤️ and <a href="https://astro.build" target="_blank">Astro</a> by
+      <a href="https://github.com/baruch-cerna" target="_blank">Baruch Cerna</a>
+    </p>
+  </footer>
 </Layout>
 
 <style>
@@ -30,6 +66,7 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5re
     height: 100%;
     width: 100%;
     gap: 2rem;
+    margin: 2rem 0;
   }
 
   h1 {
@@ -73,17 +110,30 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5re
 
   .projects {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     height: 100%;
     width: 100%;
     gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 2rem 0;
   }
 
   .location {
-    display: inline-flex; 
-    align-items: center; 
+    display: inline-flex;
+    align-items: center;
     margin: 0;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
   }
 
   @media screen and (max-width: 1024px) {
@@ -96,7 +146,7 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5re
     .header-container {
       gap: 1rem;
     }
-    
+
     h1 {
       font-size: 5.5rem;
     }
@@ -109,7 +159,7 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {width: "2.5re
     .header-container {
       gap: 1rem;
     }
-    
+
     h1 {
       font-size: 3rem;
     }

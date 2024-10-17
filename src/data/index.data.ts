@@ -35,7 +35,6 @@ export const projects = [
     image: "https://zoku.com.mx/assets/media/ZOKU_BLANCO.avif",
     technologies: [
       "Angular",
-      "Javascript",
       "HTML",
       "CSS",
       "Typescript",
@@ -52,7 +51,6 @@ export const projects = [
       "https://www.artificialdynamics.ai/assets/image/portfolio/banner/radyus.png",
     technologies: [
       "Angular",
-      "Javascript",
       "HTML",
       "CSS",
       "Typescript",
@@ -68,7 +66,6 @@ export const projects = [
     image: "https://www.go-sharp.ai/assets/image/footer/logos-footer.png",
     technologies: [
       "Angular",
-      "Javascript",
       "HTML",
       "CSS",
       "Typescript",
@@ -85,7 +82,6 @@ export const projects = [
       "https://www.artificialdynamics.ai/assets/image/portfolio/banner/viz.png",
     technologies: [
       "Angular",
-      "Javascript",
       "HTML",
       "CSS",
       "Typescript",
