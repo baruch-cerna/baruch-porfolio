@@ -23,8 +23,7 @@ const sketch = (p: p5) => {
   let y = 0;
 
   const setInitialPoints = (body: HTMLBodyElement) => {
-    const totalPoints = body.offsetWidth / window.devicePixelRatio;
-    console.log(totalPoints);
+    const totalPoints = 0.2 * body.offsetWidth / window.devicePixelRatio;
     for (let i = 0; i < totalPoints; i++) {
       points.push(p.createVector(p.random(p.width), p.random(p.height)));
     }
@@ -37,8 +36,8 @@ const sketch = (p: p5) => {
     setInitialPoints(body);
     const from = p.color(242, 242, 233, 100);
     p.stroke(from);
-    p.strokeWeight(2);
     const isDesktop = getDeviceType() === "desktop";
+    p.strokeWeight(isDesktop ? 8 : 12);
     p.frameRate(isDesktop ? 50 : 30);
     cursor = isDesktop ? p.select("#v-pointer") : null;
   };
