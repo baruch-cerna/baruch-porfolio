@@ -31,14 +31,15 @@ const sketch = (p: p5) => {
   };
 
   p.setup = () => {
-    // p.frameRate(45);
-    // const body = document.getElementsByTagName("body")[0];
-    // p.createCanvas(body.offsetWidth, body.offsetHeight);
-    // setInitialPoints(body);
-    // const from = p.color(92, 99, 115);
-    // p.stroke(from);
+    p.frameRate(45);
+    const body = document.getElementsByTagName("body")[0];
+    p.createCanvas(body.offsetWidth, body.offsetHeight);
+    setInitialPoints(body);
+    const from = p.color(242, 242, 233, 100);
+    p.stroke(from);
+    p.strokeWeight(2);
     const isDesktop = getDeviceType() === "desktop";
-    // p.frameRate(isDesktop ? 50 : 30);
+    p.frameRate(isDesktop ? 50 : 30);
     cursor = isDesktop ? p.select("#v-pointer") : null;
   };
 

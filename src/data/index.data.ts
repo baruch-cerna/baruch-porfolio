@@ -30,9 +30,9 @@ import PortfolioImage from "../../public/media/baruch_cerna.jpg";
 export const projects = [
   {
     title: "ZÖKU",
-    body: "It's a catalog of bank foreclosures in Mexico from the company Maison Maya. My friend Oswaldo and I created this catalog, from the control panel to the landing page and the catalog itself. I added some animations to bring it to life.",
+    body: "Es un catálogo de remates bancarios en México de la empresa Maison Maya. Mi amigo Oswaldo y yo creamos este catálogo, desde el panel de control hasta la landing page y el catálogo en sí. Le agregué algunas animaciones para darle vida.",
     href: "https://www.zoku.com.mx",
-    image: "https://zoku.com.mx/assets/media/ZOKU_BLANCO.avif",
+    image: "https://zoku.com.mx/media/ZOKU_BLANCO.avif",
     technologies: [
       "Angular",
       "HTML",
@@ -45,10 +45,9 @@ export const projects = [
   },
   {
     title: "Radyus",
-    body: "Solution for optimizing logistics transportation routes. I supported the web team at Go-Sharp in improving data loading for clients such as Sigma Alimentos and optimizing the user experience for viewing points of sale on maps, among other things.",
+    body: "Solución para optimizar rutas de transporte logístico. Apoyé al equipo web de Go-Sharp en mejorar la carga de datos para clientes como Sigma Alimentos y optimizar la experiencia de usuario para la visualización de puntos de venta en mapas, entre otras cosas.",
     href: "https://www.radyus.ai/",
-    image:
-      "https://www.artificialdynamics.ai/assets/image/portfolio/banner/radyus.png",
+    image: "https://www.radyus.ai/assets/image/portfolio/banner/radyus.png",
     technologies: [
       "Angular",
       "HTML",
@@ -60,9 +59,9 @@ export const projects = [
     ],
   },
   {
-    title: "Perfect Store",
-    body: "Go-Sharp's solution (currently Artificial Dynamics) to optimize strategies at points of sale for clients such as Sony, Ayvi, etc. With the web team, I optimized client information capture, automated the creation of PDF reports, and integrated the business intelligence (BI) section.",
-    href: "https://www.go-sharp.ai/solutions/perfect-store-execution",
+    title: "Go Sharp Plus",
+    body: "Solución de Artificial Dynamics para optimizar estrategias en puntos de venta para clientes como Sony, Ayvi, etc. Con el equipo web, optimicé la captura de información de clientes, automaticé la creación de reportes PDF e integré la sección de inteligencia de negocios (BI).",
+    href: "https://www.go-sharp.ai/",
     image: "https://www.go-sharp.ai/assets/image/footer/logos-footer.png",
     technologies: [
       "Angular",
@@ -74,22 +73,22 @@ export const projects = [
       "PostgreSQL",
     ],
   },
-  {
-    title: "VIZ",
-    body: "Computer vision tool for defining zones in points of interest for Go-Sharp. I improved the user experience in two main ways: enhancing the way zones are defined and optimizing the flow of real-time video information simultaneously.",
-    href: "https://www.artificialdynamics.ai/portfolio/viz",
-    image:
-      "https://www.artificialdynamics.ai/assets/image/portfolio/banner/viz.png",
-    technologies: [
-      "Angular",
-      "HTML",
-      "CSS",
-      "Typescript",
-      "Django",
-      "Python",
-      "PostgreSQL",
-    ],
-  },
+  // {
+  //   title: "VIZ",
+  //   body: "Computer vision tool for defining zones in points of interest for Go-Sharp. I improved the user experience in two main ways: enhancing the way zones are defined and optimizing the flow of real-time video information simultaneously.",
+  //   href: "https://www.artificialdynamics.ai/portfolio/viz",
+  //   image:
+  //     "https://www.artificialdynamics.ai/assets/image/portfolio/banner/viz.png",
+  //   technologies: [
+  //     "Angular",
+  //     "HTML",
+  //     "CSS",
+  //     "Typescript",
+  //     "Django",
+  //     "Python",
+  //     "PostgreSQL",
+  //   ],
+  // },
   // {
   //   title: "Baruch Cerna - Portfolio",
   //   body: "My own portfolio as a showcase for my projects and design.",

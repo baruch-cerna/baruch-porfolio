@@ -6,35 +6,49 @@ import LocationIcon from "../../public/media/location.svg?raw";
 import { addAttributesToInnerHTMLString } from "../data/utils";
 import { projects } from "../data/index.data";
 import Card from "../components/Card.astro";
+import Logo from "/public/media/logo_blanco.svg?raw";
+import CTA from "../components/CTA.astro";
+
 const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
   width: "2.5rem",
   height: "3rem",
   fill: "rgb(var(--accent-light))",
 });
+
+const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
 ---
 
-<Layout title="Baruch Cerna | Web Developer">
-  <Navbar />
+<Layout title="Baruch Cerna | Desarrollador Web">
+  <!-- <Navbar /> -->
   <Section>
     <div class="header-container">
-      <p class="location"><Fragment set:html={locationIcon} /> Mexico City</p>
-      <h1 class="enter">WEB DEVELOPER</h1>
-      <h2 class="enter">Complexity made simple</h2>
+      <div class="row">
+        <p class="location">
+          <Fragment set:html={locationIcon} /> Ciudad de México
+        </p>
+        <a href="/" class="logo">
+          <Fragment set:html={logoHTML} />
+        </a>
+      </div>
+      <h1 class="enter">Me llamo Baruch Cerna y soy Desarrollador Web</h1>
+      <CTA text="Trabajemos juntos" />
       <p>
-        The answer is more elegant if it is simple. I have more than 4 years
-        designing solutions and writing code that has helped solve problems or
-        bring ideas to reality in startups and multinationals, I rely on
-        technologies that are at the forefront.
+        Tengo más de 5 años diseñando soluciones y escribiendo código que ha
+        ayudado a resolver problemas para startups y empresas multinacionales.
+        Me encanta enfrentar nuevos retos y me apasiona la idea de transformar
+        ideas en experiencias digitales que agreguen valor a las empresas y a
+        los usuarios.
       </p>
+      <p><em>"La respuesta es más elegante si es simple."</em></p>
     </div>
   </Section>
   <Section>
     <h2 id="projects">Projects</h2>
     <p>
-      Adaptability and innovation are key to overcoming challenges and
-      achieving the goal. Throughout my experience, I have developed efficient
-      and tailored solutions, applying new technologies and approaches that
-      ensure high-impact results at every stage of the process.
+      La adaptabilidad y la innovación son claves para superar los retos y
+      alcanzar el objetivo. A lo largo de mi experiencia, he desarrollado
+      soluciones eficientes y a medida, aplicando nuevas tecnologías y enfoques
+      que aseguran resultados de alto impacto en cada etapa del proceso.
     </p>
     <div class="projects">
       {
@@ -49,11 +63,15 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
         ))
       }
     </div>
+    <div class="cta-container">
+      <CTA text="Contactame" />
+    </div>
   </Section>
 
   <footer>
     <p>
-      Made with ❤️ and <a href="https://astro.build" target="_blank">Astro</a> by
+      Hecho con ❤️ y <a href="https://astro.build" target="_blank">Astro</a>
+      por
       <a href="https://github.com/baruch-cerna" target="_blank">Baruch Cerna</a>
     </p>
   </footer>
@@ -65,12 +83,24 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    gap: 2rem;
+    gap: 3rem;
     margin: 2rem 0;
   }
 
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    height: 100px;
+    margin: 0 17px;
+  }
+
   h1 {
-    font-size: 9rem;
+    font-size: 7rem;
   }
 
   h2 {
@@ -126,6 +156,15 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
     margin: 0;
   }
 
+  .cta-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 4rem 0;
+  }
+
   footer {
     display: flex;
     flex-direction: column;
@@ -138,7 +177,7 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
 
   @media screen and (max-width: 1024px) {
     h1 {
-      font-size: 7.5rem;
+      font-size: 6rem;
     }
   }
 
@@ -168,6 +207,10 @@ const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
     }
     p {
       font-size: 1.5rem;
+    }
+
+    .row {
+      flex-direction: column-reverse;
     }
   }
 </style>
