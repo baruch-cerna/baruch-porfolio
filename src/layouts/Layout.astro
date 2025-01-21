@@ -80,12 +80,13 @@ const { title } = Astro.props;
       rgb(var(--accent-light)) 30%,
       white 60%
     );
+    --font-mono: "Red Hat Mono", monospace;
   }
   * {
     color: rgb(var(--accent-light))
   }
   html {
-    font-family: "Red Hat Mono", monospace;
+    font-family: var(--font-mono);
     font-optical-sizing: auto;
     background: rgb(var(--accent-dark));
     scroll-behavior: smooth;

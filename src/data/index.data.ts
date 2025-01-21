@@ -25,7 +25,7 @@ export const tools = [
   },
 ];
 
-import PortfolioImage from "../../public/media/baruch_cerna.jpg";
+import PortfolioImage from "../../public/media/viz.svg";
 
 export const projects = [
   {
@@ -73,22 +73,21 @@ export const projects = [
       "PostgreSQL",
     ],
   },
-  // {
-  //   title: "VIZ",
-  //   body: "Computer vision tool for defining zones in points of interest for Go-Sharp. I improved the user experience in two main ways: enhancing the way zones are defined and optimizing the flow of real-time video information simultaneously.",
-  //   href: "https://www.artificialdynamics.ai/portfolio/viz",
-  //   image:
-  //     "https://www.artificialdynamics.ai/assets/image/portfolio/banner/viz.png",
-  //   technologies: [
-  //     "Angular",
-  //     "HTML",
-  //     "CSS",
-  //     "Typescript",
-  //     "Django",
-  //     "Python",
-  //     "PostgreSQL",
-  //   ],
-  // },
+  {
+    title: "VIZ",
+    body: "Herramienta de visión artificial para definir zonas en puntos de interés para Go-Sharp. Mejoré la experiencia de usuario de dos formas principales: mejorando la forma en que se definen las zonas y optimizando el flujo de información de video en tiempo real simultáneamente.",
+    href: "https://www.go-sharp.ai/solutions/viz-computer-vision",
+    image: PortfolioImage,
+    technologies: [
+      "Angular",
+      "HTML",
+      "CSS",
+      "Typescript",
+      "Django",
+      "Python",
+      "PostgreSQL",
+    ],
+  },
   // {
   //   title: "Baruch Cerna - Portfolio",
   //   body: "My own portfolio as a showcase for my projects and design.",

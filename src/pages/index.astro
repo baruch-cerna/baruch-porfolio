@@ -30,17 +30,61 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
           <Fragment set:html={logoHTML} />
         </a>
       </div>
-      <h1 class="enter">Me llamo Baruch Cerna y soy Desarrollador Web</h1>
+      <h1 class="enter">Soy Baruch Cerna<br />Desarrollador Web</h1>
       <CTA text="Trabajemos juntos" />
       <p>
         Tengo más de 5 años diseñando soluciones y escribiendo código que ha
         ayudado a resolver problemas para startups y empresas multinacionales.
-        Me encanta enfrentar nuevos retos y me apasiona la idea de transformar
-        ideas en experiencias digitales que agreguen valor a las empresas y a
-        los usuarios.
+        Me encanta enfrentar nuevos retos y buscar transformar ideas en
+        experiencias digitales que agreguen valor a las empresas y a los
+        usuarios.
       </p>
-      <p><em>"La respuesta es más elegante si es simple."</em></p>
+      <p><em>"Una respuesta simple es más elegante."</em></p>
     </div>
+  </Section>
+  <Section>
+    <h2 id="path">Trayectoria</h2>
+    <p>
+      Aprendí a programar desde los 16 años, en la preparatoria, ahí descubrí mi
+      pasión por la tecnología. Estudié Ingeniería en Sistemas Computacionales
+      en la Escuela Superior de Cómputo del Instituto Politécnico Nacional en la
+      Ciudad de México, México.
+    </p>
+    <ul class="path-list">
+      <li>
+        <b
+          >Marzo 2020 - Noviembre 2020: Desarrollador Full Stack en Maison Maya.</b
+        > Una empresa de bienes raíces e inversiones. Mis responsabilidades incluían
+        el desarrollo de un sistema web utilizando MEAN stack para la gestión de
+        inventario y CRM, la creación de funciones para la carga y procesamiento
+        de archivos Excel, y el diseño de un CRM personalizado.
+      </li>
+      <li>
+        <b>
+          Noviembre 2020 - Presente: Cofundador y Desarrollador Web en Zöku.</b
+        >
+        También en el sector de bienes raíces e inversiones. En Zöku, desarrolle
+        un catálogo en línea para remates bancarios con Angular, Node.js, MongoDB
+        y Express, e implemente estrategias de SEO, teniendo mi primero exito en
+        SEO.
+      </li>
+      <li>
+        <b>
+          Septiembre 2022 - Presente: Desarrollador Full Stack en Go-Sharp.</b
+        >
+        Go-Sharp es ahora Artificial Dynamics, una empresa de desarrollo de software
+        B2B. He desarrollado sistemas empresariales de alto rendimiento para clientes
+        como Nestlé, Sony y Danhos, utilizando Angular, Django y PostgreSQL. He desarrollado
+        soluciones en áreas como logística, ruteo, retail y gestión de cámaras de
+        vigilancia.
+      </li>
+      <li>
+        <b>Presente: Desarrollador Web independiente.</b>
+        Además de mi trabajo en Artificial Dynamics y Zöku, me dedico a crear soluciones
+        web, desarrollo desde páginas web hasta sistemas empresariales. Exploro la
+        web desde el punto de vista de los usuarios buscando hacer productos de calidad.
+      </li>
+    </ul>
   </Section>
   <Section>
     <h2 id="projects">Proyectos</h2>
@@ -143,11 +187,12 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
     flex-direction: row;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: calc(100vw - 4rem);
     gap: 1rem;
-    justify-content: space-between;
-    flex-wrap: wrap;
     margin: 2rem 0;
+    overflow-x: auto;
+    scrollbar-color: rgb(var(--accent-light)) rgb(var(--accent));
+    scrollbar-width: thin;
   }
 
   .location {
@@ -163,6 +208,24 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
     height: 100%;
     width: 100%;
     margin: 4rem 0;
+  }
+
+  em {
+    font-family: var(--font-mono);
+    font-style: normal;
+  }
+
+  .path-list {
+    border-left: 2px solid rgb(var(--accent-light));
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    list-style-type: disclosure-closed;
+
+    & li {
+      font-size: 1.5rem;
+    }
   }
 
   footer {
@@ -209,8 +272,19 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
       font-size: 1.5rem;
     }
 
+    .projects {
+      gap: 2rem;
+    }
+
     .row {
       flex-direction: column-reverse;
+    }
+
+    .path-list {
+      padding: 1.2rem;
+      & li {
+        font-size: 1.2rem;
+      }
     }
   }
 </style>

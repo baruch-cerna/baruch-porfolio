@@ -34,10 +34,10 @@ const sketch = (p: p5) => {
     const body = document.getElementsByTagName("body")[0];
     p.createCanvas(body.offsetWidth, body.offsetHeight);
     setInitialPoints(body);
-    const from = p.color(242, 242, 233, 100);
+    const from = p.color(89, 89, 88, 20);
     p.stroke(from);
     const isDesktop = getDeviceType() === "desktop";
-    p.strokeWeight(isDesktop ? 8 : 12);
+    p.strokeWeight(isDesktop ? 4 : 6);
     p.frameRate(isDesktop ? 50 : 30);
     cursor = isDesktop ? p.select("#v-pointer") : null;
   };
@@ -51,7 +51,7 @@ const sketch = (p: p5) => {
       y = p.lerp(y, p.mouseY, speedMouse);
       cursor.position(x, y);
     }
-    p.background(1, 13, 0);
+    // p.background(1, 13, 0);
     points.forEach((po) => {
       p.point(po.x, po.y);
       const n = p.noise(po.x * noiseMultiplier, po.y * noiseMultiplier);
