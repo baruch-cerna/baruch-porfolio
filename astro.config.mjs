@@ -1,5 +1,5 @@
-import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
+import { defineConfig } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
 
 import compressor from "astro-compressor";
 
@@ -8,9 +8,7 @@ export default defineConfig({
   output: "server",
   adapter: cloudflare(),
   image: {
-    remotePatterns: [{
-      protocol: "https"
-    }]
+    remotePatterns: [{ protocol: "https" }],
   },
-  integrations: [compressor()]
+  integrations: [compressor()],
 });
