@@ -30,14 +30,14 @@ const sketch = (p: p5) => {
   };
 
   p.setup = () => {
-    p.frameRate(45);
-    const body = document.getElementsByTagName("body")[0];
-    p.createCanvas(body.offsetWidth, body.offsetHeight);
-    setInitialPoints(body);
+    // p.frameRate(45);
+    // const body = document.getElementsByTagName("body")[0];
+    // p.createCanvas(body.offsetWidth, body.offsetHeight);
+    // setInitialPoints(body);
     const from = p.color(89, 89, 88, 20);
     p.stroke(from);
     const isDesktop = getDeviceType() === "desktop";
-    p.strokeWeight(isDesktop ? 4 : 6);
+    // p.strokeWeight(isDesktop ? 4 : 6);
     p.frameRate(isDesktop ? 50 : 30);
     cursor = isDesktop ? p.select("#v-pointer") : null;
   };
