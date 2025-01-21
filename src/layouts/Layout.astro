@@ -24,42 +24,55 @@ const { title } = Astro.props;
   <body>
     <slot />
     <div id="v-pointer"></div>
+    <script type="module">
+      import {
+        animate,
+        inView,
+      } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+      const quote = `"Una respuesta simple es más elegante."`;
+      const quoteElement = document.getElementById("quote");
+      const sequence = [
+        [".logo-svg", { scale: [0.4, 1] }, { ease: "circInOut", duration: 1 }],
+        [
+          ".enter",
+          { y: [-40, 0] },
+          { type: "spring", bounce: 0.5, duration: 1 },
+        ],
+      ];
+      animate(
+        "#v-pointer",
+        {
+          x: [7, 0, 7],
+        },
+        {
+          repeat: Infinity,
+          duration: 1,
+          ease: "easeInOut",
+        }
+      );
+      animate(sequence);
+      inView("#quote", (element) => {
+        animate(0, quote.length, {
+          duration: 4,
+          ease: "easeIn",
+          onUpdate: (latest) =>
+            (quoteElement.innerHTML = quote.substring(0, latest)),
+        });
+      });
+      inView(".path-list li", (element) => {
+        animate(
+          element,
+          { opacity: 1, y: [-50, 0] },
+          {
+            duration: 0.9,
+            easing: [0.17, 0.55, 0.55, 1],
+          }
+        );
+        return () => animate(element, { opacity: 0, y: [0, -50] });
+      });
+    </script>
     <script>
       import("../../public/scripts/p5-script").then((m) => m.runSketch());
-      import("../../public/scripts/ui-animations").then((m) =>
-        m.startAnimations()
-      );
-      const cursor = document.getElementById("v-pointer");
-      // if (cursor) {
-      //   document.addEventListener("mouseover", (e) => {
-      //     const element = e.target;
-      //     if (element instanceof HTMLImageElement) {
-      //       const p = document.createElement("p");
-      //       p.textContent = "Live view";
-      //       p.style.color = "rgb(var(--accent-dark))";
-      //       p.style.fontSize = "1rem";
-      //       p.style.fontWeight = "700";
-      //       p.style.textAlign = "center";
-      //       p.style.margin = "0";
-      //       p.style.padding = "auto";
-      //       p.style.width = "100%";
-      //       p.style.aspectRatio = "1/1";
-      //       p.style.alignContent = "center";
-      //       cursor.style.padding = "2rem";
-      //       cursor.appendChild(p);
-      //     }
-      //   });
-      //   document.addEventListener("mouseout", (e) => {
-      //     const element = e.target;
-      //     if (element instanceof HTMLImageElement) {
-      //       const isImg = element.parentElement?.classList.contains("card-ref");
-      //       if (isImg) {
-      //         cursor.removeChild(cursor.children[0]);
-      //         cursor.style.padding = "0.75rem";
-      //       }
-      //     }
-      //   });
-      // }
     </script>
   </body>
 </html>
@@ -83,7 +96,7 @@ const { title } = Astro.props;
     --font-mono: "Red Hat Mono", monospace;
   }
   * {
-    color: rgb(var(--accent-light))
+    color: rgb(var(--accent-light));
   }
   html {
     font-family: var(--font-mono);
@@ -103,7 +116,7 @@ const { title } = Astro.props;
     height: 100px;
     fill: rgb(var(--accent-light));
   }
-  
+
   canvas {
     position: absolute;
     top: 0;
@@ -116,7 +129,8 @@ const { title } = Astro.props;
   h1,
   h2,
   h3,
-  p, a {
+  p,
+  a {
     font-family: "GeneralSans", sans-serif;
   }
 
@@ -126,7 +140,7 @@ const { title } = Astro.props;
     margin: 0;
     line-height: 1;
   }
-/* 
+  /* 
   h1,
   h2,
   h3,

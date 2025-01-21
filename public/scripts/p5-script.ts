@@ -38,7 +38,7 @@ const sketch = (p: p5) => {
     p.stroke(from);
     const isDesktop = getDeviceType() === "desktop";
     // p.strokeWeight(isDesktop ? 4 : 6);
-    p.frameRate(isDesktop ? 50 : 30);
+    // p.frameRate(isDesktop ? 50 : 30);
     cursor = isDesktop ? p.select("#v-pointer") : null;
   };
 
