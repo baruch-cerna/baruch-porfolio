@@ -20,17 +20,15 @@ const { title } = Astro.props;
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
+
   </head>
   <body>
     <slot />
-    <script type="module">
-      import {
-        animate,
-        inView,
-      } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+    <script>
+      import { animate, inView } from "motion";
       const quote = `"Una respuesta simple es más elegante."`;
-      const quoteElement = document.getElementById("quote");
-      const sequence = [
+      const quoteElement = document.getElementById("quote")!;
+      const sequence: any[] = [
         [".logo-svg", { scale: [0.4, 1] }, { ease: "circInOut", duration: 1 }],
         [
           ".enter",

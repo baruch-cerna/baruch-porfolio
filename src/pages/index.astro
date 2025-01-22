@@ -32,11 +32,12 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
             href="https://www.linkedin.com/in/alan-baruch/"
             class="logo"
             target="_blank"
+            aria-label="Baruch Cerna LinkedIn"
           >
             <Fragment set:html={LinkedIn} />
           </a>
         </div>
-        <a href="/" class="logo">
+        <a href="/" class="logo" aria-label="Baruch Cerna Logo">
           <Fragment set:html={logoHTML} />
         </a>
       </div>
