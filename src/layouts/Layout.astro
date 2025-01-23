@@ -25,23 +25,38 @@ const { title } = Astro.props;
     <slot />
     <script>
       import { animate, inView } from "motion";
-      const quote = `"Una respuesta simple es más elegante."`;
+      const quote = `Una respuesta simple es más elegante.`;
       const quoteElement = document.getElementById("quote")!;
+      const sequenceTime = 2;
       const sequence: any[] = [
-        [".logo-svg", { scale: [0.4, 1] }, { ease: "circInOut", duration: 1 }],
         [
           ".enter",
-          { y: [-40, 0] },
-          { type: "spring", bounce: 0.5, duration: 1 },
+          { y: [-30, 0] },
+          {
+            type: "spring",
+            bounce: 0.5,
+            duration: sequenceTime / 4,
+            delay: sequenceTime / 4,
+          },
+        ],
+        [
+          ".enter-2",
+          { y: [30, 0] },
+          { type: "spring", bounce: 0.6, duration: sequenceTime / 4 },
+        ],
+        [
+          ".logo-svg",
+          { rotate: [180, 0, -180] },
+          { ease: "circInOut", duration: sequenceTime / 2 },
         ],
       ];
       animate(sequence);
       inView("#quote", (element) => {
         animate(0, quote.length, {
-          duration: 4,
+          duration: sequenceTime,
           ease: "easeIn",
           onUpdate: (latest) =>
-            (quoteElement.innerHTML = quote.substring(0, latest)),
+            (quoteElement.innerHTML = `"${quote.substring(0, latest)}"`),
         });
       });
       inView(".path-list li", (element) => {
