@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import logo from "../../public/media/logo_blanco.jpg";
 const yoe = new Date().getFullYear() - 2020;
 const description = `Desarrollador Web Full Stack con +${yoe} años de experiencia en desarrollo de productos digitales. Experto en Node.js, Django, Angular y React.`;
 ---
@@ -12,16 +13,22 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content={description}
-    />
+    <meta name="description" content={description} />
     <meta
       name="keywords"
       content="Full Stack Developer, Full Stack Web Developer, Node.js, Django, Angular, React, JavaScript, Typescript, Python, MongoDB, PostgreSQL, MySQL, Desarrollo web, Programación, Desarrollo de software, SEO, API, Diseño de patrones, Arquitectura de software, Liderazgo, México"
     />
     <meta name="author" content="Baruch Cerna" />
     <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://baruch-cerna.dev" />
+    <meta
+      property="og:image"
+      content="https://baruch-cerna.dev/media/logo_blanco.jpg"
+    />
+    <meta property="og:site_name" content="Portafolio de Baruch Cerna" />
     <meta name="viewport" content="width=device-width" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/media/logo_blanco.svg" />
