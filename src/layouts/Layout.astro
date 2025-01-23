@@ -4,13 +4,24 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const yoe = new Date().getFullYear() - 2020;
+const description = `Desarrollador Web Full Stack con +${yoe} años de experiencia en desarrollo de productos digitales. Experto en Node.js, Django, Angular y React.`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Web Developer" />
+    <meta
+      name="description"
+      content={description}
+    />
+    <meta
+      name="keywords"
+      content="Full Stack Developer, Full Stack Web Developer, Node.js, Django, Angular, React, JavaScript, Typescript, Python, MongoDB, PostgreSQL, MySQL, Desarrollo web, Programación, Desarrollo de software, SEO, API, Diseño de patrones, Arquitectura de software, Liderazgo, México"
+    />
+    <meta name="author" content="Baruch Cerna" />
+    <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/media/logo_blanco.svg" />
     <title>{title}</title>
@@ -27,7 +38,7 @@ const { title } = Astro.props;
       import { animate, inView } from "motion";
       const quote = `Una respuesta simple es más elegante.`;
       const quoteElement = document.getElementById("quote")!;
-      const sequenceTime = 2;
+      const sequenceTime = 2.2;
       const sequence: any[] = [
         [
           ".enter",
