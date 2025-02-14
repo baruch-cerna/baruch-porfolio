@@ -4,7 +4,16 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import logo from "../../public/media/logo_blanco.jpg";
+import Logo from "/public/media/logo_blanco.svg?raw";
+import LinkedIn from "/public/media/linkedin.svg?raw";
+import LocationIcon from "../../public/media/location.svg?raw";
+import { addAttributesToInnerHTMLString } from "../data/utils";
+const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
+  width: "2.5rem",
+  height: "3rem",
+  fill: "rgb(var(--accent-light))",
+});
+const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
 const yoe = new Date().getFullYear() - 2020;
 const description = `Desarrollador Web Full Stack con +${yoe} años de experiencia en desarrollo de productos digitales. Experto en Node.js, Django, Angular y React.`;
 ---
@@ -41,7 +50,34 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     />
   </head>
   <body>
+    <div class="header row">
+      <div class="info">
+        <p class="location">
+          <Fragment set:html={locationIcon} /> Ciudad de México
+        </p>
+        <a
+          href="https://www.linkedin.com/in/alan-baruch/"
+          class="logo"
+          target="_blank"
+          aria-label="Baruch Cerna LinkedIn"
+        >
+          <Fragment set:html={LinkedIn} />
+        </a>
+      </div>
+      <a href="/" class="logo" aria-label="Baruch Cerna Logo">
+        <Fragment set:html={logoHTML} />
+      </a>
+    </div>
     <slot />
+    <footer>
+      <p>
+        Hecho con ❤️ y <a href="https://astro.build" target="_blank">Astro</a>
+        por
+        <a href="https://github.com/baruch-cerna" target="_blank"
+          >Baruch Cerna</a
+        >
+      </p>
+    </footer>
     <script>
       import { animate, inView } from "motion";
       const quote = `Una respuesta simple es más elegante.`;
@@ -109,6 +145,7 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
       rgb(var(--accent-dark)) 30%,
       rgba(var(--accent), 0.5) 70%
     );
+    --font: "GeneralSans", sans-serif;
     --font-mono: "Red Hat Mono", monospace;
     --secondary-glow: conic-gradient(
       from 10deg at 50% 50%,
@@ -212,10 +249,38 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     }
   }
 
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    padding-bottom: 0cap;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .location {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+  }
+
   .logo-svg {
     width: auto;
     height: 100px;
     fill: rgb(var(--accent-light));
+  }
+
+  .logo {
+    margin: auto 17px;
   }
 
   canvas {
@@ -231,32 +296,98 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
   h2,
   h3,
   p,
-  a {
-    font-family: "GeneralSans", sans-serif;
-  }
-
-  h1,
-  h2,
-  h3 {
+  a,
+  label,
+  em {
+    font-family: var(--font);
+    font-weight: normal;
     margin: 0;
-    line-height: 1;
   }
-  /* 
+
   h1,
   h2,
-  h3,
-  p {
-    color: rgb(var(--accent-light));
-  } */
+  h3 {
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
 
-  p {
-    font-weight: 500;
-    font-size: 1.25rem;
+  p,
+  a,
+  label,
+  em {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+
+  em {
+    font-family: var(--font-mono);
+    font-style: normal;
+  }
+
+  h1 {
+    font-size: 7rem;
+    overflow-y: hidden;
+  }
+
+  h2 {
+    font-size: 6rem;
+    font-weight: normal;
   }
 
   h3 {
-    font-weight: 700;
+    font-size: 3rem;
+  }
+
+  button {
+    background-color: rgba(var(--accent-light), 0.6);
+    border: 0;
+    border-radius: 0.25rem;
+    color: rgb(var(--accent-dark));
+    cursor: pointer;
+    font-family: var(--font);
     font-size: 2rem;
+    font-weight: normal;
+    padding: 1rem 2rem;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  button:hover {
+    background-color: rgb(var(--accent-light));
+  }
+
+  input,
+  textarea {
+    background-color: rgba(var(--accent-dark), 0.6);
+    border: 0;
+    border-radius: 0.25rem;
+    color: rgb(var(--accent-light));
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: normal;
+    padding: 1rem 2rem;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
+
+  input:hover,
+  textarea:hover {
+    background-color: rgb(var(--accent-dark));
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
   }
 
   #v-pointer {
@@ -274,9 +405,76 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     transition: padding 0.3s ease-in-out;
   }
 
+  @media screen and (max-width: 1024px) {
+    h1 {
+      font-size: 6rem;
+    }
+
+    h2 {
+      font-size: 5rem;
+    }
+    p,
+    a,
+    label,
+    em {
+      font-size: 1.75rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 5.5rem;
+    }
+    h2 {
+      font-size: 4.5rem;
+    }
+    h3 {
+      font-size: 2rem;
+    }
+    p,
+    a,
+    label,
+    em {
+      font-size: 1.5rem;
+    }
+  }
+
   @media screen and (max-width: 575px) {
     .logo-svg {
       height: 60px;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+    h2 {
+      font-size: 2.5rem;
+    }
+    h3 {
+      font-size: 2rem;
+    }
+    p,
+    a,
+    label,
+    em {
+      font-size: 1.25rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    input,
+    textarea {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .header {
+      flex-direction: column-reverse;
+    }
+
+    .logo {
+      margin: 2rem;
     }
   }
 </style>
