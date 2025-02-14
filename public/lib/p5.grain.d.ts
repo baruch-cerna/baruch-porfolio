@@ -1,1 +1,0 @@
-export declare const p5grain: P5Grain;

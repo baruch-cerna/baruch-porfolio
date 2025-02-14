@@ -1,0 +1,27 @@
+---
+import Section from "../../components/Section.astro";
+import Layout from "../../layouts/Layout.astro";
+import ContactForm from "../../components/ContactForm";
+---
+
+<Layout title="Contacto | Baruch Cerna">
+  <Section>
+    <ContactForm client:load />
+  </Section>
+</Layout>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+</style>

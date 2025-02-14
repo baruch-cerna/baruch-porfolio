@@ -1,16 +1,21 @@
-import { defineConfig } from 'astro/config';
-import netlify from "@astrojs/netlify";
+import { defineConfig } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
 
 import compressor from "astro-compressor";
+
+import sitemap from "@astrojs/sitemap";
+
+import db from "@astrojs/db";
+
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  adapter: netlify(),
+  site: 'https://baruch-cerna.dev',
+  adapter: cloudflare(),
   image: {
-    remotePatterns: [{
-      protocol: "https"
-    }]
+    remotePatterns: [{ protocol: "https" }],
   },
-  integrations: [compressor()]
+  integrations: [compressor(), sitemap(), db(), react()],
 });
