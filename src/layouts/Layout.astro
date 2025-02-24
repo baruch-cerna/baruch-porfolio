@@ -41,10 +41,8 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     <meta name="viewport" content="width=device-width" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/media/logo_blanco.svg" />
+    <link rel="apple-touch-icon" href="/media/logo_blanco.svg" />
     <title>{title}</title>
-    <script>
-      window.location.href = "https://baruch-cerna.dev";
-    </script>
   </head>
   <body>
     <div class="header row">
@@ -77,6 +75,16 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     </footer>
     <script>
       import { animate, inView } from "motion";
+      import Lenis from "lenis";
+      const lenis = new Lenis({
+        duration: 1.5,
+        easing: (x) => 1 - Math.pow(1 - x, 3),
+      });
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
       const quote = `Una respuesta simple es más elegante.`;
       const quoteElement = document.getElementById("quote")!;
       const sequenceTime = 2.2;
@@ -118,7 +126,7 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
           {
             duration: 0.9,
             easing: [0.17, 0.55, 0.55, 1],
-          } as any
+          } as any,
         );
         return () => animate(element, { opacity: 0, y: [0, -50] });
       });
@@ -126,6 +134,8 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
   </body>
 </html>
 <style is:global>
+  @import url("/css/general-sans.css");
+  @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
   *,
   *::before,
   *::after {

@@ -1,18 +1,14 @@
+import { type FormEvent } from "react";
 import "./css/ContactForm.css";
-import { db, Lead } from "astro:db";
 
 export default function ContactForm() {
-//   useEffect(async () => {
-//     const leads = await db.select(Lead).all();
-//     console.log(leads);
-//   }, []);
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.target as HTMLFormElement);
-    const name = data.get("name");
-    const email = data.get("email");
-    const password = data.get("tel");
+    const name = data.get("name") as string;
+    const email = data.get("email") as string;
+    const tel = data.get("tel") as string;
     const title = data.get("title");
     const description = data.get("description");
     const message = data.get("message");
@@ -21,20 +17,20 @@ export default function ContactForm() {
     const lead = {
       name,
       email,
-      tel: password,
+      tel,
       from: "website",
+      created: new Date(),
     };
-
-    const res = await db.insert(Lead).values(lead);
 
     const brief = {
       title,
       description,
       message,
       budget,
+      created: new Date(),
     };
 
-    console.log(lead, res);
+    console.log(lead);
     console.log(brief);
   }
   return (

@@ -1,11 +1,8 @@
 import { defineConfig } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
-
 import compressor from "astro-compressor";
 
 import sitemap from "@astrojs/sitemap";
-
-import db from "@astrojs/db";
 
 import react from "@astrojs/react";
 
@@ -17,5 +14,5 @@ export default defineConfig({
   image: {
     remotePatterns: [{ protocol: "https" }],
   },
-  integrations: [compressor(), sitemap(), db(), react()],
+  integrations: [compressor(), sitemap(), react()],
 });
