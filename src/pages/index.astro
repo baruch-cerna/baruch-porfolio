@@ -4,74 +4,91 @@ import Layout from "../layouts/Layout.astro";
 import { projects } from "../data/index.data";
 import Card from "../components/Card.astro";
 import CTA from "../components/CTA.astro";
-
-const yoe = new Date().getFullYear() - 2020;
+const initDate = new Date();
+initDate.setDate(15);
+initDate.setMonth(3);
+initDate.setFullYear(2020);
+const nowDate = new Date();
+const diffTime = nowDate.getTime() - initDate.getTime();
+const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
 ---
 
 <Layout title="Baruch Cerna | Desarrollador Web">
   <!-- <Navbar /> -->
   <Section>
-    <div class="header-container">
-      <div class="title">
-        <h1 class="enter">Soy Baruch Cerna</h1>
-        <h2 class="enter-2">Desarrollador Web</h2>
-      </div>
-      <CTA text="Trabajemos juntos" />
-      <p>
-        Tengo más de {yoe} años diseñando soluciones y escribiendo código que ha
-        ayudado a resolver problemas para startups y empresas multinacionales. Me
-        encanta enfrentar nuevos retos y buscar transformar ideas en experiencias
-        digitales que agreguen valor a las empresas y a los usuarios.
+    <div class="hero">
+      <h1 class="clip-reveal" data-animate>Soy Baruch Cerna</h1>
+      <h2 class="clip-reveal" data-animate>Desarrollador Web</h2>
+      <p class="fade-in-up" data-animate>
+        Desarrollo experiencias digitales que resuelven problemas complejos,
+        impulsan negocios y encantan a los usuarios.
       </p>
-      <p><em id="quote">"Una respuesta simple es más elegante."</em></p>
+      <CTA text="Trabajemos juntos" />
     </div>
   </Section>
   <Section>
-    <h3 id="path">Trayectoria</h3>
-    <p>
-      Aprendí a programar desde los 16 años, en la preparatoria, ahí descubrí mi
-      pasión por la tecnología. Estudié Ingeniería en Sistemas Computacionales
-      en la Escuela Superior de Cómputo del Instituto Politécnico Nacional en la
-      Ciudad de México, México.
+    <p class="fade-in-up" data-animate>
+      Tengo más de {yoe} años diseñando soluciones y escribiendo código que agrega
+      valor a las empresas y a los usuarios.
     </p>
+    <h3 class="clip-reveal" data-animate>
+      Una respuesta simple es más elegante
+    </h3>
+  </Section>
+  <Section>
+    <h3 id="path" class="clip-reveal" data-animate>Mi historia</h3>
+    <p class="fade-in-up" data-animate>
+      Empecé a programar a los 16 años, cuando descubrí que podía darle vida a
+      mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado
+      de construir, aprender y desafiar los límites de lo posible.
+    </p>
+    <p class="fade-in-up" data-animate>
+      He trabajado con startups y corporativos internacionales desarrollando
+      desde CRMs personalizados hasta catálogos de remates hipotecarios y
+      sistemas de logística.
+    </p>
+  </Section>
+  <Section>
+    <h3 class="clip-reveal" data-animate>
+      Más de 5 años codificando soluciones
+    </h3>
     <ul class="path-list">
       <li>
         <b
           >Marzo 2020 - Noviembre 2020: Desarrollador Full Stack en Maison Maya.</b
-        > Una empresa de bienes raíces e inversiones. Desarrollé un sistema web para
-        gestión de inventario y un CRM personalizado.
+        > Una empresa de bienes raíces e inversiones. Desarrollé un sistema para
+        gestionar inventario y clientes en el sector inmobiliario. Aquí entendí el
+        poder de la automatización personalizada.
       </li>
       <li>
         <b>
           Noviembre 2020 - Presente: Cofundador y Desarrollador Web en Zöku.</b
         >
-        También en el sector de bienes raíces e inversiones. En Zöku, desarrollé
-        un catálogo en línea para remates bancarios, implementé estrategias de SEO
-        y diseñé mi propia interfaz.
+        Cofundé esta plataforma de remates bancarios. Diseñé el catálogo, implementé
+        SEO técnico y optimicé toda la interfaz para una experiencia ágil e intuitiva.
       </li>
       <li>
         <b>
           Septiembre 2022 - Presente: Desarrollador Full Stack en Go-Sharp.</b
         >
-        Go-Sharp es ahora Artificial Dynamics, una empresa de desarrollo de software
-        B2B. He desarrollado sistemas empresariales de alto rendimiento para clientes
-        como Nestlé, Sony y Danhos.
+        Go-Sharp es ahora Artificial Dynamics, me sumé al equipo para crear herramientas
+        B2B de alto rendimiento. Optimizamos visualizaciones logísticas y mejoramos
+        la carga de datos para empresas como Nestlé y Sigma Alimentos.
       </li>
       <li>
         <b>Presente: Desarrollador Web independiente.</b>
-        Me dedico a crear soluciones web, desarrollo desde páginas web hasta sistemas
-        empresariales. Exploro la web desde el punto de vista de los usuarios buscando
-        hacer productos de calidad.
+        Desde sitios estáticos hasta sistemas empresariales hechos a medida, transformo
+        ideas en plataformas digitales potentes, rápidas y elegantes.
       </li>
     </ul>
   </Section>
   <Section>
-    <h3 id="projects">Proyectos</h3>
-    <p>
-      La adaptabilidad y la innovación son claves para superar los retos y
-      alcanzar el objetivo. A lo largo de mi experiencia, he desarrollado
-      soluciones eficientes y a medida, aplicando nuevas tecnologías y enfoques
-      que aseguran resultados de alto impacto en cada etapa del proceso.
+    <h3 id="projects" class="clip-reveal" data-animate>
+      Diseño productos digitales centrados en resultados
+    </h3>
+    <p class="fade-in-up" data-animate>
+      Cada proyecto es una solución concreta, construida con código elegante y
+      una visión estratégica.
     </p>
     <div class="projects">
       {
@@ -89,19 +106,23 @@ const yoe = new Date().getFullYear() - 2020;
   </Section>
   <Section>
     <div class="cta-container">
+      <h3 class="clip-reveal" data-animate>
+        ¿Tienes una idea que quieres transformar en experiencia digital?
+      </h3>
+      <p class="fade-in-up" data-animate>Te ayudo a construirla.</p>
       <CTA text="Contactame" />
     </div>
   </Section>
 </Layout>
 
 <style>
-  .header-container {
+  .hero {
+    height: calc(100vh - 6rem - 140px);
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    gap: 3rem;
-    margin: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   ul {
@@ -131,7 +152,7 @@ const yoe = new Date().getFullYear() - 2020;
     flex-direction: row;
     align-items: center;
     height: 100%;
-    width: calc(100vw - 4rem);
+    width: 100%;
     gap: 3rem;
     margin: 2rem 0;
     overflow-x: auto;
@@ -141,8 +162,10 @@ const yoe = new Date().getFullYear() - 2020;
 
   .cta-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100%;
     width: 100%;
     margin: 4rem 0;
@@ -150,36 +173,30 @@ const yoe = new Date().getFullYear() - 2020;
 
   .path-list {
     border-left: 2px solid rgb(var(--accent-light));
-    padding: 1.4rem;
+    padding: 2rem;
+    padding-left: 1.8rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     list-style-type: disclosure-closed;
-
-    & li {
-      font-size: 1.5rem;
-    }
+    margin: 0;
   }
 
   @media screen and (max-width: 768px) {
-    .header-container {
-      gap: 1rem;
+    .hero {
+      height: auto;
+      justify-content: flex-start;
     }
   }
 
   @media screen and (max-width: 575px) {
-    .header-container {
-      gap: 1rem;
-    }
     .projects {
       gap: 2rem;
     }
 
     .path-list {
-      padding: 1.2rem;
-      & li {
-        font-size: 1.2rem;
-      }
+      padding: 1rem;
+      padding-left: 1.15rem;
     }
   }
 </style>

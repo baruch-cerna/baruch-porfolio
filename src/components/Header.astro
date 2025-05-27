@@ -1,0 +1,67 @@
+---
+import Logo from "/public/media/logo_blanco.svg?raw";
+import LinkedIn from "/public/media/linkedin.svg?raw";
+import LocationIcon from "../../public/media/location.svg?raw";
+import { addAttributesToInnerHTMLString } from "../data/utils";
+const locationIcon = addAttributesToInnerHTMLString(LocationIcon, {
+  width: "2.5rem",
+  height: "3rem",
+  fill: "rgb(var(--accent-light))",
+});
+const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
+---
+
+<div class="header row">
+  <div class="info">
+    <div class="location">
+      <Fragment set:html={locationIcon} />
+      <p>Ciudad de México</p>
+    </div>
+    <a
+      href="https://www.linkedin.com/in/alan-baruch/"
+      class="logo"
+      target="_blank"
+      aria-label="Baruch Cerna LinkedIn"
+    >
+      <Fragment set:html={LinkedIn} />
+    </a>
+  </div>
+  <a href="/" class="logo" aria-label="Baruch Cerna Logo">
+    <Fragment set:html={logoHTML} />
+  </a>
+</div>
+<style>
+  .location, .info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .info {
+    gap: 2rem;
+  }
+
+  .logo-svg {
+    height: 100px;
+    fill: rgb(var(--accent-light));
+  }
+
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0;
+  }
+
+  @media (max-width: 575px) {
+    .logo-svg {
+      height: 60px;
+    }
+    .header {
+      flex-direction: column-reverse;
+    }
+    .logo {
+      margin: 1rem 0;
+    }
+  }
+</style>

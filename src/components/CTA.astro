@@ -5,7 +5,7 @@ interface Props {
 const { text } = Astro.props;
 ---
 
-<a class="cta" href="https://wa.me/525517907658" target="_blank"
+<a class="cta pulse-border fade-in-up" data-animate href="https://wa.me/525517907658" target="_blank"
   >{text}
   <svg
     viewBox="0 0 24 24"
@@ -29,14 +29,12 @@ const { text } = Astro.props;
 
 <style>
   .cta {
-    font-size: 2rem;
-    padding: 1rem 0;
+    margin-top: 1rem;
+    padding: 1rem;
     width: auto;
-  }
-
-  @media screen and (max-width: 575px) {
-    .cta {
-      font-size: 1.5rem;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
   }
 </style>
