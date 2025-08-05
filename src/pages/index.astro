@@ -4,6 +4,8 @@ import Layout from "../layouts/Layout.astro";
 import { projects } from "../data/index.data";
 import Card from "../components/Card.astro";
 import CTA from "../components/CTA.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 const initDate = new Date();
 initDate.setDate(15);
 initDate.setMonth(3);
@@ -14,20 +16,20 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
 ---
 
 <Layout title="Baruch Cerna | Desarrollador Web">
-  <!-- <Navbar /> -->
   <Section>
-    <div class="hero">
+    <Header />
+    <main class="hero">
       <h1 class="clip-reveal" data-animate>Soy Baruch Cerna</h1>
       <h2 class="clip-reveal" data-animate>Desarrollador Web</h2>
-      <p class="fade-in-up" data-animate>
+      <p class="quote" data-animate="quote">
         Desarrollo experiencias digitales que resuelven problemas complejos,
         impulsan negocios y encantan a los usuarios.
       </p>
       <CTA text="Trabajemos juntos" />
-    </div>
+    </main>
   </Section>
   <Section>
-    <p class="fade-in-up" data-animate>
+    <p class="quote" data-animate="quote">
       Tengo más de {yoe} años diseñando soluciones y escribiendo código que agrega
       valor a las empresas y a los usuarios.
     </p>
@@ -37,12 +39,12 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
   </Section>
   <Section>
     <h3 id="path" class="clip-reveal" data-animate>Mi historia</h3>
-    <p class="fade-in-up" data-animate>
+    <p class="quote" data-animate="quote">
       Empecé a programar a los 16 años, cuando descubrí que podía darle vida a
       mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado
       de construir, aprender y desafiar los límites de lo posible.
     </p>
-    <p class="fade-in-up" data-animate>
+    <p class="quote" data-animate="quote">
       He trabajado con startups y corporativos internacionales desarrollando
       desde CRMs personalizados hasta catálogos de remates hipotecarios y
       sistemas de logística.
@@ -86,7 +88,7 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
     <h3 id="projects" class="clip-reveal" data-animate>
       Diseño productos digitales centrados en resultados
     </h3>
-    <p class="fade-in-up" data-animate>
+    <p class="quote" data-animate="quote">
       Cada proyecto es una solución concreta, construida con código elegante y
       una visión estratégica.
     </p>
@@ -109,10 +111,11 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
       <h3 class="clip-reveal" data-animate>
         ¿Tienes una idea que quieres transformar en experiencia digital?
       </h3>
-      <p class="fade-in-up" data-animate>Te ayudo a construirla.</p>
+      <p class="quote" data-animate="quote">Te ayudo a construirla.</p>
       <CTA text="Contactame" />
     </div>
   </Section>
+  <Footer />
 </Layout>
 
 <style>
@@ -186,6 +189,7 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
     .hero {
       height: auto;
       justify-content: flex-start;
+      padding-bottom: 2rem;
     }
   }
 

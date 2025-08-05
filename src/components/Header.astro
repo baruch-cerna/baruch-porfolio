@@ -19,7 +19,7 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
     </div>
     <a
       href="https://www.linkedin.com/in/alan-baruch/"
-      class="logo"
+      class="linkedin-logo"
       target="_blank"
       aria-label="Baruch Cerna LinkedIn"
     >
@@ -41,11 +41,6 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
     gap: 2rem;
   }
 
-  .logo-svg {
-    height: 100px;
-    fill: rgb(var(--accent-light));
-  }
-
   .header {
     flex-direction: row;
     justify-content: space-between;
@@ -53,12 +48,14 @@ const logoHTML = addAttributesToInnerHTMLString(Logo, { class: "logo-svg" });
     padding-bottom: 0;
   }
 
+  .linkedin-logo {
+    display: flex;
+  }
+
   @media (max-width: 575px) {
-    .logo-svg {
-      height: 60px;
-    }
     .header {
       flex-direction: column-reverse;
+      padding: 0;
     }
     .logo {
       margin: 1rem 0;

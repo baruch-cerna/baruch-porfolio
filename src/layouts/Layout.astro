@@ -1,6 +1,4 @@
 ---
-import Header from "../components/Header.astro";
-
 interface Props {
   title: string;
 }
@@ -36,20 +34,14 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     <title>{title}</title>
   </head>
   <body>
-    <Header />
     <slot />
-    <footer>
-      <p>
-        Hecho con ❤️ y <a href="https://astro.build" target="_blank">Astro</a>
-        por
-        <a href="https://github.com/baruch-cerna" target="_blank"
-          >Baruch Cerna</a
-        >
-      </p>
-    </footer>
+
     <script>
       import Lenis from "lenis";
       import { animate, inView } from "motion";
+      import gsap from "gsap";
+      import SplitText from "gsap/SplitText";
+      gsap.registerPlugin(SplitText);
       const lenis = new Lenis({
         duration: 1.5,
         easing: (x) => 1 - Math.pow(1 - x, 3),
@@ -59,8 +51,6 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-      const quote = `Una respuesta simple es más elegante.`;
-      const quoteElement = document.getElementById("quote")!;
       const sequenceTime = 2.2;
       const sequence: any[] = [
         [
@@ -70,30 +60,41 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
         ],
       ];
       animate(sequence);
-      inView("#quote", (element) => {
-        animate(0, quote.length, {
-          duration: sequenceTime,
-          ease: "easeIn",
-          onUpdate: (latest) =>
-            (quoteElement.innerHTML = `"${quote.substring(0, latest)}"`),
-        });
-      });
       inView(".path-list li", (element) => {
         animate(
           element,
-          { opacity: 1, y: [-50, 0] } as any,
+          { opacity: 1, y: [50, 0] } as any,
           {
             duration: 0.9,
             easing: [0.17, 0.55, 0.55, 1],
           } as any,
         );
-        return () => animate(element, { opacity: 0, y: [0, -50] });
+        return () => animate(element, { opacity: 0, y: [50, 0] });
       });
+      const animationFuns: Record<string, (element: Element) => void> = {
+        quote: (element: Element) => {
+          SplitText.create(element, {
+            type: "words, chars",
+            onSplit(self) {
+              gsap.from(self.chars, {
+                duration: 1,
+                autoAlpha: 0,
+                stagger: 1 / self.chars.length,
+                ease: "power4.out",
+              });
+            },
+          });
+        },
+      };
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("is-visible");
+              const animation: string =
+                (entry.target as HTMLElement).dataset?.animate || "";
+              const animationFun = animationFuns[animation];
+              if (animationFun) animationFun(entry.target);
             } else {
               entry.target.classList.remove("is-visible");
             }
@@ -107,12 +108,18 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
         const hasClip = classes
           .values()
           .some((className) => className.includes("clip"));
+        const hasQuote = classes
+          .values()
+          .some((className) => className.includes("quote"));
         if (hasClip) {
           const innerHTML = el.innerHTML;
           el.innerHTML = "";
           const span = document.createElement("span");
           span.innerHTML = innerHTML;
           el.appendChild(span);
+        }
+        if (hasQuote) {
+          // const slipSpans =
         }
         observer.observe(el);
       });
@@ -518,6 +525,7 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
 
   .logo-svg {
     height: 100px;
+    width: 100px;
     fill: rgb(var(--accent-light));
   }
 
