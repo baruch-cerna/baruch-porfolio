@@ -6,6 +6,7 @@ import Card from "../components/Card.astro";
 import CTA from "../components/CTA.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import GameOfLife from "../components/GameOfLife.astro";
 const initDate = new Date();
 initDate.setDate(15);
 initDate.setMonth(3);
@@ -27,27 +28,28 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
       </p>
       <CTA text="Trabajemos juntos" />
     </main>
+    <!-- <div style="width: 100%; aspect-ratio: 8 / 6;">
+      <GameOfLife aliveColor="#ffffff" ruleString="B34/S456" cellSize={1} />
+    </div> -->
   </Section>
   <Section>
+    <h3 class="clip-reveal" data-animate>
+      Una respuesta simple es más elegante
+    </h3>
     <p class="quote" data-animate="quote">
       Tengo más de {yoe} años diseñando soluciones y escribiendo código que agrega
       valor a las empresas y a los usuarios.
     </p>
-    <h3 class="clip-reveal" data-animate>
-      Una respuesta simple es más elegante
-    </h3>
   </Section>
   <Section>
     <h3 id="path" class="clip-reveal" data-animate>Mi historia</h3>
     <p class="quote" data-animate="quote">
       Empecé a programar a los 16 años, cuando descubrí que podía darle vida a
       mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado
-      de construir, aprender y desafiar los límites de lo posible.
-    </p>
-    <p class="quote" data-animate="quote">
-      He trabajado con startups y corporativos internacionales desarrollando
-      desde CRMs personalizados hasta catálogos de remates hipotecarios y
-      sistemas de logística.
+      de construir, aprender y desafiar los límites de lo posible. <br />
+      <br />
+      He trabajado con startups y corporativos internacionales desarrollando desde
+      CRMs personalizados hasta catálogos de remates hipotecarios y sistemas de logística.
     </p>
   </Section>
   <Section>

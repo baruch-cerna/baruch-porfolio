@@ -1,0 +1,666 @@
+---
+// GameOfLife.astro
+export interface Props {
+  cellSize?: number;
+  ruleString?: string; // Formato B3/S23 (Born/Survive)
+  initialPattern?: number[][]; // 0 = muerto, 1 = vivo
+  speed?: number; // ms entre generaciones
+  backgroundColor?: string;
+  aliveColor?: string;
+  deadColor?: string;
+  gridColor?: string;
+  showGrid?: boolean;
+}
+
+const {
+  cellSize = 8,
+  ruleString = "B3/S23", // Conway's Game of Life clásico
+  initialPattern = [],
+  speed = 100,
+  backgroundColor = "#000000",
+  aliveColor = "#00ff00",
+  deadColor = "#111111",
+  gridColor = "#333333",
+  showGrid = false,
+} = Astro.props;
+
+// Parsear reglas del formato B3/S23
+function parseRules(ruleString: string): {
+  birth: number[];
+  survival: number[];
+} {
+  const match = ruleString.match(/B([0-8]*)\/?S([0-8]*)/i);
+  if (!match) return { birth: [3], survival: [2, 3] };
+
+  const birth = match[1] ? match[1].split("").map(Number) : [];
+  const survival = match[2] ? match[2].split("").map(Number) : [];
+
+  return { birth, survival };
+}
+
+const rules = parseRules(ruleString);
+---
+
+<div
+  class="gol-container"
+  data-cell-size={cellSize}
+  data-rules={JSON.stringify(rules)}
+  data-initial-pattern={JSON.stringify(initialPattern)}
+  data-speed={speed}
+  data-background-color={backgroundColor}
+  data-alive-color={aliveColor}
+  data-dead-color={deadColor}
+  data-grid-color={gridColor}
+  data-show-grid={showGrid}
+>
+  <canvas id="gameCanvas"></canvas>
+</div>
+
+<style
+  define:vars={{
+    backgroundColor,
+    aliveColor,
+    deadColor,
+    gridColor,
+    cellSize: cellSize + "px",
+    showGrid: showGrid ? "true" : "false",
+  }}
+>
+  .gol-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--backgroundColor);
+    height: 100%;
+    width: 100%;
+  }
+
+  #gameCanvas {
+    position: relative;
+    z-index: 1;
+    background: var(--backgroundColor);
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+  }
+</style>
+
+<script>
+  // Interfaces para tipado estricto
+  interface GameRules {
+    birth: number[];
+    survival: number[];
+  }
+
+  interface CellColor {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+  }
+
+  interface GameStats {
+    generation: number;
+    population: number;
+  }
+
+  interface CanvasPosition {
+    x: number;
+    y: number;
+  }
+
+  interface GridCoordinates {
+    row: number;
+    col: number;
+  }
+
+  type CellState = 0 | 1;
+  type Grid = Uint8Array;
+
+  class GameOfLifeEngine {
+    private canvas: HTMLCanvasElement;
+    private ctx: CanvasRenderingContext2D;
+    private cellSize: number;
+    private rules: GameRules;
+    private showGrid: boolean;
+
+    private cols: number = 0;
+    private rows: number = 0;
+    private currentGrid!: Grid;
+    private nextGrid!: Grid;
+
+    private generation: number = 0;
+    private isRunning: boolean = false;
+    private animationId: number | null = null;
+    private lastTime: number = 0;
+    private speed: number = 100;
+
+    // Canvas offscreen para doble buffering
+    private offscreenCanvas!: HTMLCanvasElement;
+    private offscreenCtx!: CanvasRenderingContext2D;
+
+    // Colores predefinidos
+    private ALIVE_COLOR: CellColor = {
+      r: 0,
+      g: 255,
+      b: 0,
+      a: 255,
+    };
+    private DEAD_COLOR: CellColor = {
+      r: 17,
+      g: 17,
+      b: 17,
+      a: 255,
+    };
+    private GRID_COLOR: string = "#333333";
+
+    constructor(
+      canvas: HTMLCanvasElement,
+      cellSize: number,
+      rules: GameRules,
+      aliveColor: string = "#00ff00",
+      deadColor: string = "#111111",
+      gridColor: string = "#333333",
+      showGrid: boolean = true,
+    ) {
+      this.canvas = canvas;
+      this.cellSize = cellSize;
+      this.rules = rules;
+      this.showGrid = showGrid;
+      this.ALIVE_COLOR = this.hexToRgb(aliveColor);
+      this.DEAD_COLOR = this.hexToRgb(deadColor);
+      this.GRID_COLOR = gridColor;
+
+      const context = canvas.getContext("2d");
+      if (!context) {
+        throw new Error("No se pudo obtener el contexto 2D del canvas");
+      }
+      this.ctx = context;
+
+      this.setupCanvas();
+      this.initializeGrid();
+      this.setupEventListeners();
+    }
+
+    private setupCanvas(): void {
+      const container = this.canvas.parentElement;
+      if (!container) {
+        throw new Error("El canvas debe tener un elemento padre");
+      }
+
+      const containerRect = container.getBoundingClientRect();
+
+      // Calcular tamaño óptimo basado en el contenedor
+      const maxWidth = Math.min(
+        containerRect.width - 40,
+        window.innerWidth - 100,
+      );
+      const maxHeight = Math.min(window.innerHeight - 200, 600);
+
+      this.cols = Math.floor(maxWidth / this.cellSize);
+      this.rows = Math.floor(maxHeight / this.cellSize);
+
+      this.canvas.width = this.cols * this.cellSize;
+      this.canvas.height = this.rows * this.cellSize;
+
+      // Configurar contexto para renderizado optimizado
+      this.ctx.imageSmoothingEnabled = false;
+    }
+
+    private initializeGrid(): void {
+      const totalCells = this.rows * this.cols;
+
+      // Usar Uint8Array para mejor rendimiento de memoria
+      this.currentGrid = new Uint8Array(totalCells);
+      this.nextGrid = new Uint8Array(totalCells);
+
+      // Buffer de canvas para doble buffering
+      this.offscreenCanvas = document.createElement("canvas");
+      this.offscreenCanvas.width = this.canvas.width;
+      this.offscreenCanvas.height = this.canvas.height;
+
+      const offscreenContext = this.offscreenCanvas.getContext("2d");
+      if (!offscreenContext) {
+        throw new Error("No se pudo crear el contexto offscreen");
+      }
+      this.offscreenCtx = offscreenContext;
+      this.offscreenCtx.imageSmoothingEnabled = false;
+    }
+
+    private getIndex(row: number, col: number): number {
+      return row * this.cols + col;
+    }
+
+    private getCell(row: number, col: number): CellState {
+      if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
+        return 0; // Bordes muertos
+      }
+      return this.currentGrid[this.getIndex(row, col)] as CellState;
+    }
+
+    private setCell(
+      row: number,
+      col: number,
+      value: CellState | boolean,
+    ): void {
+      if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
+        this.currentGrid[this.getIndex(row, col)] = value ? 1 : 0;
+      }
+    }
+
+    private countNeighbors(row: number, col: number): number {
+      let count = 0;
+
+      // Optimización: loop desenrollado para mejor rendimiento
+      count += this.getCell(row - 1, col - 1);
+      count += this.getCell(row - 1, col);
+      count += this.getCell(row - 1, col + 1);
+      count += this.getCell(row, col - 1);
+      count += this.getCell(row, col + 1);
+      count += this.getCell(row + 1, col - 1);
+      count += this.getCell(row + 1, col);
+      count += this.getCell(row + 1, col + 1);
+
+      return count;
+    }
+
+    private nextGeneration(): boolean {
+      let hasChanges = false;
+
+      for (let row = 0; row < this.rows; row++) {
+        for (let col = 0; col < this.cols; col++) {
+          const neighbors = this.countNeighbors(row, col);
+          const currentCell = this.getCell(row, col);
+          const index = this.getIndex(row, col);
+
+          let newState: CellState = currentCell;
+
+          if (currentCell === 1) {
+            // Célula viva: sobrevive si está en las reglas de supervivencia
+            newState = this.rules.survival.includes(neighbors) ? 1 : 0;
+          } else {
+            // Célula muerta: nace si está en las reglas de nacimiento
+            newState = this.rules.birth.includes(neighbors) ? 1 : 0;
+          }
+
+          this.nextGrid[index] = newState;
+
+          if (newState !== currentCell) {
+            hasChanges = true;
+          }
+        }
+      }
+
+      // Intercambiar grids (más eficiente que copiar)
+      const temp = this.currentGrid;
+      this.currentGrid = this.nextGrid;
+      this.nextGrid = temp;
+
+      this.generation++;
+      return hasChanges;
+    }
+
+    public render(): void {
+      // Limpiar canvas offscreen
+      this.offscreenCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Renderizar células usando ImageData para máximo rendimiento
+      const imageData = this.offscreenCtx.createImageData(
+        this.canvas.width,
+        this.canvas.height,
+      );
+      const data = imageData.data;
+
+      for (let row = 0; row < this.rows; row++) {
+        for (let col = 0; col < this.cols; col++) {
+          const isAlive = this.getCell(row, col) === 1;
+
+          const startX = col * this.cellSize;
+          const startY = row * this.cellSize;
+
+          // Obtener color según estado
+          const color: CellColor = isAlive ? this.ALIVE_COLOR : this.DEAD_COLOR;
+
+          // Pintar célula pixel por pixel
+          for (let y = 0; y < this.cellSize; y++) {
+            for (let x = 0; x < this.cellSize; x++) {
+              const pixelIndex =
+                ((startY + y) * this.canvas.width + (startX + x)) * 4;
+
+              if (pixelIndex < data.length - 3) {
+                data[pixelIndex] = color.r; // R
+                data[pixelIndex + 1] = color.g; // G
+                data[pixelIndex + 2] = color.b; // B
+                data[pixelIndex + 3] = color.a; // A
+              }
+            }
+          }
+        }
+      }
+
+      // Aplicar ImageData al canvas offscreen
+      this.offscreenCtx.putImageData(imageData, 0, 0);
+
+      // Renderizar grid si está habilitado
+      if (this.showGrid) {
+        this.renderGrid();
+      }
+
+      // Copiar al canvas principal
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.drawImage(this.offscreenCanvas, 0, 0);
+
+      // Actualizar estadísticas
+      this.updateStats();
+    }
+
+    private renderGrid(): void {
+      this.offscreenCtx.strokeStyle = this.GRID_COLOR;
+      this.offscreenCtx.lineWidth = 1;
+
+      // Líneas verticales
+      for (let col = 0; col <= this.cols; col++) {
+        const x = col * this.cellSize;
+        this.offscreenCtx.beginPath();
+        this.offscreenCtx.moveTo(x, 0);
+        this.offscreenCtx.lineTo(x, this.canvas.height);
+        this.offscreenCtx.stroke();
+      }
+
+      // Líneas horizontales
+      for (let row = 0; row <= this.rows; row++) {
+        const y = row * this.cellSize;
+        this.offscreenCtx.beginPath();
+        this.offscreenCtx.moveTo(0, y);
+        this.offscreenCtx.lineTo(this.canvas.width, y);
+        this.offscreenCtx.stroke();
+      }
+    }
+
+    private updateStats(): void {
+      let population = 0;
+      for (let i = 0; i < this.currentGrid.length; i++) {
+        population += this.currentGrid[i];
+      }
+
+      const stats: GameStats = {
+        generation: this.generation,
+        population,
+      };
+
+      const generationEl = document.getElementById("generation");
+      const populationEl = document.getElementById("population");
+
+      if (generationEl)
+        generationEl.textContent = `Generación: ${stats.generation}`;
+      if (populationEl)
+        populationEl.textContent = `Población: ${stats.population}`;
+    }
+
+    private animate(currentTime: number): void {
+      if (currentTime - this.lastTime >= this.speed) {
+        const hasChanges = this.nextGeneration();
+        this.render();
+        this.lastTime = currentTime;
+
+        // Parar si no hay cambios (estado estable)
+        if (!hasChanges) {
+          this.stop();
+        }
+      }
+
+      if (this.isRunning) {
+        this.animationId = requestAnimationFrame((time: number) =>
+          this.animate(time),
+        );
+      }
+    }
+
+    private canvasToGridCoordinates(
+      canvasPos: CanvasPosition,
+    ): GridCoordinates {
+      return {
+        row: Math.floor(canvasPos.y / this.cellSize),
+        col: Math.floor(canvasPos.x / this.cellSize),
+      };
+    }
+
+    private getCanvasPosition(event: MouseEvent): CanvasPosition {
+      const rect = this.canvas.getBoundingClientRect();
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+      };
+    }
+
+    public start(): void {
+      if (!this.isRunning) {
+        this.isRunning = true;
+        this.lastTime = 0;
+        this.animationId = requestAnimationFrame((time: number) =>
+          this.animate(time),
+        );
+      }
+    }
+
+    public stop(): void {
+      this.isRunning = false;
+      if (this.animationId !== null) {
+        cancelAnimationFrame(this.animationId);
+        this.animationId = null;
+      }
+    }
+
+    public step(): void {
+      this.nextGeneration();
+      this.render();
+    }
+
+    public clear(): void {
+      this.currentGrid.fill(0);
+      this.generation = 0;
+      this.render();
+    }
+
+    public randomize(density: number = 0.3): void {
+      for (let i = 0; i < this.currentGrid.length; i++) {
+        this.currentGrid[i] = Math.random() < density ? 1 : 0;
+      }
+      this.generation = 0;
+      this.render();
+    }
+
+    public loadPattern(pattern: number[][]): void {
+      if (!pattern.length || !pattern[0]?.length) return;
+
+      this.clear();
+
+      const startRow = Math.floor((this.rows - pattern.length) / 2);
+      const startCol = Math.floor((this.cols - pattern[0].length) / 2);
+
+      for (let row = 0; row < pattern.length; row++) {
+        for (let col = 0; col < pattern[row].length; col++) {
+          const cellValue = pattern[row][col] as CellState;
+          this.setCell(startRow + row, startCol + col, cellValue);
+        }
+      }
+
+      this.render();
+    }
+
+    private setupEventListeners(): void {
+      // Click en canvas para toggle células
+      this.canvas.addEventListener("click", (e: MouseEvent) => {
+        const canvasPos = this.getCanvasPosition(e);
+        const gridPos = this.canvasToGridCoordinates(canvasPos);
+
+        const currentState = this.getCell(gridPos.row, gridPos.col);
+        this.setCell(gridPos.row, gridPos.col, !currentState);
+        this.render();
+      });
+
+      // Drag para pintar
+      let isDragging = false;
+      let dragState: boolean | null = null;
+
+      this.canvas.addEventListener("mousedown", (e: MouseEvent) => {
+        isDragging = true;
+        const canvasPos = this.getCanvasPosition(e);
+        const gridPos = this.canvasToGridCoordinates(canvasPos);
+
+        dragState = !this.getCell(gridPos.row, gridPos.col);
+        this.setCell(gridPos.row, gridPos.col, dragState);
+        this.render();
+      });
+
+      this.canvas.addEventListener("mousemove", (e: MouseEvent) => {
+        if (isDragging && dragState !== null) {
+          const canvasPos = this.getCanvasPosition(e);
+          const gridPos = this.canvasToGridCoordinates(canvasPos);
+
+          this.setCell(gridPos.row, gridPos.col, dragState);
+          this.render();
+        }
+      });
+
+      this.canvas.addEventListener("mouseup", () => {
+        isDragging = false;
+        dragState = null;
+      });
+
+      // Prevenir arrastre de imagen del canvas
+      this.canvas.addEventListener("dragstart", (e: DragEvent) => {
+        e.preventDefault();
+      });
+    }
+
+    public setSpeed(newSpeed: number): void {
+      this.speed = Math.max(10, newSpeed); // Mínimo 10ms
+    }
+
+    public getStats(): GameStats {
+      let population = 0;
+      for (let i = 0; i < this.currentGrid.length; i++) {
+        population += this.currentGrid[i];
+      }
+
+      return {
+        generation: this.generation,
+        population,
+      };
+    }
+
+    public isGameRunning(): boolean {
+      return this.isRunning;
+    }
+
+    public getGridSize(): { rows: number; cols: number } {
+      return { rows: this.rows, cols: this.cols };
+    }
+
+    private hexToRgb(hex: string): CellColor {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result
+        ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+            a: 255,
+          }
+        : { r: 0, g: 0, b: 0, a: 255 };
+    }
+  }
+
+  // Inicialización con tipado estricto
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".gol-container") as HTMLElement;
+    const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+
+    if (!container || !canvas) {
+      console.error("No se encontraron los elementos necesarios");
+      return;
+    }
+
+    const cellSize = parseInt(container.dataset.cellSize || "8");
+    const rules: GameRules = JSON.parse(
+      container.dataset.rules || '{"birth":[3],"survival":[2,3]}',
+    );
+    const initialPattern: number[][] = JSON.parse(
+      container.dataset.initialPattern || "[]",
+    );
+    const speed = parseInt(container.dataset.speed || "100");
+    const aliveColor = container.dataset.aliveColor || "#00ff00";
+    const deadColor = container.dataset.deadColor || "#111111";
+    const gridColor = container.dataset.gridColor || "#333333";
+    const showGrid = container.dataset.showGrid === "true";
+
+    try {
+      const game = new GameOfLifeEngine(
+        canvas,
+        cellSize,
+        rules,
+        aliveColor,
+        deadColor,
+        gridColor,
+        showGrid,
+      );
+      game.setSpeed(speed);
+
+      // Cargar patrón inicial si existe
+      if (initialPattern && initialPattern.length > 0) {
+        game.loadPattern(initialPattern);
+      } else {
+        game.render();
+      }
+      game.clear();
+      game.randomize(0.3);
+      game.start();
+
+      // Event listeners para controles con manejo de errores
+      // const playPauseBtn = document.getElementById(
+      //   "playPause",
+      // ) as HTMLButtonElement;
+      // const stepBtn = document.getElementById("step") as HTMLButtonElement;
+      // const clearBtn = document.getElementById("clear") as HTMLButtonElement;
+      // const randomBtn = document.getElementById("random") as HTMLButtonElement;
+
+      // if (playPauseBtn) {
+      //   playPauseBtn.addEventListener("click", () => {
+      //     if (game.isGameRunning()) {
+      //       game.stop();
+      //       playPauseBtn.textContent = "▶️ Iniciar";
+      //     } else {
+      //       game.start();
+      //       playPauseBtn.textContent = "⏸️ Pausar";
+      //     }
+      //   });
+      // }
+
+      // if (stepBtn) {
+      //   stepBtn.addEventListener("click", () => {
+      //     game.step();
+      //   });
+      // }
+
+      // if (clearBtn) {
+      //   clearBtn.addEventListener("click", () => {
+      //     game.clear();
+      //     if (playPauseBtn) {
+      //       playPauseBtn.textContent = "▶️ Iniciar";
+      //     }
+      //   });
+      // }
+
+      // if (randomBtn) {
+      //   randomBtn.addEventListener("click", () => {
+      //     game.randomize(0.3);
+      //   });
+      // }
+
+      // Exponer el juego al objeto window para debugging
+      (window as any).gameOfLife = game;
+    } catch (error) {
+      console.error("Error al inicializar el Game of Life:", error);
+    }
+  });
+</script>
