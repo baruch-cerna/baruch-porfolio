@@ -63,7 +63,10 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
       inView(".path-list li", (element) => {
         animate(
           element,
-          { opacity: 1, y: [50, 0] } as any,
+          {
+            opacity: 1,
+            transform: ["translate(-50px)", "translate(0)"],
+          } as any,
           {
             duration: 0.9,
             easing: [0.17, 0.55, 0.55, 1],
@@ -515,6 +518,10 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
   /* ======================================
    🖼️ MEDIA & CANVAS
    ====================================== */
+  div:has(canvas) {
+    transition: all 0.8s var(--easing);
+  }
+  
   canvas {
     position: absolute;
     inset: 0;

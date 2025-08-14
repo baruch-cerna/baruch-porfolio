@@ -14,6 +14,7 @@ initDate.setFullYear(2020);
 const nowDate = new Date();
 const diffTime = nowDate.getTime() - initDate.getTime();
 const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+const cellSize = 2;
 ---
 
 <Layout title="Baruch Cerna | Desarrollador Web">
@@ -28,9 +29,17 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
       </p>
       <CTA text="Trabajemos juntos" />
     </main>
-    <!-- <div style="width: 100%; aspect-ratio: 8 / 6;">
-      <GameOfLife aliveColor="#ffffff" ruleString="B34/S456" cellSize={1} />
-    </div> -->
+  </Section>
+  <Section>
+    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+      <GameOfLife
+        aliveColor="#ffffffaa"
+        ruleString="B3/S23"
+        deadColor="#00000000"
+        backgroundColor="#00000000"
+        cellSize={cellSize}
+      />
+    </div>
   </Section>
   <Section>
     <h3 class="clip-reveal" data-animate>
@@ -42,7 +51,18 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
     </p>
   </Section>
   <Section>
-    <h3 id="path" class="clip-reveal" data-animate>Mi historia</h3>
+    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+      <GameOfLife
+        aliveColor="#ffffffaa"
+        ruleString="B1/S012345678"
+        deadColor="#00000000"
+        backgroundColor="#00000000"
+        cellSize={cellSize}
+      />
+    </div>
+  </Section>
+  <Section>
+    <h3 class="clip-reveal" data-animate>Mi historia</h3>
     <p class="quote" data-animate="quote">
       Empecé a programar a los 16 años, cuando descubrí que podía darle vida a
       mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado
@@ -51,6 +71,17 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
       He trabajado con startups y corporativos internacionales desarrollando desde
       CRMs personalizados hasta catálogos de remates hipotecarios y sistemas de logística.
     </p>
+  </Section>
+  <Section>
+    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+      <GameOfLife
+        aliveColor="#ffffffaa"
+        deadColor="#00000000"
+        backgroundColor="#00000000"
+        ruleString="B3678/S235678"
+        cellSize={cellSize}
+      />
+    </div>
   </Section>
   <Section>
     <h3 class="clip-reveal" data-animate>
@@ -87,13 +118,37 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
     </ul>
   </Section>
   <Section>
-    <h3 id="projects" class="clip-reveal" data-animate>
+    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+      <GameOfLife
+        aliveColor="#ffffffaa"
+        deadColor="#00000000"
+        backgroundColor="#00000000"
+        ruleString="B3/S12345"
+        cellSize={cellSize}
+      />
+    </div>
+  </Section>
+  <Section>
+    <h3 class="clip-reveal" data-animate>
       Diseño productos digitales centrados en resultados
     </h3>
     <p class="quote" data-animate="quote">
       Cada proyecto es una solución concreta, construida con código elegante y
       una visión estratégica.
     </p>
+  </Section>
+  <Section>
+    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+      <GameOfLife
+        aliveColor="#ffffffaa"
+        deadColor="#00000000"
+        backgroundColor="#00000000"
+        ruleString="B3/S45678"
+        cellSize={cellSize}
+      />
+    </div>
+  </Section>
+  <Section>
     <div class="projects">
       {
         projects.map((project) => (
@@ -106,6 +161,17 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
           />
         ))
       }
+    </div>
+  </Section>
+  <Section>
+    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+      <GameOfLife
+        aliveColor="#ffffffaa"
+        deadColor="#00000000"
+        backgroundColor="#00000000"
+        ruleString="B37/S1234"
+        cellSize={cellSize}
+      />
     </div>
   </Section>
   <Section>

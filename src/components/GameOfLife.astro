@@ -16,7 +16,7 @@ const {
   cellSize = 8,
   ruleString = "B3/S23", // Conway's Game of Life clásico
   initialPattern = [],
-  speed = 100,
+  speed = 120,
   backgroundColor = "#000000",
   aliveColor = "#00ff00",
   deadColor = "#111111",
@@ -39,6 +39,7 @@ function parseRules(ruleString: string): {
 }
 
 const rules = parseRules(ruleString);
+const id = Math.floor(Date.now() * Math.random()).toString();
 ---
 
 <div
@@ -53,7 +54,7 @@ const rules = parseRules(ruleString);
   data-grid-color={gridColor}
   data-show-grid={showGrid}
 >
-  <canvas id="gameCanvas"></canvas>
+  <canvas id={id}></canvas>
 </div>
 
 <style
@@ -75,7 +76,7 @@ const rules = parseRules(ruleString);
     width: 100%;
   }
 
-  #gameCanvas {
+  canvas {
     position: relative;
     z-index: 1;
     background: var(--backgroundColor);
@@ -191,11 +192,8 @@ const rules = parseRules(ruleString);
       const containerRect = container.getBoundingClientRect();
 
       // Calcular tamaño óptimo basado en el contenedor
-      const maxWidth = Math.min(
-        containerRect.width - 40,
-        window.innerWidth - 100,
-      );
-      const maxHeight = Math.min(window.innerHeight - 200, 600);
+      const maxWidth = containerRect.width;
+      const maxHeight = containerRect.height;
 
       this.cols = Math.floor(maxWidth / this.cellSize);
       this.rows = Math.floor(maxHeight / this.cellSize);
@@ -232,10 +230,12 @@ const rules = parseRules(ruleString);
     }
 
     private getCell(row: number, col: number): CellState {
-      if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) {
-        return 0; // Bordes muertos
-      }
-      return this.currentGrid[this.getIndex(row, col)] as CellState;
+      return this.currentGrid[
+        this.getIndex(
+          (row + this.rows) % this.rows,
+          (col + this.cols) % this.cols,
+        )
+      ] as CellState;
     }
 
     private setCell(
@@ -337,7 +337,6 @@ const rules = parseRules(ruleString);
           }
         }
       }
-
       // Aplicar ImageData al canvas offscreen
       this.offscreenCtx.putImageData(imageData, 0, 0);
 
@@ -345,13 +344,12 @@ const rules = parseRules(ruleString);
       if (this.showGrid) {
         this.renderGrid();
       }
-
       // Copiar al canvas principal
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.ctx.drawImage(this.offscreenCanvas, 0, 0);
 
       // Actualizar estadísticas
-      this.updateStats();
+      // this.updateStats();
     }
 
     private renderGrid(): void {
@@ -559,35 +557,38 @@ const rules = parseRules(ruleString);
     }
 
     private hexToRgb(hex: string): CellColor {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      const reg6 = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
+      const reg8 = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
+      const result = reg6.exec(hex) || reg8.exec(hex);
       return result
         ? {
             r: parseInt(result[1], 16),
             g: parseInt(result[2], 16),
             b: parseInt(result[3], 16),
-            a: 255,
+            a: result[4] ? parseInt(result[4], 16) : 255,
           }
         : { r: 0, g: 0, b: 0, a: 255 };
     }
   }
 
+  (window as any).GameOfLifeEngine = GameOfLifeEngine;
+</script>
+
+<script is:inline define:vars={{ id }}>
   // Inicialización con tipado estricto
   document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".gol-container") as HTMLElement;
-    const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-
+    const canvas = document.getElementById(id);
+    const container = canvas?.parentElement;
     if (!container || !canvas) {
       console.error("No se encontraron los elementos necesarios");
       return;
     }
 
     const cellSize = parseInt(container.dataset.cellSize || "8");
-    const rules: GameRules = JSON.parse(
+    const rules = JSON.parse(
       container.dataset.rules || '{"birth":[3],"survival":[2,3]}',
     );
-    const initialPattern: number[][] = JSON.parse(
-      container.dataset.initialPattern || "[]",
-    );
+    const initialPattern = JSON.parse(container.dataset.initialPattern || "[]");
     const speed = parseInt(container.dataset.speed || "100");
     const aliveColor = container.dataset.aliveColor || "#00ff00";
     const deadColor = container.dataset.deadColor || "#111111";
@@ -595,7 +596,7 @@ const rules = parseRules(ruleString);
     const showGrid = container.dataset.showGrid === "true";
 
     try {
-      const game = new GameOfLifeEngine(
+      const game = new window.GameOfLifeEngine(
         canvas,
         cellSize,
         rules,
@@ -658,7 +659,7 @@ const rules = parseRules(ruleString);
       // }
 
       // Exponer el juego al objeto window para debugging
-      (window as any).gameOfLife = game;
+      // (window as any).gameOfLife = game;
     } catch (error) {
       console.error("Error al inicializar el Game of Life:", error);
     }
