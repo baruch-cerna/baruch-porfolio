@@ -14,7 +14,7 @@ initDate.setFullYear(2020);
 const nowDate = new Date();
 const diffTime = nowDate.getTime() - initDate.getTime();
 const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
-const cellSize = 2;
+const cellSize = 16;
 ---
 
 <Layout title="Baruch Cerna | Desarrollador Web">
@@ -31,7 +31,7 @@ const cellSize = 2;
     </main>
   </Section>
   <Section>
-    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+    <div class="gol-container" data-animate>
       <GameOfLife
         aliveColor="#ffffffaa"
         ruleString="B3/S23"
@@ -51,7 +51,7 @@ const cellSize = 2;
     </p>
   </Section>
   <Section>
-    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+    <div class="gol-container" data-animate>
       <GameOfLife
         aliveColor="#ffffffaa"
         ruleString="B1/S012345678"
@@ -73,7 +73,7 @@ const cellSize = 2;
     </p>
   </Section>
   <Section>
-    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+    <div class="gol-container" data-animate>
       <GameOfLife
         aliveColor="#ffffffaa"
         deadColor="#00000000"
@@ -118,7 +118,7 @@ const cellSize = 2;
     </ul>
   </Section>
   <Section>
-    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+    <div class="gol-container" data-animate>
       <GameOfLife
         aliveColor="#ffffffaa"
         deadColor="#00000000"
@@ -138,7 +138,7 @@ const cellSize = 2;
     </p>
   </Section>
   <Section>
-    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+    <div class="gol-container" data-animate>
       <GameOfLife
         aliveColor="#ffffffaa"
         deadColor="#00000000"
@@ -164,7 +164,7 @@ const cellSize = 2;
     </div>
   </Section>
   <Section>
-    <div style="width: 100%; aspect-ratio: 800 / 400;" data-animate>
+    <div class="gol-container" data-animate>
       <GameOfLife
         aliveColor="#ffffffaa"
         deadColor="#00000000"
@@ -253,6 +253,11 @@ const cellSize = 2;
     margin: 0;
   }
 
+  .gol-container {
+    width: 100%;
+    aspect-ratio: 800 / 500;
+  }
+
   @media screen and (max-width: 768px) {
     .hero {
       height: auto;
@@ -269,6 +274,10 @@ const cellSize = 2;
     .path-list {
       padding: 1rem;
       padding-left: 1.15rem;
+    }
+
+    .gol-container {
+      aspect-ratio: 500 / 800;
     }
   }
 </style>
