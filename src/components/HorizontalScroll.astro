@@ -1,0 +1,18 @@
+---
+interface Props {
+  enableSnap?: boolean;
+}
+const { enableSnap = true } = Astro.props;
+const componentId = `horizontal-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<section
+  class="horizontal-section"
+  data-horizontal={componentId}
+  id={componentId}
+  data-horizontal-snap={enableSnap ? "true" : "false"}
+>
+  <div class="swipe-section">
+    <slot />
+  </div>
+</section>

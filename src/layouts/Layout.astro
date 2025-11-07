@@ -41,6 +41,8 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
       import { animate, inView } from "motion";
       import gsap from "gsap";
       import SplitText from "gsap/SplitText";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      gsap.registerPlugin(ScrollTrigger);
       gsap.registerPlugin(SplitText);
       const lenis = new Lenis({
         duration: 1.5,
@@ -59,6 +61,46 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
           { ease: "circInOut", duration: sequenceTime / 2 },
         ],
       ];
+      document.querySelectorAll("[data-horizontal]").forEach((el) => {
+        const componentId = (el as HTMLElement).dataset.horizontal as string;
+        const enableSnap =
+          (el as HTMLElement).dataset.horizontalSnap === "true";
+        const section = document.getElementById(componentId);
+        if (section) {
+          const races = section.getElementsByClassName(
+            "swipe-section",
+          )[0] as HTMLElement;
+          const panels = Array.from(
+            races.getElementsByClassName("panel"),
+          ) as HTMLElement[];
+          panels.forEach((panel) => {
+            panel.style.width = `100dvw`;
+          });
+          races.style.width = `${panels.length * 100}dvw`;
+
+          function getScrollAmount() {
+            const racesWidth = races.scrollWidth;
+            return -(racesWidth - window.innerWidth);
+          }
+
+          const tween = gsap.to(races, {
+            x: getScrollAmount,
+            duration: 3,
+            ease: "none",
+          });
+
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top 7%",
+            end: () => `+=${getScrollAmount() * -1}`,
+            pin: true,
+            animation: tween,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            // markers: true,
+          });
+        }
+      });
       animate(sequence);
       inView(".path-list li", (element) => {
         animate(
@@ -635,6 +677,42 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     textarea {
       font-size: 1rem;
       padding: 0.5rem 1rem;
+    }
+  }
+  .horizontal-section {
+    overflow-x: clip;
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 70.375px);
+    width: calc(100vw);
+
+    .swipe-section {
+      display: flex;
+      flex-wrap: nowrap;
+      height: 100%;
+
+      .panel {
+        height: 100%;
+        overflow-x: clip;
+        width: 100dvw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & > div,
+        section {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    .horizontal-section {
+      min-height: calc(100vh - 64px);
     }
   }
 </style>
