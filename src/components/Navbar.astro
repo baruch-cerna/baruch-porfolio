@@ -18,6 +18,7 @@ const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
 <style>
   nav {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 4rem;
@@ -44,13 +45,11 @@ const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
   @media screen and (max-width: 768px) {
     nav {
       padding: 2rem;
-      flex-direction: column;
       gap: 1rem;
     }
 
     .links {
       display: flex;
-      flex-direction: row;
       align-items: center;
       gap: 2rem;
     }
@@ -62,7 +61,6 @@ const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
     }
 
     .logo {
-
       & > p {
         font-size: 2rem;
       }

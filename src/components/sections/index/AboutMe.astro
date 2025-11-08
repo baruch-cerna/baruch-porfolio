@@ -1,0 +1,27 @@
+---
+import Section from "../../Section.astro";
+const initDate = new Date();
+initDate.setDate(15);
+initDate.setMonth(3);
+initDate.setFullYear(2020);
+const nowDate = new Date();
+const diffTime = nowDate.getTime() - initDate.getTime();
+const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+---
+
+<Section>
+  <h2 class="clip-reveal" data-animate>Una respuesta simple es más elegante</h2>
+  <p class="quote" data-animate="quote">
+    Tengo más de {yoe} años diseñando soluciones y escribiendo código que agrega
+    valor a las empresas y a los usuarios.
+  </p>
+  <h2 class="clip-reveal" data-animate>Mi historia</h2>
+  <p class="quote" data-animate="quote">
+    Empecé a programar a los 16 años, cuando descubrí que podía darle vida a mis
+    ideas con unas cuantas líneas de código. Desde entonces, no he dejado de
+    construir, aprender y desafiar los límites de lo posible. <br />
+    <br />
+    He trabajado con startups y corporativos internacionales desarrollando desde
+    CRMs personalizados hasta catálogos de remates hipotecarios y sistemas de logística.
+  </p>
+</Section>

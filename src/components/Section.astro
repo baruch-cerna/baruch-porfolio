@@ -1,9 +1,12 @@
 ---
-
+interface Props {
+  align?: "left" | "center" | "right";
+}
+const { align = "left" } = Astro.props;
 ---
 
-<section class="section">
-  <div class="container">
+<section>
+  <div class={`container align-${align}`}>
     <slot />
   </div>
 </section>
@@ -21,5 +24,14 @@
     min-height: 100vh;
     width: 100%;
     gap: 1rem;
+  }
+  .align-left {
+    justify-content: flex-start;
+  }
+  .align-center {
+    justify-content: center;
+  }
+  .align-right {
+    justify-content: flex-end;
   }
 </style>

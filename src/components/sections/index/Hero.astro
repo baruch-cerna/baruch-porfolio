@@ -1,0 +1,36 @@
+---
+import CTA from "../../CTA.astro";
+import Header from "../../Header.astro";
+import Section from "../../Section.astro";
+---
+
+<Section>
+  <Header />
+  <main class="hero">
+    <h1 class="clip-reveal" data-animate>Soy Baruch Cerna</h1>
+    <h2 class="clip-reveal" data-animate>Desarrollador Web</h2>
+    <p class="quote" data-animate="quote">
+      Desarrollo experiencias digitales que resuelven problemas complejos,
+      impulsan negocios y encantan a los usuarios.
+    </p>
+    <CTA text="Trabajemos juntos" />
+  </main>
+</Section>
+
+<style>
+  .hero {
+    height: calc(100vh - 6rem - 140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  @media screen and (max-width: 768px) {
+    .hero {
+      height: auto;
+      justify-content: flex-start;
+      padding-bottom: 2rem;
+    }
+  }
+</style>

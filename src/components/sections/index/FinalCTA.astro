@@ -1,0 +1,26 @@
+---
+import CTA from "../../CTA.astro";
+import Section from "../../Section.astro";
+---
+
+<Section>
+  <div class="cta-container">
+    <h2 class="clip-reveal" data-animate>
+      ¿Tienes una idea que quieres transformar en experiencia digital?
+    </h2>
+    <p class="quote" data-animate="quote">Te ayudo a construirla.</p>
+    <CTA text="Contactame" />
+  </div>
+</Section>
+<style>
+  .cta-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    margin: 4rem 0;
+  }
+</style>

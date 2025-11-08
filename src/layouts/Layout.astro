@@ -91,7 +91,7 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
 
           ScrollTrigger.create({
             trigger: section,
-            start: "top 7%",
+            start: "top 0%",
             end: () => `+=${getScrollAmount() * -1}`,
             pin: true,
             animation: tween,
@@ -101,7 +101,10 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
           });
         }
       });
-      animate(sequence);
+      animate(sequence, {
+        delay: 1,
+        ease: "circInOut",
+      });
       inView(".path-list li", (element) => {
         animate(
           element,
@@ -341,15 +344,15 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
   }
 
   h1 {
-    font-size: calc(var(--size-xxl) * 2);
+    font-size: clamp(4rem, 8.33vw, 8rem);
   }
 
   h2 {
-    font-size: calc(var(--size-xl) * 2);
+    font-size: clamp(2rem, 6vw, 4rem);
   }
 
   h3 {
-    font-size: calc(var(--size-lg) * 2);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
   }
 
   p,
@@ -358,7 +361,7 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
   em,
   li {
     font-family: var(--font-sans);
-    font-size: calc(var(--size-md) * 2);
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     line-height: 1.25;
     font-weight: 400;
     margin: 0;
@@ -563,7 +566,7 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
   div:has(canvas) {
     transition: all 0.8s var(--easing);
   }
-  
+
   canvas {
     position: absolute;
     inset: 0;
@@ -609,65 +612,11 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     transition: padding 0.3s ease-in-out;
   }
 
-  /* ======================================
-   📐 RESPONSIVE TYPOGRAPHY
-   ====================================== */
-  @media (max-width: 1024px) {
-    h1 {
-      font-size: calc(var(--size-xxl) * 1.5);
-    }
-    h2 {
-      font-size: calc(var(--size-xl) * 1.5);
-    }
-    h3 {
-      font-size: calc(var(--size-lg) * 1.5);
-    }
-    p,
-    a,
-    label,
-    em,
-    li {
-      font-size: calc(var(--size-md) * 1.5);
-    }
-  }
-
-  @media (max-width: 768px) {
-    h1 {
-      font-size: calc(var(--size-xxl) * 1.25);
-    }
-    h2 {
-      font-size: calc(var(--size-xl) * 1.25);
-    }
-    h3 {
-      font-size: calc(var(--size-lg) * 1.25);
-    }
-    p,
-    a,
-    label,
-    em,
-    li {
-      font-size: calc(var(--size-md) * 1.25);
-    }
-  }
-
   @media (max-width: 575px) {
-    h1 {
-      font-size: calc(var(--size-xxl) * 1.1);
+    .logo-svg {
+      height: 80px;
+      width: 80px;
     }
-    h2 {
-      font-size: calc(var(--size-xl) * 1.1);
-    }
-    h3 {
-      font-size: calc(var(--size-lg) * 1.1);
-    }
-    p,
-    a,
-    label,
-    em,
-    li {
-      font-size: calc(var(--size-md) * 1.1);
-    }
-
     button {
       font-size: 1rem;
       padding: 0.5rem 1rem;
@@ -683,8 +632,8 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     overflow-x: clip;
     margin: 0;
     padding: 0;
-    min-height: calc(100vh - 70.375px);
-    width: calc(100vw);
+    min-height: 100vh;
+    width: 100vw;
 
     .swipe-section {
       display: flex;
@@ -707,12 +656,6 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
           justify-content: center;
         }
       }
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    .horizontal-section {
-      min-height: calc(100vh - 64px);
     }
   }
 </style>
