@@ -1,80 +1,22 @@
----
-import { addAttributesToInnerHTMLString } from "../data/utils";
-import Logo from "/public/media/logo_blanco.svg?raw";
-
-const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
----
-
-<nav>
-    <a href="/" class="logo">
-      <Fragment set:html={innerHTML}>
-    </a>
-    <div class="links">
-      <!-- <a href="#projects">Projects</a> -->
-      <!-- <a href="#tools">Tools</a> -->
-    </div>
+<nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-3">
+              <div class="w-3 h-3 bg-white animate-pulse"></div>
+              <span class="font-mono font-bold text-lg tracking-tighter text-white">BC_DEV<span class="text-gray-500">.sh</span></span>
+          </div>
+          <div class="hidden md:block">
+              <div class="flex items-baseline space-x-8 font-mono text-xs tracking-widest text-gray-400">
+                  <a href="#logic" class="hover:text-white transition-colors uppercase">[ Logic ]</a>
+                  <a href="#stack" class="hover:text-white transition-colors uppercase">[ Stack ]</a>
+                  <a href="#projects" class="hover:text-white transition-colors uppercase">[ Build ]</a>
+              </div>
+          </div>
+          <!-- Interaction Hint -->
+          <div class="hidden md:flex items-center gap-2 text-[10px] font-mono text-gray-500 border border-white/10 px-2 py-1">
+              <i class="fas fa-mouse-pointer"></i>
+              <span>INTERACT_WITH_GRID: ON</span>
+          </div>
+      </div>
+  </div>
 </nav>
-
-<style>
-  nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4rem;
-    width: 100dvw;
-    font-size: 2rem;
-  }  
-
-  .logo {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 1rem;
-    width: auto;
-    text-decoration: none;
-
-    & > p {
-      font-size: 3rem;
-      color: rgb(var(--accent-light));
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    nav {
-      padding: 2rem;
-      gap: 1rem;
-    }
-
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    nav {
-      padding: 1rem;
-    }
-
-    .logo {
-      & > p {
-        font-size: 2rem;
-      }
-    }
-
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-
-      & > a {
-        font-size: 1.5rem;
-      }
-    }
-  }
-  
-</style>

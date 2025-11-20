@@ -10,14 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.2.1",
-    "@astrojs/db": "^0.14.6",
-    "@astrojs/react": "^4.2.0",
-    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/cloudflare": "^12.6.11",
+    "@astrojs/db": "^0.18.3",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.6.0",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
-    "astro": "^5.0.0",
+    "astro": "^5.16.0",
     "astro-compressor": "^1.0.0",
     "c2.js": "^1.0.9",
     "gsap": "^3.13.0",
@@ -27,6 +28,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.77.8",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.5.3"
   },
   "devDependencies": {

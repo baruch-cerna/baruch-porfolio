@@ -1,18 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
 import Hero from "../components/sections/index/Hero.astro";
 import AboutMe from "../components/sections/index/AboutMe.astro";
+import TechStack from "../components/sections/index/TechStack.astro";
 import CareerTimeline from "../components/sections/index/CareerTimeline.astro";
 import FinalCTA from "../components/sections/index/FinalCTA.astro";
 import Projects from "../components/sections/index/Projects.astro";
+import GameOfLife from "../components/GameOfLife.astro";
 ---
 
 <Layout title="Baruch Cerna | Desarrollador Web">
-  <Hero />
-  <AboutMe />
-  <CareerTimeline />
-  <Projects />
-  <FinalCTA />
+  <GameOfLife />
+  <Navbar />
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-40 opacity-[0.15] bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_3px]"></div>
+  <main>
+		<Hero />
+    <AboutMe />
+    <TechStack />
+    <Projects />
+	</main>
   <Footer />
 </Layout>
