@@ -1,39 +1,78 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projectToUrl: Record<string, string> = {
+  project_1: "https://www.zoku.com.mx",
+  project_2: "https://www.radyus.ai",
+  project_3: "https://www.go-sharp.ai",
+  project_4: "https://www.viz.mx",
+};
+
+const projectsTranslate = { ...(t("projects") ?? {}) };
+const projects = Object.keys(projectsTranslate)
+  .filter((k) => k.includes("project_"))
+  .map((k) => {
+    const project = projectsTranslate[k];
+    return {
+      date: project.image_alt,
+      title: project.title,
+      desc: project.description,
+      tags: project.technologies.split(", "),
+      url: projectToUrl[k],
+    };
+  });
+---
+
 <section id="projects" class="py-32 px-4 border-t border-white/5">
   <div class="max-w-7xl mx-auto">
     <div class="flex justify-between items-end mb-16 reveal">
       <div>
-          <span class="font-mono text-xs text-gray-500 block mb-2">// DEPLOYMENTS</span>
-          <h2 class="text-3xl md:text-5xl font-bold text-white">Output Log</h2>
+        <span class="font-mono text-xs text-gray-500 block mb-2">
+          // {t("nav.link_build")}
+        </span>
+        <h2 class="text-4xl font-bold text-white">
+          {projectsTranslate.title}
+        </h2>
       </div>
-      <div class="font-mono text-xs text-gray-600 hidden md:block">
-          DISPLAYING_LATEST: TRUE
-      </div>
-  </div>
+    </div>
 
-      <div class="space-y-0">
-          {[
-              { date: '01 / 2024', title: 'Project: MONOLITH', desc: 'A headless CMS built for high-frequency trading platforms. Focus on microsecond latency and data integrity.', tags: ['Rust', 'WebAssembly'] },
-              { date: '11 / 2023', title: 'Project: VOID_WALKER', desc: 'Procedural terrain generation engine running entirely in the browser using WebGL shaders.', tags: ['Three.js', 'GLSL'] },
-              { date: '08 / 2023', title: 'Project: GREYSCALE', desc: 'Minimalist task management system for neurodivergent developers. Removes all color to reduce dopamine spikes.', tags: ['Next.js', 'Prisma'] }
-          ].map((project) => (
-              <div class="group relative border-t border-white/10 hover:bg-white/5 transition-colors duration-500 reveal">
-                  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 items-center">
-                      <div class="md:col-span-2 font-mono text-xs text-gray-500">{project.date}</div>
-                      <div class="md:col-span-6">
-                          <h3 class="text-2xl font-bold text-white mb-2 group-hover:translate-x-2 transition-transform">{project.title}</h3>
-                          <p class="text-gray-400 font-light">{project.desc}</p>
-                      </div>
-                      <div class="md:col-span-4 flex justify-start md:justify-end items-center gap-4">
-                          {project.tags.map(tag => (
-                              <span class="text-xs font-mono border border-gray-700 px-2 py-1 text-gray-400">{tag}</span>
-                          ))}
-                          <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
-                              <i class="fas fa-arrow-right -rotate-45"></i>
-                          </a>
-                      </div>
-                  </div>
+    <div class="space-y-0">
+      {
+        projects.map((project) => (
+          <div class="group relative border-t border-white/10 hover:bg-white/5 transition-colors duration-500 reveal">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 items-center">
+              <div class="md:col-span-2 font-mono text-xs text-gray-500">
+                {project.date}
               </div>
-          ))}
-      </div>
+              <div class="md:col-span-6">
+                <h3 class="text-2xl font-bold text-white mb-2 group-hover:translate-x-2 transition-transform">
+                  {project.title}
+                </h3>
+                <p class="text-gray-400 font-light">{project.desc}</p>
+              </div>
+              <div class="md:col-span-3 flex justify-start md:justify-end items-center gap-4 flex-wrap">
+                {project.tags.map((tag: string) => (
+                  <span class="text-xs font-mono border border-gray-700 px-2 py-1 text-gray-400">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div class="md:col-span-1">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                >
+                  <i class="fas fa-arrow-right -rotate-45" />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>

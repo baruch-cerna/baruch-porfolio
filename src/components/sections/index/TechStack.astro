@@ -1,40 +1,56 @@
-<section id="stack" class="py-24 px-4 relative">
-    <div class="max-w-7xl mx-auto">
-        <div class="mb-16 reveal">
-            <span class="font-mono text-xs text-gray-500 block mb-2">// TOOLS_AND_LIBRARIES</span>
-            <h2 class="text-3xl font-bold text-white">Constructors</h2>
-        </div>
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <!-- Tech Items -->
-            {[
-                { icon: 'fab fa-angular', label: 'Angular' },
-                { icon: 'fab fa-react', label: 'React' },
-                { icon: 'fab fa-js', label: 'JavaScript' },
-                { icon: 'fab fa-node', label: 'Node.js' },
-                { icon: 'fas fa-database', label: 'SQL/NoSQL' },
-                { icon: 'fab fa-python', label: 'Python' },
-            ].map((tech, index) => (
-                <div class="iso-card p-6 flex flex-col items-center justify-center gap-3 aspect-square group reveal" style={`transition-delay: ${index * 50}ms`}>
-                    <i class={`${tech.icon} text-3xl text-gray-500 group-hover:text-white transition-colors`}></i>
-                    <span class="font-mono text-xs text-gray-400">{tech.label}</span>
-                </div>
-            ))}
-        </div>
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="stack" class="py-24 px-4 relative">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16 reveal">
+      <span class="font-mono text-xs text-gray-500 block mb-2">
+        // {t("nav.link_stack")}
+      </span>
+      <h2 class="text-3xl font-bold text-white">{t("stack.title")}</h2>
     </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <!-- Tech Items -->
+      {
+        [
+          { icon: "fab fa-angular", label: "Angular" },
+          { icon: "fab fa-react", label: "React" },
+          { icon: "fab fa-js", label: "JavaScript" },
+          { icon: "fab fa-node", label: "Node.js" },
+          { icon: "fas fa-database", label: "SQL/NoSQL" },
+          { icon: "fab fa-python", label: "Python" },
+        ].map((tech, index) => (
+          <div
+            class="iso-card p-6 flex flex-col items-center justify-center gap-3 aspect-square group reveal"
+            style={`transition-delay: ${index * 50}ms`}
+          >
+            <i
+              class={`${tech.icon} text-3xl text-gray-500 group-hover:text-white transition-colors`}
+            />
+            <span class="font-mono text-xs text-gray-400">{tech.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </section>
 
 <style>
-    .iso-card {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+  .iso-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  }
 
-        .iso-card:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-4px);
-            background: rgba(30, 30, 30, 0.8);
-        }
+  .iso-card:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px);
+    background: rgba(30, 30, 30, 0.8);
+  }
 </style>

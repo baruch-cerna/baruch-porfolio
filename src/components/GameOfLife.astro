@@ -23,7 +23,7 @@
 
     // Configuration
     const cellSize = 10;
-    const speed = 50;
+    const speed = 85;
     const density = 0.15;
     const trailFade = 0.05;
 
@@ -115,7 +115,7 @@
 
           if (cell.state === 1) {
             cell.opacity = 1;
-            ctx.fillStyle = "rgba(200, 200, 200, 1)";
+            ctx.fillStyle = "rgba(120, 120, 120, 1)";
             ctx.beginPath();
             ctx.arc(
               i * cellSize + cellSize / 2,

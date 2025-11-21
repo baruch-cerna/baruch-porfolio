@@ -1,40 +1,73 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-  <div class="absolute top-32 right-4 md:right-20 opacity-30 font-mono text-[10px] text-gray-500 text-right hidden md:block">
-      CELLULAR_AUTOMATA: ACTIVE<br>
-      RULESET: <span id="rule-display">B3/S23</span><br>
-      GENERATION: <span id="gen-counter">0</span>
+<section
+  class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden"
+>
+  <div
+    class="absolute top-32 right-4 md:right-20 opacity-50 font-mono text-[10px] text-gray-500 text-right hidden md:block"
+  >
+    {t("hero.technical_details.automata_status")}<br />
+    {t("hero.technical_details.ruleset_label")}: <span id="rule-display"
+      >B3/S23</span
+    ><br />
+    {t("hero.technical_details.generation_label")}: <span id="gen-counter"
+      >0</span
+    >
   </div>
 
   <div class="text-center z-10 max-w-5xl">
-      <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 border border-white/20 bg-black/40 font-mono text-xs text-gray-300 reveal">
-          <span class="w-1.5 h-1.5 bg-white rounded-full"></span> SYSTEM READY
+    <div
+      class="mb-10 inline-flex items-center gap-2 px-3 py-1 border border-white/20 bg-black/40 font-mono text-xs text-gray-300 reveal"
+    >
+      <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+      {t("hero.title")} - {t("hero.city")}
+    </div>
+
+    <h1
+      class="text-6xl md:text-9xl font-bold mb-2 tracking-tighter text-white reveal relative"
+      style="transition-delay: 100ms;"
+    >
+      <div class="glitch-container">
+        <span class="relative z-10">{t("hero.name")}</span>
       </div>
-      
-      <h1 class="text-6xl md:text-9xl font-bold mb-2 tracking-tighter text-white reveal relative" style="transition-delay: 100ms;">
-          <div class="glitch-container">
-              <span class="invisible">BARUCH CERNA</span>
-              <span class="glitch-layer" aria-hidden="true">BARUCH CERNA</span>
-              <span class="glitch-layer" aria-hidden="true">BARUCH CERNA</span>
-              <span class="relative z-10">BARUCH CERNA</span>
-          </div>
-      </h1>
-      
-      <p class="text-xl md:text-2xl text-gray-400 font-light reveal font-mono mb-12" style="transition-delay: 200ms;">
-          Full Stack Architect. Designing complexity from simple rules.
-      </p>
-      
-      <div class="flex flex-col md:flex-row gap-6 justify-center items-center reveal" style="transition-delay: 300ms;">
-          <a href="#projects" class="px-8 py-3 bg-white text-black font-mono font-bold text-sm hover:bg-gray-200 transition-colors w-48">
-              VIEW_SOURCE
-          </a>
-          <a href="#contact" class="px-8 py-3 border border-white/30 text-white font-mono text-sm hover:border-white hover:bg-white/5 transition-all w-48">
-              CONTACT_HOST
-          </a>
-      </div>
+    </h1>
+
+    <p
+      class="text-xl md:text-2xl text-gray-400 font-light reveal font-mono mb-12"
+      style="transition-delay: 200ms;"
+    >
+      {t("hero.tagline")}
+    </p>
+
+    <div
+      class="flex flex-col md:flex-row gap-6 justify-center items-center reveal"
+      style="transition-delay: 300ms;"
+    >
+      <a
+        href="#projects"
+        class="px-8 py-3 bg-white text-black font-mono font-bold text-sm hover:bg-gray-200 transition-colors w-60"
+      >
+        {t("hero.button_projects")}
+      </a>
+      <a
+        href="#contact"
+        class="px-8 py-3 border border-white/30 text-white font-mono text-sm hover:border-white hover:bg-white/5 transition-all w-60"
+      >
+        {t("hero.button_contact")}
+      </a>
+    </div>
   </div>
-  
+
   <div class="absolute bottom-12 left-0 w-full text-center">
-      <div class="w-px h-16 bg-gradient-to-b from-transparent via-gray-500 to-transparent mx-auto animate-pulse"></div>
+    <div
+      class="w-px h-16 bg-gradient-to-b from-transparent via-gray-500 to-transparent mx-auto animate-pulse"
+    >
+    </div>
   </div>
 </section>

@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  /* Fuentes Personalizadas (fontFamily) */
-  --font-sans: Inter, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: 'Host Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
   /* Colores Personalizados (colors.mono) */
   /* Nota: Usamos la convención --color-<nombre>-<escala> para los colores */
@@ -22,14 +21,17 @@
   /* Keyframes Personalizados (keyframes) */
   /* Se definen fuera del @theme, pero lo incluimos para que el código sea completo */
   @keyframes blink {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 1;
     }
+
     50% {
       opacity: 0;
     }
   }
-  
+
   /* Animaciones Personalizadas (animation) */
   --animate-glitch: glitch 2s steps(100) infinite;
   --animate-blink: blink 1s step-end infinite;
