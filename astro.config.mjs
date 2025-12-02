@@ -12,6 +12,13 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   output: "server",
   site: 'https://baruch-cerna.dev',
+  i18n: {
+    locales: ["es", "en"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   adapter: cloudflare(),
   image: {
     remotePatterns: [{ protocol: "https" }],

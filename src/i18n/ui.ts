@@ -17,6 +17,7 @@ const yoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
 
 export const ui: Record<Lang, any> = {
   "en": {
+    "site_title": "Baruch Cerna - Web Developer",
     "hero": {
       "technical_details": {
         "automata_status": "CELLULAR_AUTOMATA: ACTIVE", // Más relevante que "CELLULAR_AUTOMATA"
@@ -40,7 +41,11 @@ export const ui: Record<Lang, any> = {
     "logic": {
       "title": "A simple solution is the most elegant",
       "paragraph_1": "I started programming at 16, discovering I could bring my ideas to life with just a few lines of code. Since then, I haven't stopped building, learning, and challenging the limits of what's possible.",
-      "paragraph_2": "I have worked with startups and international corporations, developing everything from custom CRMs to mortgage auction catalogs and sophisticated logistics systems.",
+      "paragraph_2": `With ${yoe}+ years of experience, I build robust and scalable digital systems for businesses. Whether it's a website or a large enterprise system, I guarantee project success.`,
+      "analysis_trait": "Analysis",
+      "analysis_description": "Research and Diagnosis",
+      "synthesis_trait": "Synthesis",
+      "synthesis_description": "Systems Design",
       "trait_1": "Analytical",
       "trait_2": "Minimalist",
       "trait_3": "Autodidact",
@@ -93,6 +98,7 @@ export const ui: Record<Lang, any> = {
     }
   },
   "es": {
+    "site_title": "Baruch Cerna - Desarrollador Web",
     "hero": {
       "technical_details": {
         "automata_status": "AUTÓMATA_CELULAR: ACTIVO", // Más relevante que "CELLULAR_AUTOMATA"
@@ -115,7 +121,11 @@ export const ui: Record<Lang, any> = {
     "logic": {
       "title": "Una respuesta simple es más elegante",
       "paragraph_1": "Empecé a programar a los 16 años, cuando descubrí que podía darle vida a mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado de construir, aprender y desafiar los límites de lo posible.",
-      "paragraph_2": "He trabajado con startups y corporativos internacionales desarrollando desde CRMs personalizados hasta catálogos de remates hipotecarios y sistemas de logística.",
+      "paragraph_2": `Con más de ${yoe} años de experiencia, construyo sistemas digitales robustos y escalables para negocios. Ya sea un sitio web o un gran sistema empresarial, garantizo el éxito del proyecto.`,
+      "analysis_trait": "Análisis",
+      "analysis_description": "Investigación y Diagnóstico",
+      "synthesis_trait": "Síntesis",
+      "synthesis_description": "Diseño de Sistemas",
       "trait_1": "Analitíco",
       "trait_2": "Minimalista",
       "trait_3": "Autodidacta",

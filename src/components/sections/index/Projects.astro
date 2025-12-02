@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -9,6 +10,13 @@ const projectToUrl: Record<string, string> = {
   project_2: "https://www.radyus.ai",
   project_3: "https://www.go-sharp.ai",
   project_4: "https://www.viz.mx",
+};
+
+const projectToImage: Record<string, string> = {
+  project_1: "https://zoku.com.mx/media/ZOKU_BLANCO.avif",
+  project_2: "https://www.radyus.ai/assets/image/portfolio/banner/radyus.png",
+  project_3: "https://www.go-sharp.ai/assets/image/header/logo-white.png",
+  project_4: "https://www.viz.mx/assets/image/portfolio/banner/viz.png",
 };
 
 const projectsTranslate = { ...(t("projects") ?? {}) };
@@ -44,13 +52,23 @@ const projects = Object.keys(projectsTranslate)
         projects.map((project) => (
           <div class="group relative border-t border-white/10 hover:bg-white/5 transition-colors duration-500 reveal">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 items-center">
-              <div class="md:col-span-2 font-mono text-xs text-gray-500">
-                {project.date}
+              <div class="md:col-span-2 w-auto font-mono text-xs text-gray-500 p-5 md:p-0">
+                <Image
+                  src={
+                    projectToImage[`project_${projects.indexOf(project) + 1}`]
+                  }
+                  alt={project.title}
+                  inferSize={true}
+                />
               </div>
               <div class="md:col-span-6">
-                <h3 class="text-2xl font-bold text-white mb-2 group-hover:translate-x-2 transition-transform">
-                  {project.title}
-                </h3>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  class=" mb-2 group-hover:translate-x-2 transition-transform"
+                >
+                  <h3 class="text-2xl font-bold text-white">{project.title}</h3>
+                </a>
                 <p class="text-gray-400 font-light">{project.desc}</p>
               </div>
               <div class="md:col-span-3 flex justify-start md:justify-end items-center gap-4 flex-wrap">
@@ -64,7 +82,7 @@ const projects = Object.keys(projectsTranslate)
                 <a
                   href={project.url}
                   target="_blank"
-                  class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                  class="w-15 h-15 ms-auto md:ms-0 me-2 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
                 >
                   <i class="fas fa-arrow-right -rotate-45" />
                 </a>

@@ -32,14 +32,14 @@ const t = useTranslations(lang);
 
         <div class="grid grid-cols-2 gap-4 pt-4">
           <div class="p-4 border border-white/10 bg-white/5">
-            <div class="font-mono text-xs text-gray-500 mb-1">01. ANALYSIS</div>
-            <div class="text-white">Deep Dive Research</div>
+            <div class="font-mono text-xs text-gray-500 mb-1">01. {t("logic.analysis_trait")?.toUpperCase()}</div>
+            <div class="text-white">{t("logic.analysis_description")}</div>
           </div>
           <div class="p-4 border border-white/10 bg-white/5">
             <div class="font-mono text-xs text-gray-500 mb-1">
-              02. SYNTHESIS
+              02. {t("logic.synthesis_trait")?.toUpperCase()}
             </div>
-            <div class="text-white">System Architecture</div>
+            <div class="text-white">{t("logic.synthesis_description")}</div>
           </div>
         </div>
       </div>
