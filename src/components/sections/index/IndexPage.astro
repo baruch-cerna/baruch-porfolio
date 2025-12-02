@@ -1,0 +1,29 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+import Footer from "../../Footer.astro";
+import GameOfLife from "../../GameOfLife.astro";
+import Navbar from "../../Navbar.astro";
+import AboutMe from "./AboutMe.astro";
+import Hero from "./Hero.astro";
+import Projects from "./Projects.astro";
+import TechStack from "./TechStack.astro";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t("site_title")}>
+  <GameOfLife />
+  <Navbar />
+  <div
+    class="fixed top-0 left-0 w-full h-full pointer-events-none z-40 opacity-[0.15] bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_3px]"
+  >
+  </div>
+  <main>
+    <Hero />
+    <AboutMe />
+    <TechStack />
+    <Projects />
+  </main>
+  <Footer />
+</Layout>

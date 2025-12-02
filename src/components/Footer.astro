@@ -1,9 +1,39 @@
-<footer>
-    <p>
-        Hecho con ❤️ y <a href="https://astro.build" target="_blank">Astro</a>
-        por
-        <a href="https://github.com/baruch-cerna" target="_blank"
-            >Baruch Cerna</a
-        >
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer
+  class="py-12 border-t border-white/10 bg-black text-center"
+  id="contact"
+>
+  <div class="max-w-2xl mx-auto px-4">
+    <h2 class="text-2xl font-bold text-white mb-6">
+      {t("footer.cta_question")}
+    </h2>
+    <p class="text-gray-500 mb-8 font-light">
+      {t("footer.cta_action")}
     </p>
+    <a
+      href="https://linkedin.com/in/alan-baruch"
+      class="inline-block px-8 py-3 bg-white text-black font-mono font-bold text-sm hover:bg-gray-200 transition-colors mb-12"
+    >
+      {t("footer.button_contact")}
+    </a>
+
+    <div class="flex justify-center gap-8 text-2xl text-gray-600 mb-8">
+      <a href="#" class="hover:text-white transition-colors"
+        ><i class="fab fa-github"></i></a
+      >
+      <a href="#" class="hover:text-white transition-colors"
+        ><i class="fab fa-linkedin"></i></a
+      >
+    </div>
+
+    <p class="font-mono text-[10px] text-gray-700 uppercase">
+      {t("footer.copyright_text")}
+    </p>
+  </div>
 </footer>

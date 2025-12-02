@@ -1,14 +1,17 @@
 ---
+import { getLangFromUrl } from "../i18n/utils";
+import "../styles/global.css";
 interface Props {
   title: string;
 }
 const { title } = Astro.props;
 const yoe = new Date().getFullYear() - 2020;
 const description = `Desarrollador Web Full Stack con +${yoe} años de experiencia en desarrollo de productos digitales. Experto en Node.js, Django, Angular y React.`;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -31,603 +34,248 @@ const description = `Desarrollador Web Full Stack con +${yoe} años de experienc
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/media/logo_blanco.svg" />
     <link rel="apple-touch-icon" href="/media/logo_blanco.svg" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=Space+Mono:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
-  <body>
+  <body
+    class="bg-[#050505] text-[#e5e5e5] antialiased selection:bg-white selection:text-black"
+  >
     <slot />
-
-    <script>
-      import Lenis from "lenis";
-      import { animate, inView } from "motion";
-      import gsap from "gsap";
-      import SplitText from "gsap/SplitText";
-      import { ScrollTrigger } from "gsap/ScrollTrigger";
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.registerPlugin(SplitText);
-      const lenis = new Lenis({
-        duration: 1.5,
-        easing: (x) => 1 - Math.pow(1 - x, 3),
-      });
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-      const sequenceTime = 2.2;
-      const sequence: any[] = [
-        [
-          ".logo-svg",
-          { rotate: [180, 0, -180] },
-          { ease: "circInOut", duration: sequenceTime / 2 },
-        ],
-      ];
-      document.querySelectorAll("[data-horizontal]").forEach((el) => {
-        const componentId = (el as HTMLElement).dataset.horizontal as string;
-        const enableSnap =
-          (el as HTMLElement).dataset.horizontalSnap === "true";
-        const section = document.getElementById(componentId);
-        if (section) {
-          const races = section.getElementsByClassName(
-            "swipe-section",
-          )[0] as HTMLElement;
-          const panels = Array.from(
-            races.getElementsByClassName("panel"),
-          ) as HTMLElement[];
-          panels.forEach((panel) => {
-            panel.style.width = `100dvw`;
-          });
-          races.style.width = `${panels.length * 100}dvw`;
-
-          function getScrollAmount() {
-            const racesWidth = races.scrollWidth;
-            return -(racesWidth - window.innerWidth);
-          }
-
-          const tween = gsap.to(races, {
-            x: getScrollAmount,
-            duration: 3,
-            ease: "none",
-          });
-
-          ScrollTrigger.create({
-            trigger: section,
-            start: "top 0%",
-            end: () => `+=${getScrollAmount() * -1}`,
-            pin: true,
-            animation: tween,
-            scrub: 1,
-            invalidateOnRefresh: true,
-            // markers: true,
-          });
-        }
-      });
-      animate(sequence, {
-        delay: 1,
-        ease: "circInOut",
-      });
-      inView(".path-list li", (element) => {
-        animate(
-          element,
-          {
-            opacity: 1,
-            transform: ["translate(-50px)", "translate(0)"],
-          } as any,
-          {
-            duration: 0.9,
-            easing: [0.17, 0.55, 0.55, 1],
-          } as any,
-        );
-        return () => animate(element, { opacity: 0, y: [50, 0] });
-      });
-      const animationFuns: Record<string, (element: Element) => void> = {
-        quote: (element: Element) => {
-          SplitText.create(element, {
-            type: "words, chars",
-            onSplit(self) {
-              gsap.from(self.chars, {
-                duration: 1,
-                autoAlpha: 0,
-                stagger: 1 / self.chars.length,
-                ease: "power4.out",
-              });
-            },
-          });
-        },
-      };
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              const animation: string =
-                (entry.target as HTMLElement).dataset?.animate || "";
-              const animationFun = animationFuns[animation];
-              if (animationFun) animationFun(entry.target);
-            } else {
-              entry.target.classList.remove("is-visible");
-            }
-          });
-        },
-        { threshold: 0.2 },
-      );
-
-      document.querySelectorAll("[data-animate]").forEach((el) => {
-        const classes = el.classList;
-        const hasClip = classes
-          .values()
-          .some((className) => className.includes("clip"));
-        const hasQuote = classes
-          .values()
-          .some((className) => className.includes("quote"));
-        if (hasClip) {
-          const innerHTML = el.innerHTML;
-          el.innerHTML = "";
-          const span = document.createElement("span");
-          span.innerHTML = innerHTML;
-          el.appendChild(span);
-        }
-        if (hasQuote) {
-          // const slipSpans =
-        }
-        observer.observe(el);
-      });
-    </script>
   </body>
 </html>
-<style is:global>
-  @import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap");
-  @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300..700&display=swap");
+<script>
+  import Lenis from "lenis";
+  import { animate, inView } from "motion";
+  import gsap from "gsap";
+  import SplitText from "gsap/SplitText";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(SplitText);
+  const lenis = new Lenis({
+    duration: 1.5,
+    easing: (x) => 1 - Math.pow(1 - x, 3),
+  });
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+  const sequenceTime = 2.2;
+  const sequence: any[] = [
+    [
+      ".logo-svg",
+      { rotate: [180, 0, -180] },
+      { ease: "circInOut", duration: sequenceTime / 2 },
+    ],
+  ];
+  document.querySelectorAll("[data-horizontal]").forEach((el) => {
+    const componentId = (el as HTMLElement).dataset.horizontal as string;
+    const enableSnap = (el as HTMLElement).dataset.horizontalSnap === "true";
+    const section = document.getElementById(componentId);
+    if (section) {
+      const races = section.getElementsByClassName(
+        "swipe-section",
+      )[0] as HTMLElement;
+      const panels = Array.from(
+        races.getElementsByClassName("panel"),
+      ) as HTMLElement[];
+      panels.forEach((panel) => {
+        panel.style.width = `100dvw`;
+      });
+      races.style.width = `${panels.length * 100}dvw`;
 
+      function getScrollAmount() {
+        const racesWidth = races.scrollWidth;
+        return -(racesWidth - window.innerWidth);
+      }
+
+      const tween = gsap.to(races, {
+        x: getScrollAmount,
+        duration: 3,
+        ease: "none",
+      });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 0%",
+        end: () => `+=${getScrollAmount() * -1}`,
+        pin: true,
+        animation: tween,
+        scrub: 1,
+        invalidateOnRefresh: true,
+        // markers: true,
+      });
+    }
+  });
+  animate(sequence, {
+    delay: 1,
+    ease: "circInOut",
+  });
+  inView(".path-list li", (element) => {
+    animate(
+      element,
+      {
+        opacity: 1,
+        transform: ["translate(-50px)", "translate(0)"],
+      } as any,
+      {
+        duration: 0.9,
+        easing: [0.17, 0.55, 0.55, 1],
+      } as any,
+    );
+    return () => animate(element, { opacity: 0, y: [50, 0] });
+  });
+  const animationFuns: Record<string, (element: Element) => void> = {
+    quote: (element: Element) => {
+      SplitText.create(element, {
+        type: "words, chars",
+        onSplit(self) {
+          gsap.from(self.chars, {
+            duration: 1,
+            autoAlpha: 0,
+            stagger: 1 / self.chars.length,
+            ease: "power4.out",
+          });
+        },
+      });
+    },
+  };
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          const animation: string =
+            (entry.target as HTMLElement).dataset?.animate || "";
+          const animationFun = animationFuns[animation];
+          if (animationFun) animationFun(entry.target);
+        } else {
+          entry.target.classList.remove("is-visible");
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
+
+  document.querySelectorAll("[data-animate], .reveal").forEach((el) => {
+    const classes = el.classList;
+    const hasClip = classes
+      .values()
+      .some((className) => className.includes("clip"));
+    const hasQuote = classes
+      .values()
+      .some((className) => className.includes("quote"));
+    if (hasClip) {
+      const innerHTML = el.innerHTML;
+      el.innerHTML = "";
+      const span = document.createElement("span");
+      span.innerHTML = innerHTML;
+      el.appendChild(span);
+    }
+    if (hasQuote) {
+      // const slipSpans =
+    }
+    observer.observe(el);
+  });
+</script>
+<style is:global>
   /* ======================================
    🌐 DESIGN TOKENS
    ====================================== */
   :root {
-    /* — Typography — */
-    --font-sans: "Host Grotesk", sans-serif;
-    --font-mono: "Red Hat Mono", monospace;
-
-    /* — Palette — */
-    --color-bg: #1a1a1a;
-    --color-text: #fffffe;
-    --color-primary: #00f5d4;
-    --color-accent: #ff8906;
-    --color-muted: #a7a9be;
-    --color-danger: #ff5555;
-    --color-highlight: #ffe566;
-
-    /* — Accent palette for dynamic backgrounds — */
-    --accent: 89 89 88;
-    --accent-light: 242 242 233;
-    --accent-dark: 1 13 0;
-
-    /* — Sizing — */
-    --size-xs: 0.5rem;
-    --size-sm: 0.75rem;
-    --size-md: 1rem;
-    --size-lg: 1.5rem;
-    --size-xl: 2rem;
-    --size-xxl: 3rem;
-
-    /* — Spacing — */
-    --space-xxs: 0.25rem;
-    --space-xs: 0.5rem;
-    --space-sm: 1rem;
-    --space-md: 2rem;
-    --space-lg: 4rem;
-
-    /* — Radius & Shadow — */
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 24px;
-    --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.3);
-
-    /* — Shared — */
-    --easing: cubic-bezier(0.65, 0, 0.35, 1);
-    --transition: all 0.3s var(--easing);
-
-    /* — Gradients — */
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgba(var(--accent), 0.5),
-      rgb(var(--accent-dark)) 30%,
-      rgba(var(--accent), 0.5) 70%
-    );
-    --secondary-glow: conic-gradient(
-      from 10deg at 50% 50%,
-      #d9bea7 0deg,
-      #f2dcb3 55deg,
-      #223d40 120deg,
-      #72878c 160deg,
-      transparent 360deg
-    );
-    --third-glow: conic-gradient(
-      from 90deg at 50% 50%,
-      #223d40 0deg,
-      #72878c 160deg,
-      #d9bea7 120deg,
-      #f2dcb3 55deg,
-      transparent 360deg
-    );
+    --bg-color: #050505;
+    --text-primary: #e5e5e5;
+    --text-secondary: #a3a3a3;
   }
 
-  /* ======================================
-   🔄 RESET & GLOBALS
-   ====================================== */
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 
-  html {
-    font-family: var(--font-mono);
-    background: rgb(var(--accent-dark));
-    scroll-behavior: smooth;
-    width: 100vw;
-    overflow-x: hidden;
-  }
-
-  body {
-    position: relative;
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: var(--color-text);
-    font-family: var(--font-sans);
-  }
-
-  /* Dynamic background blobs */
-  body::before,
-  body::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-    height: 60%;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.5;
-  }
-
-  body::before {
-    background: var(--third-glow);
-    top: 40%;
-    left: 40vw;
-    animation: blob-before 8s ease-in-out infinite;
-  }
-
-  body::after {
-    background: var(--secondary-glow);
-    bottom: 50%;
-    left: 20vw;
-    animation: blob-after 8s ease-in-out infinite;
-  }
-
-  @keyframes blob-before {
+  /* Glitch Animations */
+  @keyframes glitch-anim-1 {
     0% {
-      transform: translateY(0);
+      clip-path: inset(20% 0 80% 0);
+      transform: translate(-2px, 0);
     }
-    50% {
-      transform: translateY(-200px) scale(0.8);
+    20% {
+      clip-path: inset(60% 0 10% 0);
+      transform: translate(2px, 0);
+    }
+    40% {
+      clip-path: inset(40% 0 50% 0);
+      transform: translate(-2px, 0);
+    }
+    60% {
+      clip-path: inset(80% 0 5% 0);
+      transform: translate(2px, 0);
+    }
+    80% {
+      clip-path: inset(10% 0 70% 0);
+      transform: translate(-1px, 0);
     }
     100% {
-      transform: translateY(0);
+      clip-path: inset(30% 0 50% 0);
+      transform: translate(1px, 0);
     }
   }
 
-  @keyframes blob-after {
+  @keyframes glitch-anim-2 {
     0% {
-      transform: translateX(0);
+      clip-path: inset(10% 0 60% 0);
+      transform: translate(2px, 0);
     }
-    50% {
-      transform: translateX(-250px) scale(1.2);
+    20% {
+      clip-path: inset(30% 0 20% 0);
+      transform: translate(-2px, 0);
+    }
+    40% {
+      clip-path: inset(70% 0 10% 0);
+      transform: translate(2px, 0);
+    }
+    60% {
+      clip-path: inset(20% 0 50% 0);
+      transform: translate(-2px, 0);
+    }
+    80% {
+      clip-path: inset(50% 0 30% 0);
+      transform: translate(1px, 0);
     }
     100% {
-      transform: translateX(0);
+      clip-path: inset(0% 0 90% 0);
+      transform: translate(-1px, 0);
     }
   }
 
-  /* ======================================
-   🔤 TYPOGRAPHY — tag‑based only
-   ====================================== */
-  h1,
-  h2,
-  h3 {
-    font-family: var(--font-sans);
-    font-weight: 800;
-    margin: 0 0 1rem;
-    line-height: 1.15;
-    color: var(--color-text);
-    text-wrap: pretty;
-    letter-spacing: 1px;
-  }
-
-  h1 {
-    font-size: clamp(4rem, 8.33vw, 8rem);
-  }
-
-  h2 {
-    font-size: clamp(2rem, 6vw, 4rem);
-  }
-
-  h3 {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-  }
-
-  p,
-  a,
-  label,
-  em,
-  li {
-    font-family: var(--font-sans);
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    line-height: 1.25;
-    font-weight: 400;
-    margin: 0;
-    color: var(--color-text);
-    text-wrap: pretty;
-    letter-spacing: 0.3px;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  em {
-    font-family: var(--font-mono);
-    font-style: normal;
-  }
-
-  button {
-    background: rgba(var(--accent-light), 0.6);
-    border: 0;
-    border-radius: 0.25rem;
-    color: rgb(var(--accent-dark));
-    cursor: pointer;
-    font-family: var(--font-sans);
-    font-size: 2rem;
-    padding: 1rem 2rem;
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  button:hover {
-    background: rgb(var(--accent-light));
-  }
-
-  input,
-  textarea {
-    width: 100%;
-    background: rgba(var(--accent-dark), 0.6);
-    border: 0;
-    border-radius: 0.25rem;
-    color: rgb(var(--accent-light));
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  input:focus,
-  textarea:focus {
-    outline: none;
-  }
-
-  input:hover,
-  textarea:hover {
-    background: rgb(var(--accent-dark));
-  }
-
-  /* ======================================
-   📦 LAYOUT UTILITIES
-   ====================================== */
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin-inline: auto;
-  }
-
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
-  }
-
-  /* Spacing / radius / shadow helpers */
-  .mt-lg {
-    margin-top: var(--space-lg);
-  }
-  .p-md {
-    padding: var(--space-md);
-  }
-  .rounded-md {
-    border-radius: var(--radius-md);
-  }
-  .shadow-md {
-    box-shadow: var(--shadow-md);
-  }
-
-  /* ======================================
-   🎞️ ANIMATIONS
-   ====================================== */
-  /* Fade in desde abajo */
-  .fade-in-up {
+  .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s var(--easing);
+    filter: blur(4px);
+    transform: translateY(20px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  .fade-in-up.is-visible {
+  .reveal.is-visible {
     opacity: 1;
+    filter: blur(0);
     transform: translateY(0);
   }
 
-  /* Desenmascarado tipo clip reveal */
-  .clip-reveal {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .clip-reveal > * {
-    transform: translateY(100%);
-    transition: all 0.8s var(--easing);
-    display: inline-block;
-  }
-
-  .clip-reveal.is-visible > * {
-    transform: translateY(0);
-  }
-
-  /* Pulso en borde (útil para botones o íconos interactivos) */
-  .pulse-border {
-    position: relative;
-  }
-
-  .pulse-border::after {
-    content: "";
-    position: absolute;
-    top: -6px;
-    left: -6px;
-    right: -6px;
-    bottom: -6px;
-    border: 2px solid currentColor;
-    border-radius: 12px;
-    opacity: 0;
-    animation: pulse-anim 2s infinite;
-  }
-
-  @keyframes pulse-anim {
-    0% {
-      opacity: 0.6;
-      transform: scale(1);
-    }
-    70% {
-      opacity: 0;
-      transform: scale(1.3);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1.3);
-    }
-  }
-
-  .type {
-    white-space: nowrap;
-    overflow: hidden;
-    display: inline-block;
-    animation: typewriter 3s steps(40, end);
-    border-right: 2px solid var(--color-primary);
-  }
-
-  [data-animate] {
-    opacity: 0;
-  }
-
-  [data-animate].is-visible {
-    opacity: 1;
-  }
-
-  /* ======================================
-   📚 COMPONENTS
-   ====================================== */
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-    border-left: 2px solid var(--color-primary);
-    animation: fade-in-up 1s ease-out forwards;
-  }
-
-  .project-card {
-    background: #0f0e17; /* using secondary tone */
-    color: var(--color-text);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    box-shadow: var(--shadow-md);
-    animation: flip-up 1s ease-in-out;
-  }
-
-  .contact-form {
-    background: #111;
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    animation: pulse-border 2.5s infinite;
-  }
-
-  /* ======================================
-   🖼️ MEDIA & CANVAS
-   ====================================== */
-  div:has(canvas) {
-    transition: all 0.8s var(--easing);
-  }
-
-  canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  .logo-svg {
-    height: 100px;
-    width: 100px;
-    fill: rgb(var(--accent-light));
-  }
-
-  /* ======================================
-   🎛️ HEADER / FOOTER STRUCTURE
-   ====================================== */
-  .header,
-  footer {
-    display: flex;
-    width: 100%;
-    padding: 2rem;
-  }
-
-  footer {
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-  }
-
-  /* Pointer (custom cursor) */
-  #v-pointer {
-    position: fixed;
-    top: -0.75rem;
-    left: -0.75rem;
-    padding: 0.75rem;
-    background: rgba(var(--accent-light));
-    mix-blend-mode: exclusion;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 99999;
-    transition: padding 0.3s ease-in-out;
-  }
-
-  @media (max-width: 575px) {
-    .logo-svg {
-      height: 80px;
-      width: 80px;
-    }
-    button {
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-    }
-
-    input,
-    textarea {
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-    }
-  }
   .horizontal-section {
     overflow-x: clip;
     margin: 0;

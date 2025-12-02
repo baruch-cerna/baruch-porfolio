@@ -1,80 +1,57 @@
 ---
-import { addAttributesToInnerHTMLString } from "../data/utils";
-import Logo from "/public/media/logo_blanco.svg?raw";
+import { languages } from "../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-const innerHTML = addAttributesToInnerHTMLString(Logo, {class: "logo-svg"});
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const languageNames = Object.keys(languages);
 ---
 
-<nav>
-    <a href="/" class="logo">
-      <Fragment set:html={innerHTML}>
-    </a>
-    <div class="links">
-      <!-- <a href="#projects">Projects</a> -->
-      <!-- <a href="#tools">Tools</a> -->
+<nav
+  class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-md"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-3">
+        <div class="w-3 h-3 bg-white animate-pulse"></div>
+        <span class="font-mono font-bold text-lg tracking-tighter text-white"
+          >BARUCH_CERNA<span class="text-gray-500">.dev</span></span
+        >
+      </div>
+      <div class="hidden md:block">
+        <div
+          class="flex items-baseline space-x-8 font-mono text-xs tracking-widest text-gray-400"
+        >
+          <a href="#logic" class="hover:text-white transition-colors uppercase"
+            >[ {t("nav.link_logic")} ]</a
+          >
+          <a href="#stack" class="hover:text-white transition-colors uppercase"
+            >[ {t("nav.link_stack")} ]</a
+          >
+          <a
+            href="#projects"
+            class="hover:text-white transition-colors uppercase"
+            >[ {t("nav.link_build")} ]</a
+          >
+        </div>
+      </div>
+      <!-- Interaction Hint -->
+      <div
+        class="hidden md:flex items-center gap-2 text-[12pt] font-mono text-gray-500 px-2 py-1"
+      >
+        {
+          languageNames.map((l) => {
+            return (
+              <a
+                class={`px-2 py-1 uppercase ${l == lang ? "bg-[#e5e5e5] text-[#050505]" : ""}`}
+                href={`/${l}`}
+              >
+                {l}
+              </a>
+            );
+          })
+        }
+      </div>
     </div>
+  </div>
 </nav>
-
-<style>
-  nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4rem;
-    width: 100dvw;
-    font-size: 2rem;
-  }  
-
-  .logo {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 1rem;
-    width: auto;
-    text-decoration: none;
-
-    & > p {
-      font-size: 3rem;
-      color: rgb(var(--accent-light));
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    nav {
-      padding: 2rem;
-      gap: 1rem;
-    }
-
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    nav {
-      padding: 1rem;
-    }
-
-    .logo {
-      & > p {
-        font-size: 2rem;
-      }
-    }
-
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-
-      & > a {
-        font-size: 1.5rem;
-      }
-    }
-  }
-  
-</style>

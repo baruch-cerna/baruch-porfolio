@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Host Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Colores Personalizados (colors.mono) */
+  /* Nota: Usamos la convención --color-<nombre>-<escala> para los colores */
+  --color-mono-50: #f9fafb;
+  --color-mono-100: #f3f4f6;
+  --color-mono-200: #e5e7eb;
+  --color-mono-300: #d1d5db;
+  --color-mono-400: #9ca3af;
+  --color-mono-500: #6b7280;
+  --color-mono-600: #4b5563;
+  --color-mono-700: #374151;
+  --color-mono-800: #1f2937;
+  --color-mono-900: #111827;
+  --color-mono-950: #030712;
+
+  /* Keyframes Personalizados (keyframes) */
+  /* Se definen fuera del @theme, pero lo incluimos para que el código sea completo */
+  @keyframes blink {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Animaciones Personalizadas (animation) */
+  --animate-glitch: glitch 2s steps(100) infinite;
+  --animate-blink: blink 1s step-end infinite;
+}

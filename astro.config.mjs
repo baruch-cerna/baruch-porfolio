@@ -6,10 +6,19 @@ import sitemap from "@astrojs/sitemap";
 
 import react from "@astrojs/react";
 
+import tailwindcss from "@tailwindcss/vite";
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   site: 'https://baruch-cerna.dev',
+  i18n: {
+    locales: ["es", "en"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   adapter: cloudflare(),
   image: {
     remotePatterns: [{ protocol: "https" }],
@@ -23,5 +32,7 @@ export default defineConfig({
         "react-dom/server": "react-dom/server.edge",
       },
     },
+
+    plugins: [tailwindcss()],
   },
 });
