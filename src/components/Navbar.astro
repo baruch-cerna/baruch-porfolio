@@ -1,4 +1,5 @@
 ---
+// ... tus imports siguen igual
 import { languages } from "../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
@@ -8,50 +9,309 @@ const languageNames = Object.keys(languages);
 ---
 
 <nav
-  class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-md"
+  id="navbar"
+  class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-white/10 transition-all duration-300 h-16"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <div class="flex items-center gap-3">
-        <div class="w-3 h-3 bg-white animate-pulse"></div>
-        <span class="font-mono font-bold text-lg tracking-tighter text-white"
-          >BARUCH_CERNA<span class="text-gray-500">.dev</span></span
-        >
-      </div>
-      <div class="hidden md:block">
-        <div
-          class="flex items-baseline space-x-8 font-mono text-xs tracking-widest text-gray-400"
-        >
-          <a href="#logic" class="hover:text-white transition-colors uppercase"
-            >[ {t("nav.link_logic")} ]</a
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+    <div class="flex items-center justify-between h-full">
+      <div class="flex items-center gap-3 group cursor-pointer select-none">
+        <div class="relative w-3 h-3">
+          <div
+            class="absolute inset-0 bg-white animate-pulse group-hover:shadow-[0_0_10px_white]"
           >
-          <a href="#stack" class="hover:text-white transition-colors uppercase"
-            >[ {t("nav.link_stack")} ]</a
-          >
-          <a
-            href="#projects"
-            class="hover:text-white transition-colors uppercase"
-            >[ {t("nav.link_build")} ]</a
-          >
+          </div>
         </div>
+        <span
+          class="font-mono font-bold text-lg tracking-tighter text-white group-hover:text-gray-200 transition-colors"
+        >
+          BARUCH_CERNA<span class="text-gray-500 group-hover:text-gray-400"
+            >.dev</span
+          >
+        </span>
       </div>
-      <!-- Interaction Hint -->
-      <div
-        class="hidden md:flex items-center gap-2 text-[12pt] font-mono text-gray-500 px-2 py-1"
-      >
-        {
-          languageNames.map((l) => {
-            return (
+
+      <div class="hidden md:flex items-center h-full space-x-8">
+        <div
+          class="flex items-center h-full space-x-8 font-mono text-xs tracking-widest text-gray-400"
+        >
+          {
+            ["logic", "stack", "projects"].map((key) => (
               <a
-                class={`px-2 py-1 uppercase ${l == lang ? "bg-[#e5e5e5] text-[#050505]" : ""}`}
+                href={`#${key}`}
+                class="desktop-link relative h-full flex items-center hover:text-white transition-colors uppercase group"
+                data-target={key}
+              >
+                <span class="bracket-left opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-white font-bold mr-1">
+                  [
+                </span>
+
+                <span>
+                  {t(`nav.link_${key === "projects" ? "build" : key}`)}
+                </span>
+
+                <span class="bracket-right opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-white font-bold ml-1">
+                  ]
+                </span>
+
+                <span class="border-bottom absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white to-transparent bg-[length:200%_100%] opacity-0 group-hover:opacity-100 animate-dataFlow pointer-events-none" />
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="h-4 w-[1px] bg-white/20"></div>
+
+        <div
+          class="flex items-center gap-2 text-[11pt] font-mono text-gray-500"
+        >
+          {
+            languageNames.map((l) => (
+              <a
+                class={`px-2 py-1 uppercase transition-all duration-200 hover:scale-105 ${l == lang ? "bg-white text-black font-bold shadow-lg" : "hover:text-white hover:bg-white/10"}`}
                 href={`/${l}`}
               >
                 {l}
               </a>
-            );
-          })
+            ))
+          }
+        </div>
+      </div>
+
+      <button
+        id="mobile-menu-button"
+        class="md:hidden relative w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white focus:outline-none z-[60]"
+        aria-label="Toggle menu"
+      >
+        <div
+          id="hamburger-container"
+          class="relative w-6 h-6 transition-transform duration-500"
+        >
+          <svg
+            id="hamburger-icon"
+            class="w-6 h-6 absolute inset-0 transition-all duration-300 opacity-100 rotate-0 scale-100"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg
+            id="close-icon"
+            class="w-6 h-6 absolute inset-0 transition-all duration-300 opacity-0 -rotate-90 scale-50"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div
+  id="mobile-menu"
+  class="mobile-close fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-black border-t border-white/10 transform transition-all duration-500 ease-in-out z-40"
+>
+  <div class="absolute inset-0 opacity-20 pointer-events-none cyber-grid"></div>
+
+  <div
+    class="relative z-50 flex flex-col items-center justify-center h-full pb-20 space-y-8"
+  >
+    <div
+      class="flex flex-col w-full space-y-6 font-mono text-xl tracking-widest text-center w-full"
+    >
+      {
+        ["logic", "stack", "projects"].map((key, index) => (
+          <a
+            href={`#${key}`}
+            class="block w-full py-4 text-gray-400 hover:text-white hover:bg-white/5 transition-all uppercase mobile-link translate-y-4"
+            style={`--delay: ${index * 100}ms`}
+          >
+            <span class="relative inline-block hover:scale-110 transition-transform duration-200">
+              [ {t(`nav.link_${key === "projects" ? "build" : key}`)} ]
+            </span>
+          </a>
+        ))
+      }
+      <div
+        class="flex w-full py-4 items-center justify-center gap-2 text-[11pt] font-mono text-gray-500 transition-all uppercase mobile-link translate-y-4"
+      >
+        {
+          languageNames.map((l) => (
+            <a
+              class={`px-2 py-1 uppercase transition-all duration-200 hover:scale-105 ${l == lang ? "bg-white text-black font-bold shadow-lg" : "hover:text-white hover:bg-white/10"}`}
+              href={`/${l}`}
+            >
+              {l}
+            </a>
+          ))
         }
       </div>
     </div>
   </div>
-</nav>
+</div>
+
+<style>
+  @keyframes dataFlow {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+  .animate-dataFlow {
+    animation: dataFlow 2s linear infinite;
+  }
+
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .mobile-close {
+    transform: translateX(-100%) !important;
+    pointer-events: none !important;
+  }
+
+  .mobile-open {
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-open .mobile-link {
+    animation: slideInUp 0.6s forwards;
+    animation-delay: var(--delay);
+  }
+
+  .mobile-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .desktop-link.active .bracket-left,
+  .desktop-link.active .bracket-right {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .desktop-link.active .border-bottom {
+    opacity: 1;
+  }
+  .desktop-link.active {
+    color: white;
+  }
+</style>
+
+<script>
+  function initNavbar() {
+    const menuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const hamburgerContainer = document.getElementById("hamburger-container");
+    const hamburgerIcon = document.getElementById("hamburger-icon");
+    const closeIcon = document.getElementById("close-icon");
+    const desktopLinks = document.querySelectorAll(".desktop-link");
+
+    let isMenuOpen = false;
+
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+
+      if (isMenuOpen) {
+        mobileMenu?.classList.add("mobile-open");
+        mobileMenu;
+        document.body.style.overflow = "hidden";
+      } else {
+        mobileMenu?.classList.remove("mobile-open");
+        mobileMenu?.classList.add("mobile-close");
+        document.body.style.overflow = "";
+      }
+
+      if (isMenuOpen) {
+        hamburgerContainer?.classList.add("rotate-180");
+        hamburgerIcon?.classList.replace("opacity-100", "opacity-0");
+        hamburgerIcon?.classList.replace("scale-100", "scale-50");
+        closeIcon?.classList.replace("opacity-0", "opacity-100");
+        closeIcon?.classList.replace("scale-50", "scale-100");
+        closeIcon?.classList.replace("-rotate-90", "rotate-0");
+      } else {
+        hamburgerContainer?.classList.remove("rotate-180");
+        hamburgerIcon?.classList.replace("opacity-0", "opacity-100");
+        hamburgerIcon?.classList.replace("scale-50", "scale-100");
+        closeIcon?.classList.replace("opacity-100", "opacity-0");
+        closeIcon?.classList.replace("scale-100", "scale-50");
+        closeIcon?.classList.replace("rotate-0", "-rotate-90");
+      }
+    }
+
+    if (menuButton) menuButton.addEventListener("click", toggleMenu);
+
+    const mobileLinks = mobileMenu?.querySelectorAll("a");
+    mobileLinks?.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileLinks?.forEach((l) => {
+          l.classList.remove("active");
+        });
+        setTimeout(() => {
+          if (isMenuOpen) toggleMenu();
+          link.classList.add("active");
+        }, 150);
+      });
+    });
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          desktopLinks.forEach((link) => link.classList.remove("active"));
+          mobileLinks?.forEach((link) => link.classList.remove("active"));
+          const id = entry.target.getAttribute("id");
+          const activeLink = document.querySelector(`[href="#${id}"]`);
+
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      observer.observe(section);
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    initNavbar();
+  });
+
+  initNavbar();
+</script>
