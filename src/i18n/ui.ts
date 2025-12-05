@@ -91,7 +91,7 @@ export const ui: Record<Lang, any> = {
       }
     },
     "footer": {
-      "cta_question": "Do you have an idea you want to transform into a digital experience?",
+      "cta_question": "Do you have an idea?",
       "cta_action": "Let me help you build it.",
       "button_contact": "Contact me",
       "copyright_text": "Made with ❤️ and Astro by Baruch Cerna"
@@ -171,7 +171,7 @@ export const ui: Record<Lang, any> = {
       }
     },
     "footer": {
-      "cta_question": "¿Tienes una idea que quieres transformar en experiencia digital?",
+      "cta_question": "¿Tienes una idea?",
       "cta_action": "Te ayudo a construirla.",
       "button_contact": "Contáctame",
       "copyright_text": "Hecho con ❤️ y Astro por Baruch Cerna"
