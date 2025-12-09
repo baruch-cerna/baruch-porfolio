@@ -6,17 +6,19 @@
 
   /* Colores Personalizados (colors.mono) */
   /* Nota: Usamos la convención --color-<nombre>-<escala> para los colores */
-  --color-mono-50: #f9fafb;
-  --color-mono-100: #f3f4f6;
-  --color-mono-200: #e5e7eb;
-  --color-mono-300: #d1d5db;
-  --color-mono-400: #9ca3af;
-  --color-mono-500: #6b7280;
-  --color-mono-600: #4b5563;
-  --color-mono-700: #374151;
-  --color-mono-800: #1f2937;
-  --color-mono-900: #111827;
-  --color-mono-950: #030712;
+  --color-mono-50: #ffffff; /* Blanco puro */
+  --color-mono-100: #fbfbfb;
+  --color-mono-200: #f5f5f5;
+  --color-mono-300: #eeeeee;
+  --color-mono-400: #dddddd;
+
+  /* Tonos oscuros (500 - 950) se convierten en grises medios a oscuros */
+  --color-mono-500: #c1c1c1; 
+  --color-mono-600: #9e9e9e; 
+  --color-mono-700: #7a7a7a; 
+  --color-mono-800: #575757; 
+  --color-mono-900: #333333; /* El color más oscuro ahora es un gris fuerte */
+  --color-mono-950: #1a1a1a;
 
   /* Keyframes Personalizados (keyframes) */
   /* Se definen fuera del @theme, pero lo incluimos para que el código sea completo */
@@ -35,4 +37,8 @@
   /* Animaciones Personalizadas (animation) */
   --animate-glitch: glitch 2s steps(100) infinite;
   --animate-blink: blink 1s step-end infinite;
+}
+
+button, a {
+  text-transform: uppercase;
 }

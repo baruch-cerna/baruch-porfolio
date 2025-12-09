@@ -24,7 +24,7 @@ export const ui: Record<Lang, any> = {
         "ruleset_label": "RULESET", // Se alinea con "Clean Architecture" y "SOLID"
         "generation_label": "GENERATION" // Enfocado en impacto de negocio
       },
-      "city": "Mexico City, Mexico",
+      "city": "Mexico City",
       "name": "I am Baruch Cerna",
       "title": "Web Developer",
       "tagline": "I craft digital experiences that solve complex problems, boost businesses, and delight users.",
@@ -34,8 +34,8 @@ export const ui: Record<Lang, any> = {
       "years_experience": `I have over ${yoe} years designing solutions and writing code that adds value to companies and users.`
     },
     "nav": {
-      "link_logic": "My Story",
-      "link_stack": "Stack",
+      "link_logic": "About me",
+      "link_stack": "My stack",
       "link_build": "Projects",
     },
     "logic": {
@@ -105,7 +105,7 @@ export const ui: Record<Lang, any> = {
         "ruleset_label": "REGLA", // Se alinea con "Clean Architecture" y "SOLID"
         "generation_label": "GENERACIÓN" // Enfocado en impacto de negocio
       },
-      "city": "Ciudad de México, México",
+      "city": "Ciudad de México",
       "name": "Soy Baruch Cerna",
       "title": "Desarrollador Web",
       "tagline": "Desarrollo experiencias digitales que resuelven problemas complejos, impulsan negocios y encantan a los usuarios.",
@@ -114,8 +114,8 @@ export const ui: Record<Lang, any> = {
       "years_experience": `Tengo más de ${yoe} años diseñando soluciones y escribiendo código que agrega valor a las empresas y a los usuarios.`
     },
     "nav": {
-      "link_logic": "Mi Historia", // Cambiado para reflejar mejor el contenido de la sección
-      "link_stack": "Stack",
+      "link_logic": "Sobre mí", // Cambiado para reflejar mejor el contenido de la sección
+      "link_stack": "Mi stack",
       "link_build": "Proyectos",
     },
     "logic": {

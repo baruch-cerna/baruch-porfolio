@@ -25,7 +25,7 @@ const languageNames = Object.keys(languages);
           <span
             class="font-mono font-bold text-lg tracking-tighter text-white group-hover:text-gray-200 transition-colors"
           >
-            BARUCH_CERNA<span class="text-gray-500 group-hover:text-gray-400"
+            BARUCH_CERNA<span class="text-gray-300 group-hover:text-gray-300"
               >.dev</span
             >
           </span>
@@ -34,7 +34,7 @@ const languageNames = Object.keys(languages);
 
       <div class="hidden md:flex items-center h-full space-x-8">
         <div
-          class="flex items-center h-full space-x-8 font-mono text-xs tracking-widest text-gray-400"
+          class="flex items-center h-full space-x-8 font-mono text-xs tracking-widest text-gray-300"
         >
           {
             ["logic", "stack", "projects"].map((key) => (
@@ -64,7 +64,7 @@ const languageNames = Object.keys(languages);
         <div class="h-4 w-[1px] bg-white/20"></div>
 
         <div
-          class="flex items-center gap-2 text-[11pt] font-mono text-gray-500"
+          class="flex items-center gap-2 text-[11pt] font-mono text-gray-300"
         >
           {
             languageNames.map((l) => (
@@ -81,7 +81,7 @@ const languageNames = Object.keys(languages);
 
       <button
         id="mobile-menu-button"
-        class="md:hidden relative w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white focus:outline-none z-[60]"
+        class="md:hidden relative w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white focus:outline-none z-[60]"
         aria-label="Toggle menu"
       >
         <div
@@ -136,7 +136,7 @@ const languageNames = Object.keys(languages);
         ["logic", "stack", "projects"].map((key, index) => (
           <a
             href={`#${key}`}
-            class="block w-full py-4 text-gray-400 hover:text-white hover:bg-white/5 transition-all uppercase mobile-link translate-y-4"
+            class="block w-full py-4 text-gray-300 hover:text-white hover:bg-white/5 transition-all uppercase mobile-link translate-y-4"
             style={`--delay: ${index * 100}ms`}
           >
             <span class="relative inline-block hover:scale-110 transition-transform duration-200">
@@ -146,7 +146,7 @@ const languageNames = Object.keys(languages);
         ))
       }
       <div
-        class="flex w-full py-4 items-center justify-center gap-2 text-[11pt] font-mono text-gray-500 transition-all uppercase mobile-link translate-y-4"
+        class="flex w-full py-4 items-center justify-center gap-2 text-[11pt] font-mono text-gray-300 transition-all uppercase mobile-link translate-y-4"
       >
         {
           languageNames.map((l) => (

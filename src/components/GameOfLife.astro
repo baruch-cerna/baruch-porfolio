@@ -22,10 +22,10 @@
     const ruleDisplay = document.getElementById("rule-display");
 
     // Configuration
-    const cellSize = 8;
+    const cellSize = 16; // Un poco más grande para que la X se distinga bien
+    const trailFade = 1;
     const speed = 30;
     const density = 0.1;
-    const trailFade = 0.5;
 
     const rules: Rules = {
       born: [3],
@@ -106,28 +106,59 @@
     }
 
     function draw() {
-      ctx.fillStyle = "rgba(5, 5, 5, 0.3)";
+      // Limpiamos el canvas completamente para mantener el estilo flat y nítido
+      // O usamos un fondo sólido plano sin transparencia acumulativa
+      ctx.fillStyle = "#111111"; // Fondo oscuro plano (hex directo)
       ctx.fillRect(0, 0, width, height);
+
+      // Configuración de estilo de línea para los vivos
+      ctx.strokeStyle = "#c0c0c0"; // Casi blanco
+      ctx.lineWidth = 1.5; // Grosor de la línea del tache
+
+      // Margen interno para que las X no se toquen (estética más limpia)
+      const padding = cellSize * 0.2;
 
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
           let cell = grid[i][j];
+          const x = i * cellSize;
+          const y = j * cellSize;
 
           if (cell.state === 1) {
+            // --- ESTADO 1: VIVO (La "X" / Tache) ---
             cell.opacity = 1;
-            ctx.fillStyle = "rgba(80, 80, 80, 1)";
-            ctx.beginPath();
-            ctx.rect(i * cellSize, j * cellSize, cellSize, cellSize);
 
-            ctx.fill();
+            ctx.beginPath();
+
+            // Dibujamos la X
+            // Línea 1: Arriba-Izquierda a Abajo-Derecha
+            ctx.moveTo(x + padding, y + padding);
+            ctx.lineTo(x + cellSize - padding, y + cellSize - padding);
+
+            // Línea 2: Arriba-Derecha a Abajo-Izquierda
+            ctx.moveTo(x + cellSize - padding, y + padding);
+            ctx.lineTo(x + padding, y + cellSize - padding);
+
+            // Opcional: Dibujar también el borde del cuadrado para más estructura
+            // ctx.rect(x, y, cellSize, cellSize);
+
+            ctx.stroke();
           } else if (cell.opacity > 0) {
+            // --- ESTADO 0: MUERTO/RASTRO (Cuadrado sólido que encoge) ---
+
             cell.opacity -= trailFade;
             if (cell.opacity < 0) cell.opacity = 0;
 
-            ctx.fillStyle = `rgba(60, 60, 60, ${cell.opacity})`;
+            // Color gris plano basado en opacidad
+            // Usamos fillStyle porque aquí queremos relleno, no líneas
+            ctx.fillStyle = `rgba(100, 100, 100, ${cell.opacity})`;
+
+            // Calculamos tamaño para que se encoja hacia el centro
+            const shrinkSize = cellSize * 0.6 * cell.opacity; // Empieza al 60% del tamaño
+            const offset = (cellSize - shrinkSize) / 2;
+
             ctx.beginPath();
-            ctx.rect(i * cellSize, j * cellSize, cellSize, cellSize);
-            ctx.fill();
+            ctx.fillRect(x + offset, y + offset, shrinkSize, shrinkSize);
           }
         }
       }
