@@ -5,36 +5,27 @@ import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const projectToUrl: Record<string, string> = {
-  project_1: "https://www.zoku.com.mx",
-  project_2: "https://www.radyus.ai",
-  project_3: "https://www.go-sharp.ai",
-  project_4: "https://www.viz.mx",
-};
-
-const projectToImage: Record<string, string> = {
-  project_1: "https://zoku.com.mx/media/ZOKU_BLANCO.avif",
-  project_2: "https://www.radyus.ai/assets/image/portfolio/banner/radyus.png",
-  project_3: "https://www.go-sharp.ai/assets/image/header/logo-white.png",
-  project_4: "https://www.viz.mx/assets/image/portfolio/banner/viz.png",
-};
-
 const projectsTranslate = { ...(t("projects") ?? {}) };
 const projects = Object.keys(projectsTranslate)
   .filter((k) => k.includes("project_"))
   .map((k) => {
     const project = projectsTranslate[k];
     return {
-      date: project.image_alt,
+      date: project.imageAlt,
       title: project.title,
       desc: project.description,
-      tags: project.technologies.split(", "),
-      url: projectToUrl[k],
+      tags: project.technologies,
+      url: project.href,
+      image: project.image,
     };
   });
+
 ---
 
-<section id="projects" class="py-32 px-4 border-t border-white/5 bg-black/10 backdrop-blur-sm">
+<section
+  id="projects"
+  class="py-32 px-4 border-t border-white/5 bg-black/10 backdrop-blur-sm"
+>
   <div class="max-w-7xl mx-auto">
     <div class="flex justify-between items-end mb-16 reveal">
       <div>
@@ -54,9 +45,7 @@ const projects = Object.keys(projectsTranslate)
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 items-center">
               <div class="md:col-span-2 w-auto font-mono text-xs text-gray-300 p-5 md:p-0">
                 <Image
-                  src={
-                    projectToImage[`project_${projects.indexOf(project) + 1}`]
-                  }
+                  src={project.image}
                   alt={project.title}
                   inferSize={true}
                 />

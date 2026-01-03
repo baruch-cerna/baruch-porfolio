@@ -1,3 +1,5 @@
+import { projectsI18nDict, projectsI18nEnDict } from "../data/index.data";
+
 export const languages = {
   en: 'English',
   es: 'Español',
@@ -65,30 +67,7 @@ export const ui: Record<Lang, any> = {
     "projects": {
       "title": "I design results-driven digital products",
       "subtitle": "Every project is a concrete solution, built with elegant code and a strategic vision.",
-      "project_1": {
-        "title": "ZÖKU",
-        "image_alt": "Zöku Project Screenshot",
-        "description": "A catalog of bank auctions in Mexico for Maison Maya. My partner Oswaldo and I created this catalog, from the control panel to the landing page and the catalog itself. I added animations to bring it to life.",
-        "technologies": "Angular, Typescript, p5.js, Node.js, MongoDB"
-      },
-      "project_2": {
-        "title": "Radyus",
-        "image_alt": "Radyus Project Screenshot",
-        "description": "A solution to optimize logistics transportation routes. I supported the Go-Sharp web team in improving data loading for clients like Sigma Alimentos and optimizing the user experience for visualizing points of sale on maps, among other tasks.",
-        "technologies": "Angular, Typescript, Django, Python, PostgreSQL"
-      },
-      "project_3": {
-        "title": "Go Sharp Plus",
-        "image_alt": "Go Sharp Plus Project Screenshot",
-        "description": "An Artificial Dynamics solution to optimize point-of-sale strategies for clients like Sony and Ayvi. With the web team, I optimized client information capture, automated PDF report creation, and integrated the Business Intelligence (BI) section.",
-        "technologies": "Angular, Typescript, Django, Python, PostgreSQL"
-      },
-      "project_4": {
-        "title": "VIZ",
-        "image_alt": "VIZ Project Screenshot",
-        "description": "An artificial vision tool to define zones in points of interest for Go-Sharp. I improved the user experience in two main ways: enhancing the method for defining zones and optimizing the real-time simultaneous video information flow.",
-        "technologies": "Angular, Typescript, Django, Python, PostgreSQL"
-      }
+      ...projectsI18nEnDict
     },
     "footer": {
       "cta_question": "Do you have an idea?",
@@ -145,30 +124,7 @@ export const ui: Record<Lang, any> = {
     "projects": {
       "title": "Diseño productos digitales centrados en resultados",
       "subtitle": "Cada proyecto es una solución concreta, construida con código elegante y una visión estratégica.",
-      "project_1": {
-        "title": "ZÖKU",
-        "image_alt": "[Imagen de la plataforma Zöku]",
-        "description": "Es un catálogo de remates bancarios en México de la empresa Maison Maya. Mi amigo Oswaldo y yo creamos este catálogo, desde el panel de control hasta la landing page y el catálogo en sí. Le agregué algunas animaciones para darle vida.",
-        "technologies": "Angular, Typescript, p5.js, Node.js, MongoDB"
-      },
-      "project_2": {
-        "title": "Radyus",
-        "image_alt": "[Imagen de la solución de ruteo Radyus]",
-        "description": "Solución para optimizar rutas de transporte logístico. Apoyé al equipo web de Go-Sharp en mejorar la carga de datos para clientes como Sigma Alimentos y optimizar la experiencia de usuario para la visualización de puntos de venta en mapas, entre otras cosas.",
-        "technologies": "Angular, Typescript, Django, Python, PostgreSQL"
-      },
-      "project_3": {
-        "title": "Go Sharp Plus",
-        "image_alt": "[Imagen de la plataforma Go Sharp Plus]",
-        "description": "Solución de Artificial Dynamics para optimizar estrategias en puntos de venta para clientes como Sony y Ayvi. Con el equipo web, optimicé la captura de información de clientes, automaticé la creación de reportes PDF e integré la sección de inteligencia de negocios (BI).",
-        "technologies": "Angular, Typescript, Django, Python, PostgreSQL"
-      },
-      "project_4": {
-        "title": "VIZ",
-        "image_alt": "[Imagen de la herramienta de visión artificial VIZ]",
-        "description": "Herramienta de visión artificial para definir zonas en puntos de interés para Go-Sharp. Mejoré la experiencia de usuario de dos formas principales: mejorando la forma en que se definen las zonas y optimizando el flujo de información de video en tiempo real simultáneamente.",
-        "technologies": "Angular, Typescript, Django, Python, PostgreSQL"
-      }
+      ...projectsI18nDict,
     },
     "footer": {
       "cta_question": "¿Tienes una idea?",
