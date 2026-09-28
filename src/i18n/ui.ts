@@ -9,128 +9,131 @@ export type Lang = keyof typeof languages;
 
 export const defaultLang: Lang = 'es';
 
-const initDate = new Date();
-initDate.setDate(15);
-initDate.setMonth(3);
-initDate.setFullYear(2020);
+const initDate = new Date(2020, 2, 15);
 const nowDate = new Date();
 const diffTime = nowDate.getTime() - initDate.getTime();
-const yoe = 5;
+const calculatedYoe = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365.25));
+const yoe = Math.max(5, calculatedYoe);
 
 export const ui: Record<Lang, any> = {
   "en": {
-    "site_title": "Baruch Cerna - Web Developer",
+    "site_title": "Baruch Cerna — Full Stack Web Developer",
     "hero": {
       "technical_details": {
-        "automata_status": "CELLULAR_AUTOMATA: ACTIVE", // Más relevante que "CELLULAR_AUTOMATA"
-        "ruleset_label": "RULESET", // Se alinea con "Clean Architecture" y "SOLID"
-        "generation_label": "GENERATION" // Enfocado en impacto de negocio
+        "automata_status": "Cellular Automata: Active",
+        "ruleset_label": "Ruleset",
+        "generation_label": "Generation"
       },
       "city": "Mexico City",
       "name": "I am Baruch Cerna",
-      "title": "Web Developer",
-      "tagline": "I craft digital experiences that solve complex problems, boost businesses, and delight users.",
+      "title": "Full Stack Web Developer",
+      "tagline": "I craft digital experiences that solve complex problems, accelerate businesses, and delight users.",
       "button_contact": "Let's work together",
-      "button_projects": "See projects",
-      "badge_text": "A simple solution is the most elegant.",
-      "years_experience": `I have over ${yoe} years designing solutions and writing code that adds value to companies and users.`
+      "button_projects": "View projects",
+      "badge_text": "Simplicity is the ultimate sophistication.",
+      "years_experience": `I have over ${yoe} years of experience designing solutions and writing code that delivers measurable value to companies and users.`
     },
     "nav": {
       "link_logic": "About me",
-      "link_stack": "My stack",
+      "link_stack": "Tech stack",
       "link_build": "Projects",
     },
     "logic": {
       "title": "A simple solution is the most elegant",
-      "paragraph_1": "I started programming at 16, discovering I could bring my ideas to life with just a few lines of code. Since then, I haven't stopped building, learning, and challenging the limits of what's possible.",
-      "paragraph_2": `With ${yoe}+ years of experience, I build robust and scalable digital systems for businesses. Whether it's a website or a large enterprise system, I guarantee project success.`,
+      "paragraph_1": "I started programming at 16, discovering that I could bring ideas to life with just a few lines of code. Since then, I have never stopped building, learning, and pushing the boundaries of what is possible on the web.",
+      "paragraph_2": `With over ${yoe} years of experience, I architect and build robust, scalable digital systems for modern businesses. From high-converting websites to mission-critical enterprise platforms, I focus on performance, clarity, and lasting impact.`,
       "analysis_trait": "Analysis",
-      "analysis_description": "Research and Diagnosis",
+      "analysis_description": "Research & Technical Diagnosis",
       "synthesis_trait": "Synthesis",
-      "synthesis_description": "Systems Design",
+      "synthesis_description": "Scalable Systems Architecture",
       "trait_1": "Analytical",
       "trait_2": "Minimalist",
       "trait_3": "Autodidact",
-      "timeline_title": `${yoe}+ years coding solutions`,
-      "timeline_1_title": "Mar 2020 - Nov 2020: Full Stack Developer @ Maison Maya",
-      "timeline_1_desc": "Developed an inventory and client management system for the real estate sector. Here, I understood the power of custom automation.",
-      "timeline_2_title": "Nov 2020 - Present: Co-founder & Web Developer @ Zöku",
-      "timeline_2_desc": "Co-founded this platform for bank auctions. I designed the catalog, implemented technical SEO, and optimized the entire interface for an agile and intuitive user experience.",
-      "timeline_3_title": "Sep 2022 - Present: Senior Full Stack Developer @ Artificial Dynamics (formerly Go-Sharp)",
-      "timeline_3_desc": "Joined the team to create high-performance B2B tools. We optimized logistics visualizations and improved data loading for companies like Nestlé and Sony/Sigma.",
-      "timeline_4_title": "Present: Independent Web Developer",
-      "timeline_4_desc": "From static sites to custom enterprise systems, I transform ideas into powerful, fast, and elegant digital platforms."
+      "timeline_title": `${yoe}+ years engineering digital solutions`,
+      "timeline_1_title": "Mar 2020 – Nov 2020 · Full Stack Developer at Maison Maya",
+      "timeline_1_desc": "Built a custom inventory and client management platform for the real estate sector, streamlining internal workflows through tailored automation.",
+      "timeline_2_title": "Nov 2020 – Present · Co-founder & Lead Web Developer at Zöku",
+      "timeline_2_desc": "Co-founded a specialized bank foreclosure platform. Designed the interactive property catalog, implemented technical SEO, and engineered a fast, intuitive interface.",
+      "timeline_3_title": "Sep 2022 – Present · Senior Full Stack Developer at Artificial Dynamics",
+      "timeline_3_desc": "Engineering high-performance B2B web platforms (formerly Go-Sharp). Optimized geospatial logistics visualizations and large-scale data pipelines for enterprise clients like Nestlé, Sony, and Sigma.",
+      "timeline_4_title": "Present · Independent Full Stack Consultant",
+      "timeline_4_desc": "Partnering with companies to transform complex business requirements into fast, reliable, and refined digital products."
     },
     "stack": {
-      "title": "Elegant code and a strategic vision"
+      "title": "Clean architecture and strategic execution",
+      "subtitle": "Core technologies I use to design, build, and scale modern web applications."
     },
     "projects": {
-      "title": "I design results-driven digital products",
-      "subtitle": "Every project is a concrete solution, built with elegant code and a strategic vision.",
+      "title": "Results-driven digital products",
+      "subtitle": "Each project is a concrete business solution built with clean code, thoughtful design, and strategic focus.",
       ...projectsI18nEnDict
     },
     "footer": {
-      "cta_question": "Do you have an idea?",
-      "cta_action": "Let me help you build it.",
-      "button_contact": "Contact me",
-      "copyright_text": "Made with ❤️ and Astro by Baruch Cerna"
+      "cta_question": "Have a project in mind?",
+      "cta_action": "Let's turn your vision into a high-impact digital product.",
+      "button_contact": "Get in touch",
+      "copyright_prefix": "Built with",
+      "copyright_suffix": "and Astro by Baruch Cerna"
     }
   },
   "es": {
-    "site_title": "Baruch Cerna - Desarrollador Web",
+    "site_title": "Baruch Cerna — Desarrollador Web Full Stack",
     "hero": {
       "technical_details": {
-        "automata_status": "AUTÓMATA_CELULAR: ACTIVO", // Más relevante que "CELLULAR_AUTOMATA"
-        "ruleset_label": "REGLA", // Se alinea con "Clean Architecture" y "SOLID"
-        "generation_label": "GENERACIÓN" // Enfocado en impacto de negocio
+        "automata_status": "Autómata Celular: Activo",
+        "ruleset_label": "Regla",
+        "generation_label": "Generación"
       },
       "city": "Ciudad de México",
       "name": "Soy Baruch Cerna",
-      "title": "Desarrollador Web",
-      "tagline": "Desarrollo experiencias digitales que resuelven problemas complejos, impulsan negocios y encantan a los usuarios.",
+      "title": "Desarrollador Web Full Stack",
+      "tagline": "Desarrollo experiencias digitales que resuelven problemas complejos, impulsan negocios y cautivan a los usuarios.",
       "button_contact": "Trabajemos juntos",
       "button_projects": "Ver proyectos",
-      "years_experience": `Tengo más de ${yoe} años diseñando soluciones y escribiendo código que agrega valor a las empresas y a los usuarios.`
+      "badge_text": "Una solución simple es la más elegante.",
+      "years_experience": `Tengo más de ${yoe} años de experiencia diseñando soluciones y escribiendo código que aporta valor real a las empresas y a los usuarios.`
     },
     "nav": {
-      "link_logic": "Sobre mí", // Cambiado para reflejar mejor el contenido de la sección
-      "link_stack": "Mi stack",
+      "link_logic": "Sobre mí",
+      "link_stack": "Tecnologías",
       "link_build": "Proyectos",
     },
     "logic": {
-      "title": "Una respuesta simple es más elegante",
-      "paragraph_1": "Empecé a programar a los 16 años, cuando descubrí que podía darle vida a mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado de construir, aprender y desafiar los límites de lo posible.",
-      "paragraph_2": `Con más de ${yoe} años de experiencia, construyo sistemas digitales robustos y escalables para negocios. Ya sea un sitio web o un gran sistema empresarial, garantizo el éxito del proyecto.`,
+      "title": "Una solución simple es la más elegante",
+      "paragraph_1": "Empecé a programar a los 16 años, cuando descubrí que podía dar vida a mis ideas con unas cuantas líneas de código. Desde entonces, no he dejado de construir, aprender y desafiar los límites de lo posible.",
+      "paragraph_2": `Con más de ${yoe} años de experiencia, diseño y desarrollo sistemas digitales robustos y escalables. Ya sea un sitio web de alto impacto o una plataforma empresarial a medida, me enfoco en el rendimiento, la claridad técnica y el éxito del proyecto.`,
       "analysis_trait": "Análisis",
-      "analysis_description": "Investigación y Diagnóstico",
+      "analysis_description": "Investigación y Diagnóstico Técnico",
       "synthesis_trait": "Síntesis",
-      "synthesis_description": "Diseño de Sistemas",
-      "trait_1": "Analitíco",
+      "synthesis_description": "Arquitectura y Diseño de Sistemas",
+      "trait_1": "Analítico",
       "trait_2": "Minimalista",
       "trait_3": "Autodidacta",
-      "timeline_title": `Más de ${yoe} años codificando soluciones`,
-      "timeline_1_title": "Mar 2020 - Nov 2020: Desarrollador Full Stack en Maison Maya",
-      "timeline_1_desc": "Desarrollé un sistema para gestionar inventario y clientes en el sector inmobiliario. Aquí entendí el poder de la automatización personalizada.",
-      "timeline_2_title": "Nov 2020 - Presente: Cofundador y Desarrollador Web en Zöku",
-      "timeline_2_desc": "Cofundé esta plataforma de remates bancarios. Diseñé el catálogo, implementé SEO técnico y optimicé toda la interfaz para una experiencia ágil e intuitiva.",
-      "timeline_3_title": "Sep 2022 - Presente: Desarrollador Full Stack Senior en Artificial Dynamics (anteriormente Go-Sharp)",
-      "timeline_3_desc": "Me sumé al equipo para crear herramientas B2B de alto rendimiento. Optimizamos visualizaciones logísticas y mejoramos la carga de datos para empresas como Nestlé y Sony/Sigma.",
-      "timeline_4_title": "Presente: Desarrollador Web independiente",
-      "timeline_4_desc": "Desde sitios estáticos hasta sistemas empresariales hechos a medida, transformo ideas en plataformas digitales potentes, rápidas y elegantes."
+      "timeline_title": `Más de ${yoe} años creando soluciones digitales`,
+      "timeline_1_title": "Mar 2020 – Nov 2020 · Desarrollador Full Stack en Maison Maya",
+      "timeline_1_desc": "Desarrollé un sistema a medida para gestionar inventario y clientes en el sector inmobiliario, optimizando la operación mediante automatización personalizada.",
+      "timeline_2_title": "Nov 2020 – Presente · Cofundador y Desarrollador Web en Zöku",
+      "timeline_2_desc": "Cofundé esta plataforma especializada en remates bancarios. Diseñé el catálogo interactivo, implementé SEO técnico y optimicé la interfaz para ofrecer una experiencia ágil e intuitiva.",
+      "timeline_3_title": "Sep 2022 – Presente · Desarrollador Full Stack Senior en Artificial Dynamics",
+      "timeline_3_desc": "Desarrollo herramientas B2B de alto rendimiento (antes Go-Sharp). Optimizamos visualizaciones logísticas y aceleramos la carga de datos para empresas como Nestlé, Sony y Sigma Alimentos.",
+      "timeline_4_title": "Presente · Consultor y Desarrollador Web Independiente",
+      "timeline_4_desc": "Desde sitios web de alto rendimiento hasta sistemas empresariales hechos a medida, transformo ideas complejas en plataformas digitales rápidas, sólidas y elegantes."
     },
     "stack": {
-      "title": "Código elegante y una visión estratégica"
+      "title": "Código elegante y visión estratégica",
+      "subtitle": "Tecnologías principales con las que diseño, construyo y escalo aplicaciones web modernas."
     },
     "projects": {
-      "title": "Diseño productos digitales centrados en resultados",
-      "subtitle": "Cada proyecto es una solución concreta, construida con código elegante y una visión estratégica.",
+      "title": "Productos digitales orientados a resultados",
+      "subtitle": "Cada proyecto es una solución concreta, construida con arquitectura limpia y enfoque estratégico.",
       ...projectsI18nDict,
     },
     "footer": {
-      "cta_question": "¿Tienes una idea?",
-      "cta_action": "Te ayudo a construirla.",
+      "cta_question": "¿Tienes un proyecto en mente?",
+      "cta_action": "Transformemos tu idea en un producto digital de alto impacto.",
       "button_contact": "Contáctame",
-      "copyright_text": "Hecho con ❤️ y Astro por Baruch Cerna"
+      "copyright_prefix": "Hecho con",
+      "copyright_suffix": "y Astro por Baruch Cerna"
     }
   }
 } as const;

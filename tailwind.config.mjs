@@ -5,8 +5,7 @@ export default {
 		extend: {
 			fontFamily: {
 				// Matches the fonts loaded in Layout.astro
-				sans: ['Host Grotesk', 'sans-serif'],
-				mono: ['Space Mono', 'monospace'],
+				sans: ['Host Grotesk', 'GeneralSans', 'sans-serif'],
 			},
 			colors: {
 				// Custom monochrome palette from the design

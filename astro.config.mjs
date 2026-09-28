@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import cloudflare from "@astrojs/cloudflare";
+import node from "@astrojs/node";
 import compressor from "astro-compressor";
 
 import sitemap from "@astrojs/sitemap";
@@ -12,6 +12,10 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   output: "server",
   site: 'https://baruch-cerna.dev',
+  server: {
+    host: '0.0.0.0',
+    port: 3000
+  },
   i18n: {
     locales: ["es", "en"],
     defaultLocale: "en",
@@ -19,20 +23,14 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  adapter: cloudflare(),
+  adapter: node({
+    mode: "standalone"
+  }),
   image: {
     remotePatterns: [{ protocol: "https" }],
   },
   integrations: [compressor(), sitemap(), react()],
   vite: {
-    resolve: {
-      // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
-      // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
-      alias: import.meta.env.PROD && {
-        "react-dom/server": "react-dom/server.edge",
-      },
-    },
-
     plugins: [tailwindcss()],
   },
 });

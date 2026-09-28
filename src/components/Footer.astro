@@ -6,34 +6,54 @@ const t = useTranslations(lang);
 ---
 
 <footer
-  class="py-32 px-4 border-t border-white/5 bg-black/10 backdrop-blur-sm text-center"
+  class="py-24 px-4 border-t border-white/10 bg-[#050505]/90 backdrop-blur-sm text-center"
   id="contact"
 >
   <div class="max-w-2xl mx-auto px-4">
-    <h2 class="text-2xl font-bold text-white mb-6">
+    <h2
+      class="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4"
+      style="text-wrap: balance;"
+    >
       {t("footer.cta_question")}
     </h2>
-    <p class="text-gray-300 mb-8 font-light">
+    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
       {t("footer.cta_action")}
     </p>
     <a
-      href="https://linkedin.com/in/alan-baruch"
-      class="inline-block px-8 py-3 bg-white text-black font-mono font-bold text-sm hover:bg-gray-200 transition-colors mb-12"
+      href="https://www.linkedin.com/in/alan-baruch/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white text-black font-semibold text-sm rounded-lg hover:bg-gray-200 transition-colors mb-12 whitespace-nowrap"
     >
-      {t("footer.button_contact")}
+      <span>{t("footer.button_contact")}</span>
+      <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
     </a>
 
-    <div class="flex justify-center gap-8 text-2xl text-gray-600 mb-8">
-      <a href="#" class="hover:text-white transition-colors"
-        ><i class="fab fa-github"></i></a
+    <div class="flex justify-center gap-6 text-xl text-gray-400 mb-8">
+      <a
+        href="https://github.com/baruch-cerna"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:text-white hover:border-white/30 transition-colors"
       >
-      <a href="#" class="hover:text-white transition-colors"
-        ><i class="fab fa-linkedin"></i></a
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <a
+        href="https://www.linkedin.com/in/alan-baruch/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:text-white hover:border-white/30 transition-colors"
       >
+        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+      </a>
     </div>
 
-    <p class="font-mono text-[10px] text-gray-700 uppercase">
-      {t("footer.copyright_text")}
+    <p class="text-xs text-gray-400 flex items-center justify-center gap-1.5">
+      <span>{t("footer.copyright_prefix")}</span>
+      <i class="fas fa-heart text-white/80 text-[11px]" aria-hidden="true"></i>
+      <span>{t("footer.copyright_suffix")}</span>
     </p>
   </div>
 </footer>

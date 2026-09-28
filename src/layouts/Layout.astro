@@ -5,9 +5,12 @@ interface Props {
   title: string;
 }
 const { title } = Astro.props;
-const yoe = new Date().getFullYear() - 2020;
-const description = `Desarrollador Web Full Stack con +${yoe} años de experiencia en desarrollo de productos digitales. Experto en Node.js, Django, Angular y React.`;
+const yoe = Math.max(5, new Date().getFullYear() - 2020);
 const lang = getLangFromUrl(Astro.url);
+const description =
+  lang === "en"
+    ? `Full Stack Web Developer with ${yoe}+ years of experience building scalable digital products with Astro, React, Angular, Node.js, and Django.`
+    : `Desarrollador Web Full Stack con más de ${yoe} años de experiencia en el desarrollo de productos digitales escalables con Astro, React, Angular, Node.js y Django.`;
 ---
 
 <!doctype html>
@@ -17,7 +20,7 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="Full Stack Developer, Full Stack Web Developer, Node.js, Django, Angular, React, JavaScript, Typescript, Python, MongoDB, PostgreSQL, MySQL, Desarrollo web, Programación, Desarrollo de software, SEO, API, Diseño de patrones, Arquitectura de software, Liderazgo, México"
+      content="Full Stack Developer, Full Stack Web Developer, Node.js, Django, Angular, React, JavaScript, TypeScript, Python, MongoDB, PostgreSQL, MySQL, Desarrollo web, Programación, Desarrollo de software, SEO, API, Diseño de patrones, Arquitectura de software, Liderazgo, México"
     />
     <meta name="author" content="Baruch Cerna" />
     <meta name="robots" content="index, follow" />
@@ -29,23 +32,24 @@ const lang = getLangFromUrl(Astro.url);
       property="og:image"
       content="https://baruch-cerna.dev/media/logo_blanco2.jpg"
     />
-    <meta property="og:site_name" content="Portafolio de Baruch Cerna" />
+    <meta property="og:site_name" content="Baruch Cerna — Portfolio" />
     <meta name="viewport" content="width=device-width" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/media/logo_blanco.svg" />
     <link rel="apple-touch-icon" href="/media/logo_blanco.svg" />
+    <link rel="stylesheet" href="/css/general-sans.css" />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&family=Space+Mono:wght@300;400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
   <body
-    class="bg-[#050505] text-[#e5e5e5] antialiased selection:bg-white selection:text-black"
+    class="bg-[#050505] text-[#e5e5e5] font-sans antialiased selection:bg-white selection:text-black"
   >
     <slot />
   </body>
@@ -186,9 +190,6 @@ const lang = getLangFromUrl(Astro.url);
   });
 </script>
 <style is:global>
-  /* ======================================
-   🌐 DESIGN TOKENS
-   ====================================== */
   :root {
     --bg-color: #050505;
     --text-primary: #e5e5e5;

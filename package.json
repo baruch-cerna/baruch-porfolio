@@ -3,16 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "npm install --force && astro check && astro build",
-    "preview": "astro preview",
+    "dev": "astro dev --host 0.0.0.0 --port 3000",
+    "start": "astro dev --host 0.0.0.0 --port 3000",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 3000",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.5",
-    "@astrojs/cloudflare": "^12.6.11",
     "@astrojs/db": "^0.18.3",
+    "@astrojs/node": "9.0.0",
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/vite": "^4.1.17",
